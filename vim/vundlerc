@@ -1,0 +1,85 @@
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+" pass a path where Vundle should install plugins
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" Git Wrapper
+Plugin 'tpope/vim-fugitive'
+" LaTeX-Box for compiling LaTeX
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+" Improved highlighting for RestructuredText
+Plugin 'Rykka/riv.vim'
+" NerdTree for navigating files
+Plugin 'scrooloose/nerdtree'
+" Thesuarus
+Plugin 'ron89/thesaurus_query.vim'
+" Syntax checking
+Plugin 'scrooloose/syntastic'
+" Go language support
+Plugin 'fatih/vim-go'
+" Powerline (fancy status line)
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Vim hard mode (Why, oh why did I do this?)
+Plugin 'wikitopian/hardmode.git'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+"""""""""""""
+" LaTeX Box "
+"""""""""""""
+" Ignore warning when using subfiles and compiling using LaTeX-Box
+let g:LatexBox_ignore_warnings = ['Cannot patch \\document']
+
+""""""""""""
+" Rike-VIM "
+""""""""""""
+let g:riv_disable_folding=1 "RST folding
+
+""""""""""""
+" NerdTree "
+""""""""""""
+" Open NerdTree with plain 'vi' command
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Open NerdTree with <C-n>
+map <C-n> :NERDTreeToggle<CR>
+
+
+"""""""""""""
+" Syntastic "
+"""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_python_exec = 'python3' " use python3, not python
+let g:syntastic_tex_checkers=['lacheck']
+let g:syntastic_loc_list_height=5 " Smaller error window
+
+"""""""""""""
+" Hard Mode "
+"""""""""""""
+nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
+set lazyredraw

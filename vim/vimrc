@@ -1,0 +1,87 @@
+syntax on
+set showmatch       " Show matching brace
+set autoindent      " Automatically indent
+set paste           " Make insert mode better support paste
+set shiftwidth=4    " Indent == 4 spaces
+set tabstop=4       " Tab == 4 spaces
+set softtabstop=4   " Let backspace delete indent
+set shiftround      " Tab as multiples of shiftwidth
+set number          " Number lines
+set relativenumber  " Number lines relative to the line cursor is on
+set incsearch       " Start searching on first keystroke (don't wait for enter)
+set ruler           " put a ruler in the bottom right corner
+set backspace=eol,start,indent  " Backspace through newlines
+set scrolloff=2     " Don't let the cursor get to the bottom of the page
+set nowrap          " Do not wrap long lines
+set nojoinspaces    " Prevents inserting two spaces after punctuation on a join (J)
+set splitright      " Puts new vsplit windows to the right of the current
+set splitbelow      " Puts new split windows to the bottom of the current
+set expandtab       " Tabs are spaces :(
+set autoread        " Update loaded files when changed externally if no local edits
+
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
+set smartcase                   " Smart case insensitive searching
+                                "/copyright      " Case insensitive
+                                "/Copyright      " Case sensitive
+                                "/copyright\C    " Case sensitive
+                                "/Copyright\c    " Case insensitive
+
+set tw=79                       "Tetxidth = 2 (use gq to wrap)
+
+" Prevent tabs from expanding to spaces in Makefiles
+autocmd FileType make setlocal noexpandtab
+
+" Map moving to simpler motions
+map <c-h> <c-w>h
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+
+"map <c-tab> gt
+"map <c-S-tab> gT
+
+"Fix bad habits
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+" Keep selection selected after indent
+vmap > >gv
+vmap < <gv
+
+" Make Y consistent with C and D
+nnoremap Y y$
+
+" Make cw consistent with dw, yw, vw
+onoremap w :execute 'normal! '.v:count1.'w'<CR>
+
+" Fix tab completion
+set wildmode=longest,list,full
+set wildmenu
+
+" Fix slow scrolling (due to having to redraw screen)
+"set lazyredraw
+
+" Fixes escape timeout (may change last to 10)
+set timeoutlen=1000 ttimeoutlen=0
+
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+
+" Highlight git merge conflict
+set hlsearch
+map <F7> :/\(<<<<<<<\\|=======\\|>>>>>>>\)<CR>
+
+" Remove trailing whitespace
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+
+""""""""""""""""
+" Running Code "
+""""""""""""""""
+au FileType go map <leader>r :!go run %<CR>
+au FileType python map <leader>r :!python3 %<CR>
+
