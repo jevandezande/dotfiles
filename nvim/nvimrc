@@ -1,1 +1,4 @@
 " nvim specific commands
+
+" Escape from the terminal
+tnoremap <Esc> <C-\><C-n>
