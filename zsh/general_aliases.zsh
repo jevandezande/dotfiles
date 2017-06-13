@@ -22,16 +22,20 @@ alias ..='cd ..'
 #######################
 # Editing and Viewing #
 #######################
-# default to nvim
+# Default to nvim
 alias vi='nvim'
 
-# Reading
+# Specific files used a lot
 alias vii='vi input.dat'
 alias vij='vi input.json'
 alias vio='vi output.dat -R'
 alias vig='vi geom.xyz'
 alias viz='vi ZMAT'
 
+# Watch the output file
+alias tout='less +F output.dat'
+
+# Make a fancy table from a csv file
 alias table='column -s, -t'
 
 
@@ -63,4 +67,21 @@ alias xopen='xdg-open $* > /dev/null 2>&1'
 mkdircd () {
     mkdir $1
     cd $1
+}
+
+########
+# Orca #
+########
+orca_run()
+{
+    if [ "$1" = "" ]
+	then
+		inp="input.dat"
+		out="output.dat"
+	elif [ "$2" = "" ]
+	then
+		out="${1:r}.out"
+	fi
+
+    $HOME/progs/orca4_0/orca $inp > $out & disown
 }
