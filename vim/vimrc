@@ -1,6 +1,5 @@
 syntax on
 set showmatch       " Show matching brace
-set autoindent      " Automatically indent
 set paste           " Make insert mode better support paste
 set shiftwidth=4    " Indent == 4 spaces
 set tabstop=4       " Tab == 4 spaces
@@ -20,6 +19,8 @@ set expandtab       " Tabs are spaces :(
 set autoread        " Update loaded files when changed externally if no local edits
 
 filetype plugin on
+filetype indent on  " Automatically indent
+
 set omnifunc=syntaxcomplete#Complete
 
 set smartcase                   " Smart case insensitive searching
