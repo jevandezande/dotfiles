@@ -1,7 +1,38 @@
-alias l="ls -la"       # List in long format, include dotfiles
-alias la="ls -l"       # List all
-alias ld="ls -ld */"   # List in long format, only directories
-alias ll="ls -l"       # List in long format
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
+
+# Key-bindings for the command-line editor.
+
+# Ask before displaying >50 items
+# Since $WINDIR $PATH var can be in $PATH, this could list
+# all window exectables in C:\WINDOWS
+set completion-query-items 50
+
+# Ignore case for the command-line-completion functionality
+# on:  default to a Windows style console
+# off: default to a *nix style console
+set completion-ignore-case on
+
+# none, visible or audible
+set bell-style none
+
+# disable/enable 8bit input
+set meta-flag on
+set input-meta on
+set output-meta off
+set convert-meta on
+
+# visible-stats
+# Append a mark according to the file type in a listing
+set visible-stats off
+set mark-directories on
+
+# Show all instead of beeping first
+set show-all-if-ambiguous on
+
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[7~": beginning-of-line
+"\e[8~": end-of-line
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+"\e[H": beginning-of-line
+"\e[F": end-of-line
