@@ -11,6 +11,7 @@ alias cpg='cp geom.xyz ~'
 #########
 # Queue #
 #########
+alias qme='qstat -u `whoami`'
 alias qall='qstat -f -u "*"'
-alias qu='qinfo2 -u'
-alias qw='qinfo2 -uw'
+alias qu='qinfo -u'
+alias qw='qinfo -uw'
