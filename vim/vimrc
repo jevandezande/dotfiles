@@ -1,4 +1,6 @@
 syntax on
+filetype plugin on
+filetype indent on  " Automatically indent
 set showmatch       " Show matching brace
 set paste           " Make insert mode better support paste
 set shiftwidth=4    " Indent == 4 spaces
@@ -18,8 +20,6 @@ set splitbelow      " Puts new split windows to the bottom of the current
 set expandtab       " Tabs are spaces :(
 set autoread        " Update loaded files when changed externally if no local edits
 
-filetype plugin on
-filetype indent on  " Automatically indent
 
 set omnifunc=syntaxcomplete#Complete
 
