@@ -1,10 +1,20 @@
+# Make sure we don't output everything on the 1 line
+set horizontal-scroll-mode Off
 
-# Key-bindings for the command-line editor.
+# Enable 8bit input
+set meta-flag On
+set input-meta On
+
+# Turns off 8th bit stripping
+set convert-meta Off
+
+# Keep the 8th bit for display
+set output-meta On
 
 # Ask before displaying >50 items
 # Since $WINDIR $PATH var can be in $PATH, this could list
 # all window exectables in C:\WINDOWS
-set completion-query-items 50
+set completion-query-items 100
 
 # Ignore case for the command-line-completion functionality
 # on:  default to a Windows style console
@@ -28,8 +38,14 @@ set mark-directories on
 # Show all instead of beeping first
 set show-all-if-ambiguous on
 
+"\eOd": backward-word
+"\eOc": forward-word
 "\e[1~": beginning-of-line
+"\e[2~": quoted-insert
+"\e[3~": delete-char
 "\e[4~": end-of-line
+"\e[5~": beginning-of-history
+"\e[6~": end-of-history
 "\e[7~": beginning-of-line
 "\e[8~": end-of-line
 "\eOH": beginning-of-line
