@@ -85,3 +85,4 @@ orca_run()
 
     $HOME/progs/orca4_0/orca $inp > $out & disown
 }
+alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
