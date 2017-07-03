@@ -22,7 +22,7 @@ jobs () { tail ~/.jobs -n ${1:-10} }
 # Random #
 ##########
 # delete e and o files
-alias rmeo='ls | grep ".*\.[eo][0-9]\+" | xargs -r rm'
+alias rmeo='find . -regextype posix-extended -regex ".*\.(e|o)[0-9]{4,}.*" -delete'
 
 cdj () {
 	# cd to the appropriate job, whether running or finished
