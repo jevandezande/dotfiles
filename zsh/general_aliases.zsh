@@ -86,3 +86,23 @@ orca_run()
     $HOME/progs/orca4_0/orca $inp > $out & disown
 }
 alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
+
+alias orca_2mkl='$HOME/progs/orca4_0/orca_2mkl'
+function molden ()
+{
+	# Strip the file extenstion
+	file=${1:r}
+	# If no argument
+	if [[ ! -n $file ]]
+	then
+		file='input'
+	fi
+
+	if [[ ! -f "${file}.gbw" ]]
+	then
+		echo "No gbw file found"
+	else
+		orca_2mkl $file -molden
+		mv $file.molden.input $file.molden
+	fi
+}
