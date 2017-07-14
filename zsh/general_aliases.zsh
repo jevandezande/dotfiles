@@ -86,6 +86,7 @@ orca_run()
     $HOME/progs/orca4_0/orca $inp > $out & disown
 }
 alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
+alias clean_orca="find input.{engrad,ges,opt,prop,xyz,cis} input{,_atom{45,77}}{,_property}.txt -type f 2> /dev/null | xargs rm 2> /dev/null"
 
 alias orca_2mkl='$HOME/progs/orca4_0/orca_2mkl'
 function molden ()
