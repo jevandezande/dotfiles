@@ -32,6 +32,9 @@ Plug 'fatih/vim-go', { 'for' : 'go' }
 " Ctrlp: Fuzzy file finder, buffers, etc.
 Plug 'ctrlpvim/ctrlp.vim'
 
+" Sort python imports
+Plug 'tweekmonster/impsort.vim'
+
 " Initialize plugin system
 call plug#end()
 
