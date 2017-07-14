@@ -16,6 +16,7 @@ alias qall='qstat -f -u "*"'
 alias qu='qinfo -u'
 alias qw='qinfo -uw'
 jobs () { tail ~/.jobs -n ${1:-10} }
+finished () { tail ~/.completed_jobs -n ${1:-10} }
 
 
 ##########
