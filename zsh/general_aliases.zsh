@@ -107,3 +107,56 @@ function molden ()
 		mv $file.molden.input $file.molden
 	fi
 }
+
+##########
+# Images #
+##########
+# Fix pdf page conflicts in LaTeX
+gs_pdf_pages()
+{
+    # Can't read and write to the same file
+    file=${1:r}.pdf
+    gs -o .tmp.pdf -sDEVICE=pdfwrite -dColorConversionStrategy=/sRGB -dProcessColorModel=/DeviceRGB $file
+    mv .tmp.pdf $file
+}
+
+# Another way to fix pdf page conflicts in LaTeX
+ps_pdf_pages()
+{
+    for f in $(find . -type f  -name "*.pdf")
+    do
+        echo $f
+        pdf2ps $f ${f%.*}.ps
+        ps2pdf ${f%.*}.ps $f
+        rm -f ${f%.*}.ps
+    done
+}
+
+# Convert an svg to a pdf using inkscape
+ink_pdf()
+{
+    # Strip the file extenstion
+    file_base="${1:r}"
+    inkscape "${file_base}.svg" -A "${file_base}.pdf"
+    gs_pdf_pages "${file_base}.pdf"
+}
+
+# Convert all svg files in folder to pdf
+ink_pdfs()
+{
+    for i in *.svg
+    do
+        echo $i
+        ink_pdf $i
+    done
+}
+
+# Convert mrv to svg and pdf using
+mrv_pdf()
+{
+    # Strip the file extenstion
+    file_base="${1:r}"
+    ~/bin/MarvinBeans/bin/molconvert svg "${file_base}.mrv" -o "${file_base}.svg" 2>/dev/null
+    inkscape "${file_base}.svg" -A "${file_base}.pdf"
+}
+
