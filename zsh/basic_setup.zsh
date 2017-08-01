@@ -1,6 +1,8 @@
 autoload -Uz promptinit
 promptinit
 
+PID=$$
+
 # share history between shell instances
 setopt  histignorealldups sharehistory
 
@@ -42,3 +44,26 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 
 setopt extended_glob
+
+
+###################
+# Directory Stack #
+###################
+DIRSTACKFILE="$HOME/.cache/zsh/dirs$PID"
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1]
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+
+DIRSTACKSIZE=100
+
+setopt AUTO_PUSHD PUSHD_SILENT PUSHD_TO_HOME
+
+## Remove duplicate entries
+setopt PUSHD_IGNORE_DUPS
+
+## This reverts the +/- operators.
+setopt PUSHD_MINUS
