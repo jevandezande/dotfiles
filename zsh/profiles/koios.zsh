@@ -1,5 +1,6 @@
 # Prompt style
-prompt adam1 blue
+export PROMPT='%F{blue}jev@koios%f% %~$ '
+
 
 source $HOME/.zsh/profiles/local.zsh
 

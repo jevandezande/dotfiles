@@ -1,6 +1,6 @@
 # System profile selecter
 
-if [ $HOST = "koios" ]
+if [ $HOST = "pccec0668" ]
 then
     source $HOME/.zsh/profiles/koios.zsh
 elif ( [ $HOST = "vlogin1.ccqc.uga.edu" ] || [ $HOST = "vlogin2.ccqc.uga.edu" ] ) && [ -f profiles/vulcan.zsh ]
