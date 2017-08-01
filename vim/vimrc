@@ -6,6 +6,7 @@ set paste           " Make insert mode better support paste
 set shiftwidth=4    " Indent == 4 spaces
 set tabstop=4       " Tab == 4 spaces
 set softtabstop=4   " Let backspace delete indent
+set expandtab       " Tabs are spaces :(
 set shiftround      " Tab as multiples of shiftwidth
 set number          " Number lines
 set relativenumber  " Number lines relative to the line cursor is on
@@ -17,7 +18,6 @@ set nowrap          " Do not wrap long lines
 set nojoinspaces    " Prevents inserting two spaces after punctuation on a join (J)
 set splitright      " Puts new vsplit windows to the right of the current
 set splitbelow      " Puts new split windows to the bottom of the current
-set expandtab       " Tabs are spaces :(
 set autoread        " Update loaded files when changed externally if no local edits
 
 
@@ -69,8 +69,8 @@ set wildmenu
 " Fixes escape timeout (may change last to 10)
 set timeoutlen=1000 ttimeoutlen=0
 
-" <Ctrl-l> redraws the screen and removes any search highlighting.
-nnoremap <silent> <C-l> :nohl<CR><C-l>
+" <Ctrl-c> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-c> :nohl<CR><C-c>
 
 " Highlight git merge conflict
 set hlsearch

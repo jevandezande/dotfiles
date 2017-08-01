@@ -35,6 +35,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Sort python imports
 Plug 'tweekmonster/impsort.vim'
 
+" Vim-Polyglot: syntax and proper indents
+Plug 'sheerun/vim-polyglot'
+
 " Initialize plugin system
 call plug#end()
 
@@ -73,7 +76,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_python_exec = 'python3' " use python3, not python
+let g:syntastic_python_python_exec = 'python3.6' " use python3, not python
 let g:syntastic_tex_checkers=['lacheck']
 let g:syntastic_loc_list_height=5 " Smaller error window
 
