@@ -18,12 +18,15 @@ alias qw='qinfo -uw'
 jobs () { tail ~/.jobs -n ${1:-10} }
 finished () { tail ~/.completed_jobs -n ${1:-10} }
 
+# SubmitJob
+export PYTHONPATH=$PYTHONPATH:~/progs/sq/
+
 
 ##########
 # Random #
 ##########
 # delete e and o files
-alias rmeo='find . -regextype posix-extended -regex ".*\.(e|o)[0-9]{4,}.*" -delete'
+alias rmeo='find . -regextype posix-extended -regex ".*\.(e|o)[0-9]{5,}(-[0-9]+)?" -delete'
 
 cdj () {
 	# cd to the appropriate job, whether running or finished

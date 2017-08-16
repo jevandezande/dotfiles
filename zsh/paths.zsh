@@ -1,3 +1,6 @@
+##########
+# Python #
+##########
 # QGrep
 export PYTHONPATH=$PYTHONPATH:~/progs/qgrep/
 # CCLib
