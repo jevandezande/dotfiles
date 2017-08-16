@@ -85,4 +85,3 @@ nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 """"""""""""""""
 au FileType go map <leader>r :!go run %<CR>
 au FileType python map <leader>r :!python3 %<CR>
-

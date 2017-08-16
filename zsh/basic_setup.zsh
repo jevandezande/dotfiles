@@ -49,7 +49,12 @@ setopt extended_glob
 ###################
 # Directory Stack #
 ###################
-DIRSTACKFILE="$HOME/.cache/zsh/dirs$PID"
+dirstack_dir="$HOME/.cache/zsh"
+DIRSTACKFILE="$dirstack_dir/dirs$PID"
+if [[ ! -e $dirstack_dir ]]
+then
+    mkdir $dirstack_dir
+fi
 if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
   dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
   [[ -d $dirstack[1] ]] && cd $dirstack[1]
