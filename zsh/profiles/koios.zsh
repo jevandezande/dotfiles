@@ -6,7 +6,6 @@ source $HOME/.zsh/profiles/local.zsh
 
 export PATH="$PATH:/home/vandezande/progs/openchemistry-build/prefix/bin/"
 
-
 ############
 # Transfer #
 ############
