@@ -83,7 +83,7 @@ orca_run()
 		out="${1:r}.out"
 	fi
 
-    $HOME/progs/orca/orca $inp > $out & disown
+    $HOME/progs/orca/x86_exe/orca $inp > $out & disown
 }
 alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
 alias clean_orca="find input.{cis,engrad,ges,hostnames,opt,prop,qro,uno,unso,xyz} input{,_atom{45,77}}{,_property}.txt -type f 2> /dev/null | xargs rm 2> /dev/null"
