@@ -74,11 +74,9 @@ mkdircd () {
 ########
 orca_run()
 {
-    if [ "$1" = "" ]
-	then
-		inp="input.dat"
-		out="output.dat"
-	elif [ "$2" = "" ]
+    inp=${1:-input.dat}
+    out=${2:-output.dat}
+	if [ "$1" != "input.dat" ] && [ "$2" = "" ]
 	then
 		out="${1:r}.out"
 	fi
@@ -88,7 +86,7 @@ orca_run()
 alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
 alias clean_orca="find input.{cis,engrad,ges,hostnames,opt,prop,qro,uno,unso,xyz} input{,_atom{45,77}}{,_property}.txt -type f 2> /dev/null | xargs rm 2> /dev/null"
 
-alias orca_2mkl='$HOME/progs/orca4_0/orca_2mkl'
+alias orca_2mkl='$HOME/progs/orca/x86_exe/orca_2mkl'
 function molden ()
 {
 	# Strip the file extenstion
