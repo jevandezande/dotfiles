@@ -27,7 +27,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'ron89/thesaurus_query.vim'
 
 " Vim Go: The Go plugin
-Plug 'fatih/vim-go', { 'for' : 'go' }
+Plug 'fatih/vim-go', { 'for' : 'go', 'do': 'GoInstallBinaries' }
+
+" Split Join: split and join structs
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Ctrlp: Fuzzy file finder, buffers, etc.
 Plug 'ctrlpvim/ctrlp.vim'
@@ -35,8 +38,11 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Sort python imports
 Plug 'tweekmonster/impsort.vim'
 
-" Vim-Polyglot: syntax and proper indents
+" Vim Polyglot: syntax and proper indents
 Plug 'sheerun/vim-polyglot'
+
+" Ultisnips: snippets plugin
+Plug 'SirVer/ultisnips'
 
 " Initialize plugin system
 call plug#end()
@@ -62,7 +68,7 @@ let g:riv_disable_folding=1 "RST folding
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Open NerdTree with <C-n>
-map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
 
 
 """""""""""""
@@ -79,6 +85,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_python_exec = 'python3.6' " use python3, not python
 let g:syntastic_tex_checkers=['lacheck']
 let g:syntastic_loc_list_height=5 " Smaller error window
+
 
 
 """""""""""""
@@ -127,3 +134,75 @@ nmap <leader>p :CtrlP<cr>
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
+
+
+""""""""""
+" Vim-Go "
+""""""""""
+map <C-n> :cnext<CR>
+map <C-m> :cnext<CR>
+nnoremap <leader>a :cclose<CR>
+let g:go_list_type = "quickfix"
+" Previous default of 10s set before async was available
+let g:go_test_timeout = '10000s'
+let g:go_fmt_command = 'goimports'
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
+
+" Open :GoDeclsDir with ctrl-g
+nmap <C-g> :GoDeclsDir<cr>
+imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
+
+" build_go_files is a custom function that builds or compiles the test file.
+" It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+augroup go
+  autocmd!
+
+  " Show by default 4 spaces for a tab
+  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
+  " :GoBuild and :GoTestCompile
+  autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
+  " :GoTest
+  autocmd FileType go nmap <leader>t  <Plug>(go-test)
+
+  " :GoRun
+  autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
+  " :GoDoc
+  autocmd FileType go nmap <Leader>d <Plug>(go-doc)
+
+  " :GoCoverageToggle
+  autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+
+  " :GoInfo
+  autocmd FileType go nmap <Leader>i <Plug>(go-info)
+
+  " :GoMetaLinter
+  autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
+
+  " :GoDef but opens in a vertical split
+  autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
+  " :GoDef but opens in a horizontal split
+  autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
+
+  " :GoAlternate  commands :A, :AV, :AS and :AT
+  autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+  autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+  autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+  autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+augroup END

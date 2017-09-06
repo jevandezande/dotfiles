@@ -1,3 +1,4 @@
+set nocompatible                " Enables us Vim specific features
 syntax on
 filetype plugin on
 filetype indent on  " Automatically indent
@@ -19,6 +20,8 @@ set nojoinspaces    " Prevents inserting two spaces after punctuation on a join 
 set splitright      " Puts new vsplit windows to the right of the current
 set splitbelow      " Puts new split windows to the bottom of the current
 set autoread        " Update loaded files when changed externally if no local edits
+set autowrite       " Write whenever :make is called
+set ttyfast         " Indicate fast terminal conn for faster redraw
 
 
 set omnifunc=syntaxcomplete#Complete
@@ -33,6 +36,8 @@ set tw=79                       "Tetxidth = 2 (use gq to wrap)
 
 " Prevent tabs from expanding to spaces in Makefiles
 autocmd FileType make setlocal noexpandtab
+" Prevent tabs from expanding to spaces in Go
+autocmd FileType go setlocal noexpandtab
 
 " Map moving to simpler motions
 map <c-h> <c-w>h
@@ -79,9 +84,13 @@ map <F7> :/\(<<<<<<<\\|=======\\|>>>>>>>\)<CR>
 " Remove trailing whitespace
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
+" This enables us to undo files even if you exit Vim.
+if has('persistent_undo')
+  set undofile
+  set undodir=~/.config/vim/tmp/undo//
+endif
 
 """"""""""""""""
 " Running Code "
 """"""""""""""""
-au FileType go map <leader>r :!go run %<CR>
 au FileType python map <leader>r :!python3 %<CR>
