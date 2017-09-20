@@ -87,10 +87,12 @@ nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " This enables us to undo files even if you exit Vim.
 if has('persistent_undo')
   set undofile
-  set undodir=~/.config/vim/tmp/undo//
+  set undodir=~/.config/vim/tmp/undo/
 endif
 
 """"""""""""""""
 " Running Code "
 """"""""""""""""
 au FileType python map <leader>r :!python3 %<CR>
+au FileType zsh map <leader>r :!zsh %<CR>
+au FileType r map <leader>r :!Rscript %<CR>
