@@ -76,9 +76,9 @@ orca_run()
 {
     inp=${1:-input.dat}
     out=${2:-output.dat}
-	if [ "$1" != "input.dat" ] && [ "$2" = "" ]
+	if [ "$inp" != "input.dat" ] && [ "$2" = "" ]
 	then
-		out="${1:r}.out"
+		out="${inp:r}.out"
 	fi
 
     $HOME/progs/orca/x86_exe/orca $inp > $out & disown
