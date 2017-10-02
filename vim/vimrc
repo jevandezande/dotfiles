@@ -94,5 +94,6 @@ endif
 " Running Code "
 """"""""""""""""
 au FileType python map <leader>r :!python3 %<CR>
+au FileType python map <leader>t :!pytest %<CR>
 au FileType zsh map <leader>r :!zsh %<CR>
 au FileType r map <leader>r :!Rscript %<CR>
