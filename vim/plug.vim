@@ -86,8 +86,6 @@ let g:syntastic_python_python_exec = 'python3.6' " use python3, not python
 let g:syntastic_tex_checkers=['lacheck']
 let g:syntastic_loc_list_height=5 " Smaller error window
 
-
-
 """""""""""""
 " Hard Mode "
 """""""""""""
