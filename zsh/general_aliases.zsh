@@ -19,6 +19,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias ..='cd ..'
 
+
 #######################
 # Editing and Viewing #
 #######################
@@ -47,7 +48,6 @@ export NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
 alias pmake='time nice make -j$NUMCPUS --load-average=$NUMCPUS'
 alias package_size_list="dpkg-query -Wf '\${Installed-size}\t\${Package}\n' | sort -n"
 
-
 # Multiple move
 autoload -U zmv
 alias mmv='noglob zmv -W'
@@ -56,9 +56,9 @@ pdf() {
     # Strip the file extenstion
     file=${1:r}
     # only open if it exists and compiles
-    if [[ -f "${file}.tex" ]] && pdflatex "${file}.tex"
+    if [[ -f $file".tex" ]] && pdflatex $file".tex"
     then
-        xdg-open "${file}.pdf"
+        xdg-open $file".pdf"
     fi
 }
 
@@ -68,6 +68,7 @@ mkdircd () {
     mkdir $1
     cd $1
 }
+
 
 ########
 # Orca #
@@ -97,7 +98,7 @@ function molden ()
 		file='input'
 	fi
 
-	if [[ ! -f "${file}.gbw" ]]
+	if [[ ! -f $file".gbw" ]]
 	then
 		echo "No gbw file found"
 	else
@@ -106,16 +107,23 @@ function molden ()
 	fi
 }
 
+
 ##########
 # Images #
 ##########
 # Fix pdf page conflicts in LaTeX
 gs_pdf_pages()
 {
-    # Can't read and write to the same file
-    file=${1:r}.pdf
-    gs -o .tmp.pdf -sDEVICE=pdfwrite -dColorConversionStrategy=/sRGB -dProcessColorModel=/DeviceRGB $file
-    mv .tmp.pdf $file
+    # Strip the file extenstion
+    file_base=${1:r}
+    if [ ! -f $file_base".svg" ]
+    then
+        echo "Can't find file"
+    else
+        # Can't read and write to the same file
+        gs -o .tmp.pdf -sDEVICE=pdfwrite -dColorConversionStrategy=/sRGB -dProcessColorModel=/DeviceRGB $file_base".pdf"
+        mv .tmp.pdf $file_base".pdf"
+    fi
 }
 
 # Another way to fix pdf page conflicts in LaTeX
@@ -134,9 +142,14 @@ ps_pdf_pages()
 ink_pdf()
 {
     # Strip the file extenstion
-    file_base="${1:r}"
-    inkscape "${file_base}.svg" -A "${file_base}.pdf"
-    gs_pdf_pages "${file_base}.pdf"
+    file_base=${1:r}
+    if [ ! -f $file_base".svg" ]
+    then
+        echo "Can't find file"
+    else
+        inkscape $file_base".svg" -A $file_base".pdf"
+        gs_pdf_pages $file_base".pdf"
+    fi
 }
 
 # Convert all svg files in folder to pdf
@@ -153,8 +166,8 @@ ink_pdfs()
 mrv_pdf()
 {
     # Strip the file extenstion
-    file_base="${1:r}"
-    ~/bin/MarvinBeans/bin/molconvert svg "${file_base}.mrv" -o "${file_base}.svg" 2>/dev/null
-    inkscape "${file_base}.svg" -A "${file_base}.pdf"
+    file_base=${1:r}
+    ~/bin/MarvinBeans/bin/molconvert svg $file_base".mrv" -o $file_base".svg" 2>/dev/null
+    inkscape $file_base".svg" -A $file_base".pdf"
 }
 
