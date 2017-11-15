@@ -82,7 +82,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_python_exec = 'python3.6' " use python3, not python
+let g:syntastic_python_python_exec = 'python3' " use python3, not python
 let g:syntastic_tex_checkers=['lacheck']
 let g:syntastic_loc_list_height=5 " Smaller error window
 
@@ -105,7 +105,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 
 """""""""
-" CtrlP	"
+" CtrlP "
 """""""""
 " remap opening command
 let g:ctrlp_map = '<c-p>'
@@ -113,8 +113,8 @@ let g:ctrlp_cmd = 'CtrlP'
 " Setup some default ignores
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-	\ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+    \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
 \}
 
 " Ignore files in .gitignore
