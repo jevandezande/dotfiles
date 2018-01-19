@@ -9,7 +9,14 @@ then
     source ~/.zsh/profiles/cluster.zsh
 elif [ ${HOST} = 'master1' ] || [ ${HOST} = 'master2' ]
 then
-    source ~/.zsh/profiles/hera.zsh
+    # look for Hera proc
+    proc=$(grep 'E5649  @ 2.53GHz' /proc/cpuinfo)
+    if [ $proc ]
+    then
+        source ~/.zsh/profiles/hera.zsh
+    else
+        source ~/.zsh/profiles/hermes.zsh
+    fi
     source ~/.zsh/profiles/mpi.zsh
     source ~/.zsh/profiles/cluster.zsh
 elif [ ${HOST:0:6} = 'zeusln' ]
