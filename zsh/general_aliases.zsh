@@ -59,6 +59,8 @@ pdf() {
     if [[ -f $file".tex" ]] && pdflatex $file".tex"
     then
         xdg-open $file".pdf"
+    else
+        return 1
     fi
 }
 
@@ -77,34 +79,35 @@ orca_run()
 {
     inp=${1:-input.dat}
     out=${2:-output.dat}
-	if [ "$inp" != "input.dat" ] && [ "$2" = "" ]
-	then
-		out="${inp:r}.out"
-	fi
+    if [ "$inp" != "input.dat" ] && [ "$2" = "" ]
+    then
+        out="${inp:r}.out"
+    fi
 
     $HOME/progs/orca/x86_exe/orca $inp > $out & disown
 }
 alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
 alias clean_orca="find input.{cis,engrad,ges,hostnames,opt,prop,qro,uno,unso,xyz} input{,_atom{45,77}}{,_property}.txt -type f 2> /dev/null | xargs rm 2> /dev/null"
 
-alias orca_2mkl='$HOME/progs/orca/x86_exe/orca_2mkl'
+#alias orca_2mkl='$HOME/progs/orca/x86_exe/orca_2mkl'
 function molden ()
 {
-	# Strip the file extenstion
-	file=${1:r}
-	# If no argument
-	if [[ ! -n $file ]]
-	then
-		file='input'
-	fi
+    # Strip the file extenstion
+    file=${1:r}
+    # If no argument
+    if [[ ! -n $file ]]
+    then
+        file='input'
+    fi
 
-	if [[ ! -f $file".gbw" ]]
-	then
-		echo "No gbw file found"
-	else
-		orca_2mkl $file -molden
-		mv $file.molden.input $file.molden
-	fi
+    if [[ ! -f $file".gbw" ]]
+    then
+        echo "No gbw file found"
+        return 1
+    else
+        orca_2mkl $file -molden
+        mv $file.molden.input $file.molden
+    fi
 }
 
 
@@ -146,6 +149,7 @@ ink_pdf()
     if [ ! -f $file_base".svg" ]
     then
         echo "Can't find file"
+        return 1
     else
         inkscape $file_base".svg" -A $file_base".pdf"
         gs_pdf_pages $file_base".pdf"
