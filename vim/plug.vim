@@ -1,8 +1,8 @@
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
 
-" LaTeX-Box: compiling LaTeX
-Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for' : 'tex' }
+" VimTex: compiling LaTeX (more modern than LaTeX-Box)
+Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 " Rykka.vim: Improved highlighting for RestructuredText
 Plug 'Rykka/riv.vim', { 'for' : 'rst' }
@@ -46,13 +46,6 @@ Plug 'SirVer/ultisnips'
 
 " Initialize plugin system
 call plug#end()
-
-
-"""""""""""""
-" LaTeX Box "
-"""""""""""""
-" Ignore warning when using subfiles and compiling using LaTeX-Box
-let g:LatexBox_ignore_warnings = ['Cannot patch \\document']
 
 
 """""""""""""
@@ -205,6 +198,11 @@ augroup go
   autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 augroup END
 
+""""""""""""
+" Polyglot "
+""""""""""""
+" Breaks bim-tex
+let g:polyglot_disabled = ['latex']
 
 """""""""""""
 " UltiSnips "
