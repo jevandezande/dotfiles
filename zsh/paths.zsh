@@ -7,6 +7,8 @@ export PYTHONPATH=$PYTHONPATH:~/progs/qgrep/
 export PYTHONPATH=$PYTHONPATH:~/progs/cclib/src/
 # Cluster
 export PYTHONPATH=$PYTHONPATH:~/progs/cluster
+# CFour
+export PATH=$PATH:~/.install/cfour/bin
 
 # Go
 export PATH=$PATH:~/progs/go/bin/
