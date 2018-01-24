@@ -144,16 +144,20 @@ ps_pdf_pages()
 # Convert an svg to a pdf using inkscape
 ink_pdf()
 {
-    # Strip the file extenstion
-    file_base=${1:r}
-    if [ ! -f $file_base".svg" ]
-    then
-        echo "Can't find file"
-        return 1
-    else
-        inkscape $file_base".svg" -A $file_base".pdf"
-        gs_pdf_pages $file_base".pdf"
-    fi
+    files=(${~1?})
+    for file in $files
+    do
+        # Strip the file extenstion
+        file_base=${file:r}
+        if [ ! -f $file_base".svg" ]
+        then
+            echo "Can't find file"
+            return 1
+        else
+            inkscape $file_base".svg" -A $file_base".pdf"
+            gs_pdf_pages $file_base".pdf"
+        fi
+    done
 }
 
 # Convert all svg files in folder to pdf
