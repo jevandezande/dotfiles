@@ -15,13 +15,13 @@ alias qme='qstat -u `whoami`'
 alias qall='qstat -f -u "*"'
 alias qu='qinfo -u'
 alias qw='qinfo -uw'
-jobs () { tail ~/.job_queue/submitted -n ${1:-10} }
-finished () { tail ~/.job_queue/completed -n ${1:-10} }
+jobs () { tail ~/.config/job_queue/submitted -n ${1:-10} }
+finished () { tail ~/.config/job_queue/completed -n ${1:-10} }
 
 # cd to the next job in the completed_jobs_list
 next () {
-    current_job_id=`cat ~/.job_queue/completed_list_current | cut -f1`
-    next_job_data=$(tac ~/.job_queue/completed | grep "^$current_job_id: " -m 1 -B 1 | head -1 )
+    current_job_id=`cat ~/.config/job_queue/completed_list_current | cut -f1`
+    next_job_data=$(tac ~/.config/job_queue/completed | grep "^$current_job_id: " -m 1 -B 1 | head -1 )
     next_job_id=$(echo $next_job_data | cut -f1 -d ':')
     next_job_dir=$(echo $next_job_data | cut -f4 -d ' ')
     if [ -z $next_job_dir ]
@@ -33,7 +33,7 @@ next () {
         echo "At last job"
         return 1
     else
-        echo $next_job_id > ~/.job_queue/completed_list_current
+        echo $next_job_id > ~/.config/job_queue/completed_list_current
         cd $next_job_dir
     fi
 }
@@ -65,8 +65,8 @@ cdj () {
         # cut out the directory and cd to the job
         cd $(echo $job | grep "PBS_O_WORKDIR" | sed -e "s|.*PBS_O_WORKDIR=\([^,]*\),.*|\1|")
     else
-        # Try looking for it in ~/.job_queue/completed
-        job_data=$(tac ~/.job_queue/completed | grep "^$job_id: " -m 1)
+        # Try looking for it in ~/.config/job_queue/completed
+        job_data=$(tac ~/.config/job_queue/completed | grep "^$job_id: " -m 1)
         if [[ -n $job_data ]]
         then
             # cut out the directory and cd to the job
@@ -74,7 +74,7 @@ cdj () {
             job_id=$(echo $job_data | cut -f1 -d ':')
             job_dir=$(echo $job_data | cut -f4 -d ' ')
 
-            echo $job_id > ~/.job_queue/completed_list_current
+            echo $job_id > ~/.config/job_queue/completed_list_current
             cd $job_dir
         else
             echo "Could not find job"
