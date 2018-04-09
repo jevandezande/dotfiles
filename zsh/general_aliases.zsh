@@ -175,7 +175,7 @@ mrv_pdf()
 {
     # Strip the file extenstion
     file_base=${1:r}
-    ~/bin/MarvinBeans/bin/molconvert svg $file_base".mrv" -o $file_base".svg" 2>/dev/null
+    molconvert svg $file_base".mrv" -o $file_base".svg" 2>/dev/null
     inkscape $file_base".svg" -A $file_base".pdf"
 }
 
