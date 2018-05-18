@@ -15,3 +15,6 @@ export GOPATH=~/work/go
 export PATH=$PATH:~/work/go/bin
 
 export PATH=$PATH:~/progs/miniconda3/bin
+
+# Rust
+export PATH=$PATH:~/.cargo/bin

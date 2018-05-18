@@ -44,6 +44,9 @@ Plug 'sheerun/vim-polyglot'
 " Ultisnips: snippets plugin
 Plug 'SirVer/ultisnips'
 
+" Rust coding features
+Plug 'rust-lang/rust.vim'
+
 " Initialize plugin system
 call plug#end()
 
