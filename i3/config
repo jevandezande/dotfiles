@@ -145,8 +145,11 @@ exec --no-startup-id xsetroot -solid "#11111"
 ############
 # Avogadro
 # Parse ~/output.dat, open with avogadro, and send resulting geom.xyz to zeus:
-bindsym $mod+g exec "export PYTHONPATH=/home/vandezande/progs/new_cclib/; /home/vandezande/.bin/get_geom && avogadro geom.xyz && scp geom.xyz zeus:"
+bindsym $mod+g exec "export PYTHONPATH=/home/vandezande/progs/cclib/; /home/vandezande/.bin/get_geom && avogadro geom.xyz && scp geom.xyz zeus:"
 bindsym $mod+Shift+g exec "i3-msg workspace avogadro; export PYTHONPATH=/home/vandezande/progs/new_cclib/; /home/vandezande/.bin/get_geom && avogadro geom.xyz && scp geom.xyz zeus:"
+
+# Orca manual
+bindsym $mod+O exec "xdg-open /home/vandezande/Dropbox/work/Papers/manuals/ORCA4\ Manual.pdf"
 
 #########
 # Audio #
