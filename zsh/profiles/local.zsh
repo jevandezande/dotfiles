@@ -19,3 +19,9 @@ alias cout='cheMVP output.dat'
 # Program Running #
 ###################
 alias cfour_run='xcfour ZMAT > output.dat 2> /dev/null & disown'
+
+
+#####################
+# VirtualEnvWrapper #
+#####################
+source /usr/local/bin/virtualenvwrapper.sh
