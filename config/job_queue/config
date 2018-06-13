@@ -1,0 +1,10 @@
+[queues]
+    job_id_length = 6
+    name_length = 22
+    small_queue = 3
+[submitjob]
+    program = orca
+    queue = batch
+    email = False
+    email_address = jevandezande@gmail.com
+
