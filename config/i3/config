@@ -134,7 +134,8 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status
+    #status_command i3status
+    status_command i3blocks
 }
 
 # Desktop background (might not work)
@@ -167,3 +168,11 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 bindsym $mod+p exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+bindsym $mod+greater exec "sp next"
+bindsym $mod+less exec "sp prev"
+bindsym $mod+slash exec "sp play"
+assign [class="Spotify"] $music
+assign [instance="Spotify"] $music
+assign [title="Spotify"] $music
+for_window [class="Spotify"] move to workspace $music
