@@ -1,0 +1,36 @@
+set nocompatible    " Enables us Vim specific features
+set shiftround      " Tab as multiples of shiftwidth
+set number          " Number lines
+set relativenumber  " Number lines relative to the line cursor is on
+set incsearch       " Start searching on first keystroke (don't wait for enter)
+set backspace=eol,start,indent  " Backspace through newlines
+set nojoinspaces    " Prevents inserting two spaces after punctuation on a join (J)
+set ttyfast         " Indicate fast terminal conn for faster redraw
+
+set smartcase                   " Smart case insensitive searching
+                                "/copyright      " Case insensitive
+                                "/Copyright      " Case sensitive
+                                "/copyright\C    " Case sensitive
+                                "/Copyright\c    " Case insensitive
+
+set tw=79                       "Tetxidth = 2 (use gq to wrap)
+
+"map <c-tab> gt
+"map <c-S-tab> gT
+
+" Keep selection selected after indent
+vmap > >gv
+vmap < <gv
+
+" Make Y consistent with C and D
+nnoremap Y y$
+
+" Make cw consistent with dw, yw, vw
+onoremap w :execute 'normal! '.v:count1.'w'<CR>
+
+" Highlight git merge conflict
+set hlsearch
+map <F7> :/\(<<<<<<<\\|=======\\|>>>>>>>\)<CR>
+
+" <Ctrl-c> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-c> :nohl<CR><C-c>
