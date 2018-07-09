@@ -9,12 +9,12 @@ cdj () {
     fi
 
     # Find the job in qstat
-    job=$(qstat $1 -f 2> /dev/null)
+    job=$(qstat -j $1 2> /dev/null)
     # If the job string is not empty it must be running or queued
     if [[ -n $job ]]
     then
         # cut out the directory and cd to the job
-        cd $(echo $job | grep "PBS_O_WORKDIR" | sed -e "s|.*PBS_O_WORKDIR=\([^,]*\),.*|\1|")
+        cd $(echo $job | grep "sge_o_workdir" | sed -e "s|.*:\s\+\(.*\)|\1|")
     else
         # Try looking for it in ~/.config/job_queue/completed
         job_data=$(tac ~/.config/job_queue/completed | grep "^$job_id: " -m 1)
