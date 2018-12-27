@@ -10,6 +10,7 @@
 *.so
 *.pyc
 x86_exe
+__pycache__
 
 
 ###################
@@ -48,6 +49,7 @@ x86_exe
 ehthumbs.db
 Icon?
 Thumbs.db
+desktop.ini
 
 
 ###########
