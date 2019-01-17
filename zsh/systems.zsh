@@ -48,6 +48,10 @@ then
     source ~/.zsh/profiles/cluster.zsh
     source ~/.zsh/profiles/sapelo.zsh
 
+elif [ ${HOST} = 'Bob' ]
+then
+    source ~/.zsh/profiles/bob.zsh
+
 elif [ -n "$HOST" ]
 then
     echo "Cannot find the proper host and associated system profile. Host: $HOST"
