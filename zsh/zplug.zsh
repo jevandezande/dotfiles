@@ -1,4 +1,4 @@
-source /usr/share/zplug/init.zsh
+source ~/.zplug/init.zsh
 
 # Autoswitching virtualenv
 zplug "MichaelAquilina/zsh-autoswitch-virtualenv"

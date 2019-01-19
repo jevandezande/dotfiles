@@ -4,6 +4,10 @@ if [ $HOST = "pccec0668" ]
 then
     source ~/.zsh/profiles/koios.zsh
 
+elif [ $HOST = "cronos" ]
+then
+    source ~/.zsh/profiles/cronos.zsh
+
 elif ( [ $HOST = "vlogin1.ccqc.uga.edu" ] || [ $HOST = "vlogin2.ccqc.uga.edu" ] ) && [ -f profiles/vulcan.zsh ]
 then
     source ~/.zsh/profiles/cluster.zsh
