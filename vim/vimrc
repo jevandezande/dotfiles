@@ -22,6 +22,8 @@ set splitbelow      " Puts new split windows to the bottom of the current
 set autoread        " Update loaded files when changed externally if no local edits
 set autowrite       " Write whenever :make is called
 set ttyfast         " Indicate fast terminal conn for faster redraw
+set visualbell      " Prevent noises
+set t_vb=           " Prevent noises
 
 
 set omnifunc=syntaxcomplete#Complete
