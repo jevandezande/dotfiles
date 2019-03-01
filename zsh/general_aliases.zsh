@@ -24,7 +24,7 @@ alias ..='cd ..'
 # Editing and Viewing #
 #######################
 # Default to nvim
-alias vi='nvim'
+#alias vi='nvim'
 
 # Specific files used a lot
 alias vii='vi input.dat'
