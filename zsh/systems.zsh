@@ -3,6 +3,12 @@
 if [ $HOST = "pccec0668" ]
 then
     source ~/.zsh/profiles/koios.zsh
+    source ~/.zsh/profiles/wsl.zsh
+
+elif [ ${HOST} = 'Hyperion' ]
+then
+    source ~/.zsh/profiles/hyperion.zsh
+    source ~/.zsh/profiles/wsl.zsh
 
 elif [ $HOST = "cronos" ]
 then
