@@ -1,4 +1,5 @@
 #!/bin/bash
+username=jevandezande
 
 
 echo "Adding repos"
@@ -60,7 +61,7 @@ apt_progs=(
     libscalapack-mpi-dev    # BAGEL
     # mendeleydesktop -y
     nautilus-dropbox# Dropbox that works on Ubuntu
-    # neovim          # Neovim
+    neovim          # Neovim
     network-manager-openconnect       # VPN (alternative to Cisco AnyConnect)
     network-manager-openconnect-gnome # VPN (alternative to Cisco AnyConnect)
     openconnect     # VPN (alternative to Cisco AnyConnect)
@@ -82,6 +83,7 @@ apt_progs=(
     # wine            # Compatability program
     # valgrind        # Code checker
     vim             # Editor
+    python3-venv    # Python3 virtual environment
     zsh             # Shell
 )
 
@@ -106,6 +108,8 @@ pip_progs=(
     nose nose-regression # Code testing
     natsort        # Natural sorting (e.g. A2 < A11)
     numpy          # Scientific computing
+    virtualenv     # Virtual environments
+    virtualenv-wrapper  # Shell integrstion with virtualenv
     scipy          # Scientific computing
     sympy          # symbolic python
 )
@@ -123,7 +127,7 @@ snap_progs=(
     gimp                # Raster graphic editor
     inkscape            # Vector graphics editor
     keepassxc           # Password storage
-    neovim-kalikiana    # Upgraded version of vim
+    # neovim-kalikiana    # Upgraded version of vim
     pycharm-community   # Python IDE
     skype               # Video chat client
     spotify             # Music player
@@ -144,10 +148,14 @@ echo "Setup VPN alternative to Cisco anyconnect"
 #http://www.humans-enabled.com/2011/06/how-to-connect-ubuntu-linux-to-cisco.html
 echo "Install cheMVP"
 echo "Change shell: chsh -s /bin/zsh <username>"
+echo "Run non-root commands"
 
+su $username
 
-git clone https://github.com/jevandezande/dotfiles ~/.dotfiles
-rcup
+if [ ! -d ~/.dotfiles ]
+then
+   git clone https://github.com/jevandezande/dotfiles ~/.dotfiles
+fi
 
 # Vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -157,8 +165,10 @@ curl -sL --proto-redir -all,https \
     https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 
+mkdir ~/progs -p
+git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
+git clone https://github.com/jevandezande/quantum ~/progs/quantum
 
-mkdir ~/progs
-cd ~/progs
-git clone https://github.com/jevandezande/qgrep
-git clone https://github.com/jevandezande/quantum
+chown $username -R ~/.dotfiles
+chown $username -R ~/progs
+chsh jevandezande -s /bin/zsh
