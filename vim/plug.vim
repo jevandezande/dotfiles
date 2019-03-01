@@ -90,11 +90,11 @@ let g:syntastic_python_checkers=['pycodestyle']
 let g:syntastic_tex_checkers=['lacheck']
 let g:syntastic_loc_list_height=5 " Smaller error window
 
+
 """""""""""""
 " Hard Mode "
 """""""""""""
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-set lazyredraw
 
 
 """""""""""""""
