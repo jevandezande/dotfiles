@@ -28,3 +28,6 @@ export PATH=$PATH:~/.cargo/bin
 
 # Anaconda3
 export PATH=~/progs/anaconda3:$PATH
+
+# QGrep
+export PATH=$PATH:~/progs/qgrep/bin
