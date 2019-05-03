@@ -119,7 +119,6 @@ do
 done
 
 
-
 echo "Snaps!"
 snap_progs=(
     eclipse             # IDE
@@ -136,7 +135,7 @@ snap_progs=(
 )
 for prog in "${snap_progs[@]}"
 do
-    snap intsall $prog
+    snap install $prog
 done
 
 
@@ -149,6 +148,7 @@ echo "Setup VPN alternative to Cisco anyconnect"
 echo "Install cheMVP"
 echo "Change shell: chsh -s /bin/zsh <username>"
 echo "Run non-root commands"
+
 
 su $username
 
