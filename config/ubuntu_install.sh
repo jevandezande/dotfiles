@@ -170,5 +170,6 @@ git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
 git clone https://github.com/jevandezande/quantum ~/progs/quantum
 
 chown $username -R ~/.dotfiles
+chown $username -R ~/.zplug
 chown $username -R ~/progs
 chsh jevandezande -s /bin/zsh
