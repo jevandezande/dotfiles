@@ -12,7 +12,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 " Rykka.vim: Improved highlighting for RestructuredText
-Plug 'Rykka/riv.vim', { 'for' : 'rst' }
+"Plug 'Rykka/riv.vim', { 'for' : 'rst' }
 
 " NERDTree: makes nicer directory viewing
 " On-demand loading
@@ -20,9 +20,11 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 " Syntastic: syntax checking
 Plug 'scrooloose/syntastic'
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': ['.dat'] }
+nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 " Hardmode: Why, oh why did I do this?
-Plug 'wikitopian/hardmode'
+"Plug 'wikitopian/hardmode'
 
 " Vim-Airline: fancy status line
 Plug 'vim-airline/vim-airline'
@@ -46,10 +48,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tweekmonster/impsort.vim'
 
 " Vim Polyglot: syntax and proper indents
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 
 " Ultisnips: snippets plugin
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 
 " Rust coding features
 Plug 'rust-lang/rust.vim'
