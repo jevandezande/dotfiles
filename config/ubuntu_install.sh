@@ -76,6 +76,7 @@ apt_progs=(
     python3-pip     # Python3 package installer
     python3-pyqt5   # Python3 qt5 bindings
     qt5-default     # cheMVP
+    rclone          # Rscync for cloud storage
     rcm             # Dotfile manager
     # skype           # Video chat client
     # spotify-client  # Spotify
@@ -105,7 +106,7 @@ pip_progs=(
     h5py           # Hdf5 library
     jupyter        # iPython notebooks
     matplotlib     # Plotting
-    nose nose-regression # Code testing
+    more-itertools # Even more ways to iterate
     natsort        # Natural sorting (e.g. A2 < A11)
     numpy          # Scientific computing
     virtualenv     # Virtual environments
