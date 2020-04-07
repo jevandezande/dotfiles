@@ -12,7 +12,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'lervag/vimtex', { 'for' : 'tex' }
 
 " Rykka.vim: Improved highlighting for RestructuredText
-"Plug 'Rykka/riv.vim', { 'for' : 'rst' }
+Plug 'Rykka/riv.vim', { 'for' : 'rst' }
 
 " NERDTree: makes nicer directory viewing
 " On-demand loading
@@ -219,7 +219,7 @@ augroup END
 """"""""""""
 " Polyglot "
 """"""""""""
-" Breaks bim-tex
+" Breaks vim-tex
 let g:polyglot_disabled = ['latex']
 
 """""""""""""
@@ -229,3 +229,8 @@ let g:polyglot_disabled = ['latex']
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+""""""""
+" Rust "
+""""""""
+let g:rustfmt_autosave = 1
