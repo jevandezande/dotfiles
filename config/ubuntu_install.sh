@@ -76,6 +76,7 @@ apt_progs=(
     qt5-default     # cheMVP
     rclone          # Rscync for cloud storage
     rcm             # Dotfile manager
+    ruby-dev        # Programming language (used for Travis)
     # skype           # Video chat client
     # spotify-client  # Spotify
     texlive-full    # Full tex distribtution (very large)
@@ -88,7 +89,8 @@ apt_progs=(
 
 for prog in "${apt_progs[@]}"
 do
-    apt-get install $prog -y
+    #apt-get install $prog -y
+    echo $prog
 done
 
 apt-get update
@@ -101,20 +103,23 @@ pip_progs=(
     bibtextparser  # Parses bibtex files
     cairocffi
     cython         # Python -> c
+    flake8         # Linting
     h5py           # Hdf5 library
     jupyter        # iPython notebooks
     matplotlib     # Plotting
     more-itertools # Even more ways to iterate
     natsort        # Natural sorting (e.g. A2 < A11)
     numpy          # Scientific computing
+    pytest         # Unittesting
     virtualenv     # Virtual environments
     virtualenv-wrapper  # Shell integrstion with virtualenv
     scipy          # Scientific computing
-    sympy          # symbolic python
+    sympy          # Symbolic python
+    tox            # Venv and CLI tool
 )
 for prog in "${pip_progs[@]}"
 do
-    pip3 install prog
+    pip3 install $prog
 done
 
 
@@ -135,6 +140,16 @@ snap_progs=(
 for prog in "${snap_progs[@]}"
 do
     snap install $prog
+done
+
+
+echo "Gems!"
+gem_progs=(
+    travis              # Travis CI CLI
+)
+for prog in "${gem_progs[@]}"
+do
+    gem install $prog
 done
 
 

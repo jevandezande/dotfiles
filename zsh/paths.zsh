@@ -12,8 +12,6 @@ export PYTHONPATH=$PYTHONPATH:~/progs/qgrep
 export PYTHONPATH=$PYTHONPATH:~/progs/cclib
 # Cluster
 export PYTHONPATH=$PYTHONPATH:~/progs/cluster
-# Spectra
-export PYTHONPATH=$PYTHONPATH:~/progs/spectra
 
 # CFour
 export PATH=$PATH:~/.install/cfour/bin

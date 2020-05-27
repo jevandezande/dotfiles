@@ -7,3 +7,5 @@ source $HOME/.zsh/paths.zsh
 source $HOME/.zsh/zplug.zsh
 
 source $HOME/.zsh/systems.zsh
+
+[ ! -s $HOME/.travis/travis.sh ] || source $HOME/.travis/travis.sh
