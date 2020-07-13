@@ -154,6 +154,23 @@ do
 done
 
 
+# Conda
+echo "Conda!"
+mkdir ~/tmp -p
+curl -o Miniconda-latest.sh "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+bash Miniconda-latest.sh -b -p ~/progs/miniconda
+conda update --yes --all
+
+conda config --add channels http://conda.anaconda.org/psi4
+cond_progs=(
+    gcp               # gcp
+    psi4              # psi4
+)
+for prog in "${conda_progs[@]}"
+do
+    conda install --yes $prog
+done
+
 su $username
 
 if [ ! -d ~/.dotfiles ]
@@ -172,16 +189,6 @@ curl -sL --proto-redir -all,https \
 mkdir ~/progs -p
 git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
 git clone https://github.com/jevandezande/quantum ~/progs/quantum
-
-
-# Conda
-echo "Installing Miniconda"
-mkdir ~/tmp -p
-curl -o Miniconda-latest.sh "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-bash Miniconda-latest.sh -b -p ~/progs/miniconda
-conda update --yes --all
-conda config --add channels http://conda.anaconda.org/psi4
-conda install --yes psi4
 
 
 # Change ownership from root to user
