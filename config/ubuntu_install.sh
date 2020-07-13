@@ -69,7 +69,7 @@ apt_progs=(
     pinta           # Lightwieght raster graphic editor
     # pithos          # Pandora app
     povray          # Ray tracer
-    psi4            # QM Package
+    # psi4            # QM Package
     python3-dev     # Python3
     python3-pip     # Python3 package installer
     python3-pyqt5   # Python3 qt5 bindings
@@ -101,6 +101,7 @@ echo "Pips!"
 pip_progs=(
     'ipython[all]'
     bibtextparser  # Parses bibtex files
+    bump2version   # Python package version bumper
     cairocffi
     cython         # Python -> c
     flake8         # Linting
@@ -153,17 +154,6 @@ do
 done
 
 
-echo "Finished Installing"
-echo "Change launcher and workspaces with the gnome-tweak-tool"
-echo "Change Alt+Tab with compizconfig-settings-manager. Change settings in 'Ubuntu Unity Plugin' and 'Static Application Switcher.'"
-echo "Install Spotify notify (for media controls)"
-echo "Setup VPN alternative to Cisco anyconnect"
-#http://www.humans-enabled.com/2011/06/how-to-connect-ubuntu-linux-to-cisco.html
-echo "Install cheMVP"
-echo "Change shell: chsh -s /bin/zsh <username>"
-echo "Run non-root commands"
-
-
 su $username
 
 if [ ! -d ~/.dotfiles ]
@@ -183,7 +173,29 @@ mkdir ~/progs -p
 git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
 git clone https://github.com/jevandezande/quantum ~/progs/quantum
 
+
+# Conda
+echo "Installing Miniconda"
+mkdir ~/tmp -p
+curl -o Miniconda-latest.sh "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+bash Miniconda-latest.sh -b -p ~/progs/miniconda
+conda update --yes --all
+conda config --add channels http://conda.anaconda.org/psi4
+conda install --yes psi4
+
+
+# Change ownership from root to user
 chown $username -R ~/.dotfiles
 chown $username -R ~/.zplug
 chown $username -R ~/progs
-chsh jevandezande -s /bin/zsh
+chsh $username -s /bin/zsh
+
+
+echo "Finished Installing"
+echo "Change launcher and workspaces with the gnome-tweak-tool"
+echo "Change Alt+Tab with compizconfig-settings-manager. Change settings in 'Ubuntu Unity Plugin' and 'Static Application Switcher.'"
+echo "Install Spotify notify (for media controls)"
+echo "Setup VPN alternative to Cisco anyconnect"
+#http://www.humans-enabled.com/2011/06/how-to-connect-ubuntu-linux-to-cisco.html
+echo "Install cheMVP"
+echo "Run non-root commands"
