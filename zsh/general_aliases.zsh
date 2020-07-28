@@ -179,3 +179,14 @@ mrv_pdf()
     inkscape $file_base".svg" -A $file_base".pdf"
 }
 
+ljobs()
+{
+    for prog in psi4 orca
+    do
+        js=`top -bn1 | grep $prog -c`
+        if [ $js -gt 0 ]
+        then
+            echo $prog $js
+        fi
+    done
+}
