@@ -71,7 +71,6 @@ apt_progs=(
     povray          # Ray tracer
     # psi4            # QM Package
     python3-dev     # Python3
-    python3-pip     # Python3 package installer
     python3-pyqt5   # Python3 qt5 bindings
     qt5-default     # cheMVP
     rclone          # Rscync for cloud storage
@@ -83,13 +82,12 @@ apt_progs=(
     # wine            # Compatability program
     # valgrind        # Code checker
     vim             # Editor
-    python3-venv    # Python3 virtual environment
     zsh             # Shell
 )
 
 for prog in "${apt_progs[@]}"
 do
-    #apt-get install $prog -y
+    apt-get install $prog -y
     echo $prog
 done
 
@@ -157,13 +155,14 @@ done
 # Conda
 echo "Conda!"
 mkdir ~/tmp -p
-curl -o Miniconda-latest.sh "https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+curl -o Miniconda-latest.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
 bash Miniconda-latest.sh -b -p ~/progs/miniconda
 conda update --yes --all
 
 conda config --add channels http://conda.anaconda.org/psi4
 cond_progs=(
     gcp               # gcp
+    dftd3             # DFT D3 correction
     psi4              # psi4
 )
 for prog in "${conda_progs[@]}"
@@ -175,20 +174,21 @@ su $username
 
 if [ ! -d ~/.dotfiles ]
 then
-   git clone https://github.com/jevandezande/dotfiles ~/.dotfiles
+    git clone https://github.com/jevandezande/dotfiles ~/.dotfiles
+    rcup
 fi
 
 # Vim-plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+#    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # Zplug
-curl -sL --proto-redir -all,https \
-    https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+#curl -sL --proto-redir -all,https \
+#    https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 
-mkdir ~/progs -p
-git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
-git clone https://github.com/jevandezande/quantum ~/progs/quantum
+#mkdir ~/progs -p
+#git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
+#git clone https://github.com/jevandezande/quantum ~/progs/quantum
 
 
 # Change ownership from root to user
