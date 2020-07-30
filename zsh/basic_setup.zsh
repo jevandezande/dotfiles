@@ -3,6 +3,9 @@ promptinit
 
 PID=$$
 
+# Kill beep
+unsetopt beep
+
 # share history between shell instances
 setopt  histignorealldups sharehistory
 
