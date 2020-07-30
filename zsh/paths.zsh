@@ -2,6 +2,7 @@
 # Local #
 #########
 export PATH=~/.local/bin:$PATH
+export PATH=$HOME/.bin:$PATH
 
 ##########
 # Python #

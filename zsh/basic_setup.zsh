@@ -14,9 +14,6 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 HISTFILE=~/.zsh/history
 
-# Add bin
-export PATH=$HOME/.bin:$PATH
-
 # Use modern completion system
 autoload -Uz compinit
 compinit
