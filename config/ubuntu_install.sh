@@ -73,6 +73,7 @@ apt_progs=(
     # psi4            # QM Package
     python3-dev     # Python3
     python3-pip     # Python3 package installer
+    python3-setuptools # setting up python packages
     python3-pyqt5   # Python3 qt5 bindings
     qt5-default     # cheMVP
     rclone          # Rscync for cloud storage
