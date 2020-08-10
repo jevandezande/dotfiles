@@ -1,5 +1,5 @@
 #!/bin/bash
-username=jevandezande
+username={$1-jevandezande}
 
 
 echo "Adding repos"
