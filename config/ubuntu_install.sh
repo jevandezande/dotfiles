@@ -58,6 +58,7 @@ apt_progs=(
     libscalapack-openmpi1   # BAGEL
     libscalapack-mpi-dev    # BAGEL
     # mendeleydesktop -y
+    make            # compilation
     nautilus-dropbox# Dropbox that works on Ubuntu
     neovim          # Neovim
     network-manager-openconnect       # VPN (alternative to Cisco AnyConnect)
@@ -169,6 +170,12 @@ cond_progs=(
 for prog in "${conda_progs[@]}"
 do
     conda install --yes $prog
+done
+
+# Install pip packages in Conda version of python3
+for prog in "${pip_progs[@]}"
+do
+    pip3 install $prog
 done
 
 su $username
