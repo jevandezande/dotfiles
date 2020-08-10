@@ -115,7 +115,7 @@ pip_progs=(
     numpy          # Scientific computing
     pytest         # Unittesting
     virtualenv     # Virtual environments
-    virtualenv-wrapper  # Shell integrstion with virtualenv
+    virtualenvwrapper  # Shell integration with virtualenv
     scipy          # Scientific computing
     sympy          # Symbolic python
     tox            # Venv and CLI tool
