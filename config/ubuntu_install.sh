@@ -175,8 +175,8 @@ su $username
 if [ ! -d ~/.dotfiles ]
 then
     git clone https://github.com/jevandezande/dotfiles ~/.dotfiles
-    rcup
 fi
+rcup
 
 # Vim-plug
 #curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
