@@ -58,6 +58,11 @@ elif [ ${HOST} = 'Bob' ]
 then
     source ~/.zsh/profiles/bob.zsh
 
+elif [ ${HOST:0:3} = '1sr' ]
+then
+    source ~/.zsh/profiles/cluster.zsh
+    source ~/.zsh/profiles/1sr_mpi.zsh
+
 elif [ -n "$HOST" ]
 then
     echo "Cannot find the proper host and associated system profile. Host: $HOST"
