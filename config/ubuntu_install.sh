@@ -81,6 +81,7 @@ apt_progs=(
     rcm             # Dotfile manager
     ruby-dev        # Programming language (used for Travis)
     # skype           # Video chat client
+    snapd           # Snap installer
     # spotify-client  # Spotify
     texlive-full    # Full tex distribtution (very large)
     # wine            # Compatability program
