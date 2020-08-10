@@ -1,6 +1,7 @@
 #!/bin/bash
 username=${1-'jevandezande'}
 
+mkdir -p ~/progs ~/tmp
 
 echo "Adding repos"
 
@@ -157,12 +158,17 @@ done
 
 # Conda
 echo "Conda!"
-mkdir ~/tmp -p
-curl -o Miniconda-latest.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-bash Miniconda-latest.sh -b -p ~/progs/miniconda
-conda update --yes --all
+conda_dir=~/progs/miniconda
+if [ ! -d $conda_dir ]
+then
+    curl -o Miniconda-latest.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+    bash Miniconda-latest.sh -b -p $conda_dir
+    rm Miniconda-latest.sh
+fi
 
-conda config --add channels http://conda.anaconda.org/psi4
+$conda_dir/bin/conda update --yes --all
+
+$conda_dir/bin/conda config --add channels http://conda.anaconda.org/psi4
 cond_progs=(
     gcp               # gcp
     dftd3             # DFT D3 correction
@@ -170,8 +176,9 @@ cond_progs=(
 )
 for prog in "${conda_progs[@]}"
 do
-    conda install --yes $prog
+    $conda_dir/bin/conda install --yes $prog
 done
+
 
 # Install pip packages in Conda version of python3
 for prog in "${pip_progs[@]}"
@@ -188,16 +195,24 @@ fi
 rcup
 
 # Vim-plug
-#curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-#    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [ ! -f ~/.dotfiles/.vim/autoload/plug.vim ]
+then
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
 # Zplug
-#curl -sL --proto-redir -all,https \
-#    https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+if [ ! -d ~/.zplug ]
+then
+    curl -sL --proto-redir -all,https \
+        https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
 
 
-#mkdir ~/progs -p
-#git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
-#git clone https://github.com/jevandezande/quantum ~/progs/quantum
+if [ ! -d ~/progs/qgrep ]
+then
+    git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
+fi
 
 
 # Change ownership from root to user
