@@ -1,4 +1,5 @@
 # System profile selecter
+HOST=${HOST:-`hostname`}
 
 if [ $HOST = "pccec0668" ]
 then
