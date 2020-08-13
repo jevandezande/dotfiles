@@ -54,7 +54,7 @@ alias mmv='noglob zmv -W'
 
 pdf() {
     # Strip the file extenstion
-    file=${1:r}
+    file=${${1:r}:-'main'}
     # only open if it exists and compiles
     if [[ -f $file".tex" ]] && pdflatex $file".tex"
     then
