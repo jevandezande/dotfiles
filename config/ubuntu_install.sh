@@ -166,6 +166,7 @@ su $username
 # Conda
 echo "Conda!"
 conda_dir=~/progs/miniconda
+conda=$conda_dir/bin/conda
 if [ ! -d $conda_dir ]
 then
     curl -o Miniconda-latest.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
@@ -173,18 +174,14 @@ then
     rm Miniconda-latest.sh
 fi
 
-$conda_dir/bin/conda update --yes --all
+$conda update -n base -c defaults conda --yes
+$conda update --all --yes
 
-$conda_dir/bin/conda config --add channels http://conda.anaconda.org/psi4
-cond_progs=(
-    gcp               # gcp
-    dftd3             # DFT D3 correction
-    psi4              # psi4
-)
-for prog in "${conda_progs[@]}"
-do
-    $conda_dir/bin/conda install --yes $prog
-done
+if [ ! -d $conda_dir/envs/p4env ]
+then
+    $conda create -n p4env python=3.8 -c psi4/label/dev --yes
+fi
+$conda install -n p4env -c psi4/label/dev gcp dftd3 --yes
 
 
 # Install pip packages in Conda version of python3
