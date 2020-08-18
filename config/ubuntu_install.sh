@@ -157,6 +157,12 @@ do
 done
 
 
+#############
+# Userspace #
+#############
+su $username
+
+
 # Conda
 echo "Conda!"
 conda_dir=~/progs/miniconda
@@ -186,8 +192,6 @@ for prog in "${pip_progs[@]}"
 do
     pip3 install $prog
 done
-
-su $username
 
 if [ ! -d ~/.dotfiles ]
 then
