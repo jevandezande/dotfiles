@@ -110,14 +110,16 @@ function molden ()
     fi
 }
 
+
 ########
 # PSI4 #
 ########
 psi4_run()
 {
     conda activate p4env
-    psi4 -n ${1-'1'} & disown
+    psi4 -n ${1-'1'} > /dev/null & disown
 }
+
 
 ##########
 # Images #
