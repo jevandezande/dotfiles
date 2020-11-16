@@ -120,6 +120,14 @@ psi4_run()
     psi4 -n ${1-'1'} > /dev/null & disown
 }
 
+#######
+# XTB #
+#######
+xtb_opt()
+{
+    conda run -n cc xtb ${1-'geom.xyz'} > output.dat
+}
+
 
 ##########
 # Images #
