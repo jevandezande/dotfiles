@@ -188,6 +188,12 @@ ink_pdfs()
     done
 }
 
+# Convert a file to a png
+ink_png()
+{
+    inkscape ${~1?} --export-type=png --export-area-drawing
+}
+
 # Convert mrv to svg and pdf using
 mrv_pdf()
 {
