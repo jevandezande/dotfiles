@@ -55,7 +55,7 @@ then
     source ~/.zsh/profiles/cluster.zsh
     source ~/.zsh/profiles/sapelo.zsh
 
-elif [ ${HOST} = 'Bob' ]
+elif [ $HOST = 'Bob' ]
 then
     source ~/.zsh/profiles/bob.zsh
 
@@ -63,6 +63,11 @@ elif [ ${HOST:0:3} = '1sr' ]
 then
     source ~/.zsh/profiles/cluster.zsh
     source ~/.zsh/profiles/1sr_mpi.zsh
+
+elif [ $HOST = 'ZL-12213' ]
+then
+    source ~/.zsh/profiles/zym.zsh
+    source ~/.zsh/profiles/rhea.zsh
 
 elif [ -n "$HOST" ]
 then
