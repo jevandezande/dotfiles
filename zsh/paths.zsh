@@ -13,6 +13,8 @@ export PYTHONPATH=$PYTHONPATH:~/progs/qgrep
 export PYTHONPATH=$PYTHONPATH:~/progs/cclib
 # Cluster
 export PYTHONPATH=$PYTHONPATH:~/progs/cluster
+# Reaction Web
+export PYTHONPATH=$PYTHONPATH:~/progs/reaction_web
 
 # CFour
 export PATH=$PATH:~/.install/cfour/bin
