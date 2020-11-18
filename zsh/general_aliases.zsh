@@ -116,8 +116,7 @@ function molden ()
 ########
 psi4_run()
 {
-    conda activate p4env
-    psi4 -n ${1-'1'} > /dev/null & disown
+    conda run -n psi4 psi4 -n ${1-'1'} > /dev/null & disown
 }
 
 #######
@@ -125,7 +124,7 @@ psi4_run()
 #######
 xtb_opt()
 {
-    conda run -n cc xtb ${1-'geom.xyz'} > output.dat
+    conda run -n xtb xtb ${1-'geom.xyz'} --opt > output.dat
 }
 
 
