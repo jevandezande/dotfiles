@@ -54,17 +54,17 @@ mamba install -n cc natsort --yes
 # Package specific environments
 #Psi4
 mamba create -n psi4 --yes
-mamba install -n psi4 psi4 -c psi4/label/dev
-mamba install -n psi4 gcp -c psi4/label/dev
+mamba install -n psi4 psi4 -c psi4/label/dev --yes
+mamba install -n psi4 gcp -c psi4/label/dev --yes
 
 # XTB
 mamba create -n xtb --yes
-mamba install -n xtb xtb -c conda-forge
-mamba install -n xtb xtb-python -c conda-forge
+mamba install -n xtb xtb -c conda-forge --yes
+mamba install -n xtb xtb-python -c conda-forge --yes
 
 # PySCF
 mamba create -n pyscf --yes
-mamba install -n pyscf pyscf -c pyscf
+mamba install -n pyscf pyscf -c pyscf --yes
 
 
 ## Conda
