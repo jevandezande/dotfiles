@@ -19,7 +19,7 @@ apt-get update
 apt_progs=(
     autoconf        # PSI4
     aptitude        # Better than apt-get
-    avogadro        # Vizualizing molecules and MM
+    avogadro        # Visualizing molecules and MM
     cmake           # PSI4
     curl            # Downloading stuff from the web
     compizconfig-settings-manager # For changing computer defaults
@@ -86,7 +86,7 @@ apt_progs=(
     # skype           # Video chat client
     snapd           # Snap installer
     # spotify-client  # Spotify
-    texlive-full    # Full tex distribtution (very large)
+    texlive-full    # Full tex distribution (very large)
     vim             # Editor
     zplug           # Zsh plugin installer
     zsh             # Shell
