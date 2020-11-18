@@ -62,7 +62,11 @@ $mamba install -n cc cclib -c cclib --yes
 $mamba install -n cc nglview -c conda-forge --yes
 $mamba install -n cc networkx -c conda-forge --yes
 $mamba install -n cc jupyterlab --yes
+$mamda install -n cc ipyparallel --yes
+$mamda install -n cc matplotlib --yes
 $mamba install -n cc natsort --yes
+$mamda install -n cc scipy --yes
+pip install pyscf  # conda version does not work with python3.8
 
 
 # Package specific environments
@@ -78,4 +82,5 @@ $mamba install -n xtb xtb-python -c conda-forge --yes
 
 # PySCF
 $mamba create -n pyscf --yes
-$mamba install -n pyscf pyscf -c pyscf --yes
+pip install pyscf  # conda version does not work with python3.8
+#$mamba install -n pyscf pyscf -c pyscf --yes
