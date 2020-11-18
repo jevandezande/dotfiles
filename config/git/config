@@ -39,3 +39,5 @@
 #https://gist.github.com/pksunkara/988716
 [credential]
     helper = cache --timeout=86400
+[pull]
+	ff = only
