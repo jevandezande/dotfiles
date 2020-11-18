@@ -1,4 +1,11 @@
 #!/bin/bash
+###########################################################
+# Before running:
+#
+# Setup your ssh key with github
+#
+###########################################################
+
 username=${1-'jevandezande'}
 
 mkdir -p ~/progs ~/tmp
@@ -8,7 +15,6 @@ echo "Adding repos"
 
 echo "Apt!"
 apt-get update
-
 
 apt_progs=(
     autoconf        # PSI4
@@ -99,34 +105,6 @@ done
 apt-get update
 apt-get upgrade -y
 
-
-echo "Pips!"
-pip_progs=(
-    'ipython[all]'
-    bibtextparser  # Parses bibtex files
-    bump2version   # Python package version bumper
-    cairocffi
-    cython         # Python -> c
-    flake8         # Linting
-    h5py           # Hdf5 library
-    jupyter        # iPython notebooks
-    matplotlib     # Plotting
-    more-itertools # Even more ways to iterate
-    natsort        # Natural sorting (e.g. A2 < A11)
-    numpy          # Scientific computing
-    pytest         # Unittesting
-    virtualenv     # Virtual environments
-    virtualenvwrapper  # Shell integration with virtualenv
-    scipy          # Scientific computing
-    sympy          # Symbolic python
-    tox            # Venv and CLI tool
-)
-for prog in "${pip_progs[@]}"
-do
-    pip3 install $prog
-done
-
-
 echo "Snaps!"
 snap_progs=(
     eclipse             # IDE
@@ -162,37 +140,14 @@ done
 #############
 su $username
 
-
-# Conda
-echo "Conda!"
-conda_dir=~/progs/miniconda
-conda=$conda_dir/bin/conda
-if [ ! -d $conda_dir ]
-then
-    curl -o Miniconda-latest.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-    bash Miniconda-latest.sh -b -p $conda_dir
-    rm Miniconda-latest.sh
-fi
-
-$conda update -n base -c defaults conda --yes
-$conda update --all --yes
-
-if [ ! -d $conda_dir/envs/p4env ]
-then
-    $conda create -n p4env python=3.8 -c psi4/label/dev --yes
-fi
-$conda install -n p4env -c psi4/label/dev gcp dftd3 --yes
-
-
-# Install pip packages in Conda version of python3
-for prog in "${pip_progs[@]}"
-do
-    pip3 install $prog
-done
-
+# Dotfiles
 if [ ! -d ~/.dotfiles ]
 then
     git clone https://github.com/jevandezande/dotfiles ~/.dotfiles
+else
+    cd ~/.dotfiles
+    git update
+    cd ~
 fi
 rcup
 
@@ -214,7 +169,13 @@ fi
 if [ ! -d ~/progs/qgrep ]
 then
     git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
+else
+    cd ~/progs/qgrep
+    git update
+    cd ~
 fi
+
+zsh conda_install.sh
 
 
 # Change ownership from root to user
@@ -230,5 +191,4 @@ echo "Change Alt+Tab with compizconfig-settings-manager. Change settings in 'Ubu
 echo "Install Spotify notify (for media controls)"
 echo "Setup VPN alternative to Cisco anyconnect"
 #http://www.humans-enabled.com/2011/06/how-to-connect-ubuntu-linux-to-cisco.html
-echo "Install cheMVP"
 echo "Run non-root commands"
