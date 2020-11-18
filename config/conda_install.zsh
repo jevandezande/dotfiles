@@ -27,6 +27,7 @@ base_progs=(
     flake8         # Linting
     h5py           # Hdf5 library
     jupyterlab     # iPython notebooks
+    ipyparallel    # Needed by jupyterlab
     matplotlib     # Plotting
     more-itertools # Even more ways to iterate
     natsort        # Natural sorting (e.g. A2 < A11)
