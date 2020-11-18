@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 ###########################################################
 # Before running:
 #
@@ -24,9 +24,8 @@ apt_progs=(
     curl            # Downloading stuff from the web
     compizconfig-settings-manager # For changing computer defaults
     compiz-plugins  # Extension to ccsm
-    # eclipse-cdt     # IDE
     eigen           # Matrix library
-    # firefox         # Browser
+    # firefox         # Browser, superseded by snap
     g++             # C++ compiler
     gabedit         # QM program input generator
     gfortran        # PSI4
@@ -37,11 +36,11 @@ apt_progs=(
     gparted         # Disk partitioning tool
     gsl-bin         # GNU Scientific library: CheMPS2
     gummi           # Simple LaTeX editor
-    # inkscape        # Vector graphic editor
+    # inkscape        # Vector graphic editor, superseded by snap
     icedtea-plugin  # Java on the internet
     i3              # Tiling window manager
     # jmol# Molecule visualizer
-    # keepassx        # Password storage
+    keepassx        # Password storage
     libatk-adaptor  # For inkscape
     libblas-dev     # PSI4, OpenChemistry
     libboost-all-dev # PSI4
@@ -64,7 +63,7 @@ apt_progs=(
     libxml2-dev     # Avogadro2
     libscalapack-openmpi1   # BAGEL
     libscalapack-mpi-dev    # BAGEL
-    # mendeleydesktop -y
+    # mendeleydesktop
     make            # compilation
     nautilus-dropbox# Dropbox that works on Ubuntu
     neovim          # Neovim
@@ -75,9 +74,7 @@ apt_progs=(
     openssh-server  # SSH
     openssl         # Compiling Python3
     pinta           # Lightwieght raster graphic editor
-    # pithos          # Pandora app
     povray          # Ray tracer
-    # psi4            # QM Package
     python3-dev     # Python3
     python3-pip     # Python3 package installer
     python3-setuptools # setting up python packages
@@ -90,9 +87,8 @@ apt_progs=(
     snapd           # Snap installer
     # spotify-client  # Spotify
     texlive-full    # Full tex distribtution (very large)
-    # wine            # Compatability program
-    # valgrind        # Code checker
     vim             # Editor
+    zplug           # Zsh plugin installer
     zsh             # Shell
 )
 
@@ -107,7 +103,6 @@ apt-get upgrade -y
 
 echo "Snaps!"
 snap_progs=(
-    eclipse             # IDE
     firefox             # Browser
     gimp                # Raster graphic editor
     inkscape            # Vector graphics editor
@@ -175,14 +170,14 @@ else
     cd ~
 fi
 
-zsh conda_install.sh
+source conda_install.zsh
 
 
 # Change ownership from root to user
-chown $username -R ~/.dotfiles
-chown $username -R ~/.zplug
-chown $username -R ~/progs
-chsh $username -s /bin/zsh
+#chown $username -R ~/.dotfiles
+#chown $username -R ~/.zplug
+#chown $username -R ~/progs
+#chsh $username -s /bin/zsh
 
 
 echo "Finished Installing"
