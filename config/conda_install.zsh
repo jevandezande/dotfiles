@@ -58,9 +58,11 @@ $mamba install -n cc xtb -c conda-forge --yes
 $mamba install -n cc xtb-python -c conda-forge --yes
 $mamba install -n cc qcportal -c conda-forge --yes
 $mamba install -n cc qcfractal -c conda-forge --yes
+$mamba install -n cc rdkit -c conda-forge --yes
 $mamba install -n cc cclib -c cclib --yes
 $mamba install -n cc nglview -c conda-forge --yes
 $mamba install -n cc networkx -c conda-forge --yes
+$mamda install -n cc py3dmol -c conda-forge --yes
 $mamba install -n cc jupyterlab --yes
 $mamda install -n cc ipyparallel --yes
 $mamda install -n cc matplotlib --yes

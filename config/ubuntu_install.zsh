@@ -170,7 +170,7 @@ else
     cd ~
 fi
 
-source conda_install.zsh
+zsh conda_install.zsh
 
 
 # Change ownership from root to user
