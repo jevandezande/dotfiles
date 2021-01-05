@@ -124,7 +124,12 @@ psi4_run()
 #######
 xtb_opt()
 {
-    conda run -n xtb xtb ${1-'geom.xyz'} --opt > output.dat
+    conda run -n xtb xtb ${1-'geom.xyz'} --opt -c ${2-0} > output.dat
+}
+
+xtb_md()
+{
+    conda run -n xtb xtb ${1-'geom.xyz'} --omd -c ${2-0} > output.dat
 }
 
 
