@@ -131,6 +131,19 @@ xtb_md()
 {
     conda run -n xtb xtb ${1-'geom.xyz'} --omd -c ${2-0} > output.dat
 }
+stda()
+{
+    cords=${1-'geom.xyz'}
+    charge=${2-0}
+    xtb4stda $coords -chrg $charge > xtb.out
+    ~/progs/bin/stda_v1_6_2 coords -xtb -e 10
+}
+
+#########
+# ENTOS #
+#########
+alias qcore="docker run --rm -v \$(pwd):\$(pwd) -w \$(pwd) -u $(id -u):$(id -g) entos.jfrog.io/docker-entos-commercial/qcore:0.8.17"
+alias sierra="docker run --rm -v \$(pwd):\$(pwd) -w \$(pwd) -u $(id -u):$(id -g) --env DGLBACKEND=pytorch entos.jfrog.io/docker-entos-commercial/sierra-orbnet:1.1.0"
 
 
 ##########

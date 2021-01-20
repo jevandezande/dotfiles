@@ -86,3 +86,7 @@ $mamba install -n xtb xtb-python -c conda-forge --yes
 $mamba create -n pyscf --yes
 pip install pyscf  # conda version does not work with python3.8
 #$mamba install -n pyscf pyscf -c pyscf --yes
+
+# ENTOS
+$mamba create -n entos -c entos qcore sierra python=3.9 --yes
+$mamba install matplotlib numpy scipy ipython
