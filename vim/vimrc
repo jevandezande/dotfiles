@@ -62,6 +62,8 @@ vmap < <gv
 
 " Make Y consistent with C and D
 nnoremap Y y$
+" Don't jank my yank!
+vnoremap <expr>y "my\"" . v:register . "y`y"
 
 " Make cw consistent with dw, yw, vw
 onoremap w :execute 'normal! '.v:count1.'w'<CR>
@@ -79,12 +81,22 @@ set timeoutlen=1000 ttimeoutlen=0
 " <Ctrl-c> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-c> :nohl<CR><C-c>
 
+" Remove trailing whitespace
+nnoremap <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
 " Highlight git merge conflict
 set hlsearch
-map <F7> :/\(<<<<<<<\\|=======\\|>>>>>>>\)<CR>
+map <F3> :/\(<<<<<<<\\|=======\\|>>>>>>>\)<CR>
 
-" Remove trailing whitespace
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+" Reformat with black
+autocmd FileType python map <buffer> <F6> :Black<CR>
+
+" Check types with MyPy
+autocmd FileType python map <buffer> <F7> :Mypy<CR>
+"nnoremap <F7> :Mypy<CR>
+
+" Lint with Flake8
+autocmd FileType python map <buffer> <F8> :call flake8#Flake8()<CR>
 
 " This enables us to undo files even if you exit Vim.
 if has('persistent_undo')

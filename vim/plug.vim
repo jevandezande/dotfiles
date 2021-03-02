@@ -8,6 +8,9 @@ endif
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
 
+" CSV
+"Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+
 " VimTex: compiling LaTeX (more modern than LaTeX-Box)
 Plug 'lervag/vimtex', { 'for' : 'tex' }
 
@@ -56,6 +59,21 @@ Plug 'tweekmonster/impsort.vim'
 " Rust coding features
 Plug 'rust-lang/rust.vim'
 
+" SnipRun: runs code blocks
+"Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+
+" Black: code formatter
+Plug 'psf/black', { 'branch': 'stable' }
+
+" MyPy: type checking
+Plug 'spirosbax/vim-mypy'
+
+" Flake8: linting
+Plug 'nvie/vim-flake8'
+
+" Submode: new submodes for making things easier
+Plug 'kana/vim-submode'
+
 " Initialize plugin system
 call plug#end()
 
@@ -87,8 +105,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_python_exec = 'python3' " use python3, not python
-let g:syntastic_python_checkers=['pycodestyle']
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_python_checkers=['flake8']
 let g:syntastic_tex_checkers=['lacheck']
 let g:syntastic_loc_list_height=5 " Smaller error window
 
@@ -234,3 +252,72 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Rust "
 """"""""
 let g:rustfmt_autosave = 1
+
+
+"""""""""""
+" Submode "
+"""""""""""
+
+" Window resizing submode!!!
+""""""""""""""""""""""""""""
+
+" A message will appear in the message line when you're in a submode
+" and stay there until the mode has exited.
+let g:submode_always_show_submode = 1
+
+" We're taking over the default <C-w> setting. Don't worry we'll do
+" our best to put back the default functionality.
+call submode#enter_with('window', 'n', '', '<C-w>')
+
+" Note: <C-c> will also get you out to the mode without this mapping.
+" Note: <C-[> also behaves as <ESC>
+call submode#leave_with('window', 'n', '', '<ESC>')
+
+" Go through every letter
+for key in ['a','b','c','d','e','f','g','h','i','j','k','l','m',
+\           'n','o','p','q','r','s','t','u','v','w','x','y','z']
+  " maps lowercase, uppercase and <C-key>
+  call submode#map('window', 'n', '', key, '<C-w>' . key)
+  call submode#map('window', 'n', '', toupper(key), '<C-w>' . toupper(key))
+  call submode#map('window', 'n', '', '<C-' . key . '>', '<C-w>' . '<C-'.key . '>')
+endfor
+" Go through symbols. Sadly, '|', not supported in submode plugin.
+for key in ['=','_','+','-','<','>']
+  call submode#map('window', 'n', '', key, '<C-w>' . key)
+endfor
+
+" Old way, just in case.
+nnoremap <Leader>w <C-w>
+
+" I don't like <C-w>q, <C-w>c won't exit Vim when it's the last window.
+call submode#map('window', 'n', '', 'q', '<C-w>c')
+call submode#map('window', 'n', '', '<C-q>', '<C-w>c')
+
+" <lowercase-pipe> sets the width to 100 columns, pipe (<S-\>) by default
+" maximizes the width.
+call submode#map('window', 'n', '', '\', ':vertical resize 100<CR>')
+
+" Resize faster
+call submode#map('window', 'n', '', '+', '3<C-w>+')
+call submode#map('window', 'n', '', '-', '3<C-w>-')
+call submode#map('window', 'n', '', '<', '10<C-w><')
+call submode#map('window', 'n', '', '>', '10<C-w>>')
+
+
+""""""""""""""
+" Black Hole "
+""""""""""""""
+" Thanks https://ddrscott.github.io/blog/2016/bs-to-the-black-hole/
+func! BlackHoleDeleteOperator(type)
+  if a:type ==# 'char'
+    execute 'normal! `[v`]"_d'
+  elseif a:type ==# 'line'
+    execute 'normal! `[V`]"_d'
+  else
+    execute 'normal! `<' . a:type . '`>"_d'
+  endif
+endf
+
+" Map to <BS> because it's under worked in Vim.
+nnoremap <silent> <BS> <Esc>:set opfunc=BlackHoleDeleteOperator<CR>g@
+vnoremap <silent> <BS> :<C-u>call BlackHoleDeleteOperator(visualmode())<CR>
