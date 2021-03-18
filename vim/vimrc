@@ -81,6 +81,7 @@ set timeoutlen=1000 ttimeoutlen=0
 " <Ctrl-c> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-c> :nohl<CR><C-c>
 
+
 " Remove trailing whitespace
 nnoremap <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
@@ -88,15 +89,20 @@ nnoremap <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 set hlsearch
 map <F3> :/\(<<<<<<<\\|=======\\|>>>>>>>\)<CR>
 
-" Reformat with black
-autocmd FileType python map <buffer> <F6> :Black<CR>
-
-" Check types with MyPy
-autocmd FileType python map <buffer> <F7> :Mypy<CR>
-"nnoremap <F7> :Mypy<CR>
-
-" Lint with Flake8
-autocmd FileType python map <buffer> <F8> :call flake8#Flake8()<CR>
+""""""""""
+" Python "
+""""""""""
+augroup python_functions
+    autocmd!
+    " Reformat with black
+    autocmd FileType python nnoremap <buffer> <F6> :Black<CR>
+    " Check types with MyPy
+    autocmd FileType python nnoremap <buffer> <F7> :Mypy<CR>
+    " Lint with Flake8
+    autocmd FileType python nnoremap <buffer> <F8> :call flake8#Flake8()<CR>
+    " Pytest doctest
+    autocmd Filetype python nnoremap <buffer> <F9> :execute ':!python -m doctest %'<CR>
+augroup end
 
 " This enables us to undo files even if you exit Vim.
 if has('persistent_undo')
