@@ -1,0 +1,37 @@
+name: cc
+channels:
+    - psi4/label/dev
+    - adcc
+    - entos
+    - conda-forge
+dependencies:
+    - python=3.9
+    - pip
+    - psi4
+    - dftd3    
+    - gcp
+    - geomeTRIC
+    - adcc
+    - entos
+    - xtb
+    - xtb-python
+    - rdkit
+    - py3dmol
+    - jupyterlab
+    - ipyparallel
+    - pip:
+      - pyscf
+      - pyberny
+      - scipy
+      - pandas
+      - matplotlib
+      - sympy
+      - networkx
+      - cclib
+      - pytest
+      - ipython
+      - more-itertools
+      - natsort
+      - flake8
+      - mypy
+      - isort

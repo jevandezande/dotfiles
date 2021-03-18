@@ -1,0 +1,29 @@
+name: psi4
+channels:
+    - psi4/label/dev
+    - conda-forge
+dependencies:
+    - python=3.9
+    - pip
+    - psi4
+    - dftd3    
+    - gcp
+    - geomeTRIC
+    - xtb
+    - xtb-python
+    - rdkit
+    - pip:
+      - pyscf
+      - pyberny
+      - scipy
+      - pandas
+      - matplotlib
+      - networkx
+      - cclib
+      - pytest
+      - ipython
+      - more-itertools
+      - natsort
+      - flake8
+      - mypy
+      - isort
