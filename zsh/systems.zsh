@@ -68,6 +68,7 @@ elif [ $HOST = 'ZL-12213' ]
 then
     source ~/.zsh/profiles/zym.zsh
     source ~/.zsh/profiles/rhea.zsh
+    source ~/.zsh/profiles/mac.zsh
 
 elif [ -n "$HOST" ]
 then

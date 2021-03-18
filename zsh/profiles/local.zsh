@@ -31,14 +31,3 @@ alias gcz='scp geom.xyz zeus:'
 alias aout='avogadro2 output.dat'
 alias aview='get_geom -i output.dat && avogadro geom.xyz'
 alias cout='cheMVP output.dat'
-
-###################
-# Program Running #
-###################
-alias cfour_run='xcfour ZMAT > output.dat 2> /dev/null & disown'
-
-
-#####################
-# VirtualEnvWrapper #
-#####################
-#source /usr/local/bin/virtualenvwrapper.sh
