@@ -1,3 +1,5 @@
+# General aliases for all systems
+
 # Color directories
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -23,10 +25,7 @@ alias ..='cd ..'
 #######################
 # Editing and Viewing #
 #######################
-# Default to nvim
-#alias vi='nvim'
-
-# Specific files used a lot
+# Reading
 alias vii='vi input.dat'
 alias vij='vi input.json'
 alias vio='vi output.dat -R'
@@ -34,7 +33,7 @@ alias vig='vi geom.xyz'
 alias viz='vi ZMAT'
 
 # Watch the output file
-alias tout='less +F output.dat'
+tout() { less +F ${1-'output.dat'} }
 
 # Make a fancy table from a csv file
 alias table='column -s, -t'
@@ -79,12 +78,17 @@ orca_run()
 {
     inp=${1:-input.dat}
     out=${2:-output.dat}
+    label=${$(pwd):t}
+    args='--use-hwthread-cpus'
+
     if [ "$inp" != "input.dat" ] && [ "$2" = "" ]
     then
         out="${inp:r}.out"
     fi
 
-    orca $inp > $out & disown
+    my_orca=/home/jevandezande/progs/orca/orca_4_2_1/orca
+
+    tsp zsh -c "$my_orca $inp $args > $out" -N 1 -L $label
 }
 alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
 alias clean_orca="find input.{cis,engrad,ges,hostnames,opt,prop,qro,uno,unso,xyz} input{,_atom{45,77}}{,_property}.txt -type f 2> /dev/null | xargs rm 2> /dev/null"
@@ -116,7 +120,8 @@ function molden ()
 ########
 psi4_run()
 {
-    conda run -n psi4 psi4 -n ${1-'1'} > /dev/null & disown
+    label=${$(pwd):t}
+    tsp zsh -c "conda run -n cc psi4 -n ${1-'1'}" -N ${1-'1'} -L $label
 }
 
 #######
@@ -124,20 +129,27 @@ psi4_run()
 #######
 xtb_opt()
 {
-    conda run -n xtb xtb ${1-'geom.xyz'} --opt -c ${2-0} > output.dat
+    tsp zsh -c "conda run -n cc xtb ${1-'geom.xyz'} --opt -c ${2-0} > output.dat"
 }
 
 xtb_md()
 {
-    conda run -n xtb xtb ${1-'geom.xyz'} --omd -c ${2-0} > output.dat
+    tsp zsh -c "conda run -n cc xtb ${1-'geom.xyz'} --omd -c ${2-0} > output.dat"
 }
 stda()
 {
     cords=${1-'geom.xyz'}
     charge=${2-0}
-    xtb4stda $coords -chrg $charge > xtb.out
-    ~/progs/bin/stda_v1_6_2 coords -xtb -e 10
+    tsp zsh -c "xtb4stda $coords -chrg $charge > xtb.out"
+    tsp -d zsh -c "~/progs/bin/stda_v1_6_2 coords -xtb -e 10"
 }
+
+#########
+# ENTOS #
+#########
+#alias qcore="docker run --rm -v \$(pwd):\$(pwd) -w \$(pwd) -u $(id -u):$(id -g) entos.jfrog.io/docker-entos-commercial/qcore:0.8.17"
+#alias sierra="docker run --rm -v \$(pwd):\$(pwd) -w \$(pwd) -u $(id -u):$(id -g) --env DGLBACKEND=pytorch entos.jfrog.io/docker-entos-commercial/sierra-orbnet:1.1.0"
+
 
 ##########
 # Images #
