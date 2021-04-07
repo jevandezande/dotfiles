@@ -8,3 +8,6 @@ then
 fi
 
 source $HOME/.zsh/profiles/local.zsh
+
+export LD_LIBRARY_PATH=/home/jevandezande/progs/orca/orca_4_2_1
+export PATH=~/progs/orca/orca_4_2_1/:$PATH

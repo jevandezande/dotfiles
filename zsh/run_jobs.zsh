@@ -14,8 +14,19 @@ orca_run()
 {
     label=${$(pwd):t}
     orca=~/progs/orca/orca_4_2_1/run_orca.zsh
+    inp=${1:-input.dat}
 
-    tsp zsh -c "$orca $@" -N 1 -L $label | add_job $label
+    nprocs=1
+    if [[ -f $inp ]]
+    then
+        pal=`head -1 $inp | cut -d " " -f 1`
+        if [[ $pal == "%pal" ]]
+        then
+            nprocs=`head -1 $inp | cut -d " " -f 3`
+        fi
+    fi
+
+    tsp zsh -c "$orca $@" -N $nprocs -L $label | add_job $label
 }
 alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
 alias clean_orca="find input.{cis,engrad,ges,hostnames,opt,prop,qro,uno,unso,xyz} input{,_atom{45,77}}{,_property}.txt -type f 2> /dev/null | xargs rm 2> /dev/null"
