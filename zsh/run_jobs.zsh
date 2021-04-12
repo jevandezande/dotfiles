@@ -12,7 +12,7 @@ add_job()
 ########
 orca_run()
 {
-    label=${$(pwd):t}
+    label="orca_${$(pwd):t}"
     orca=~/progs/orca/orca_4_2_1/run_orca.zsh
     inp=${1:-input.dat}
 
@@ -20,13 +20,17 @@ orca_run()
     if [[ -f $inp ]]
     then
         pal=`head -1 $inp | cut -d " " -f 1`
+        pal2=`head -1 $inp | cut -d " " -f 2`
         if [[ $pal == "%pal" ]]
         then
             nprocs=`head -1 $inp | cut -d " " -f 3`
+        elif [[ $pal == "pal" ]]
+        then
+            nprocs=`head -1 $inp | cut -d " " -f 4`
         fi
     fi
 
-    tsp zsh -c "$orca $@" -N $nprocs -L $label | add_job $label
+    tsp -N $procs -L $label zsh -c "$orca $@" | add_job $label
 }
 alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
 alias clean_orca="find input.{cis,engrad,ges,hostnames,opt,prop,qro,uno,unso,xyz} input{,_atom{45,77}}{,_property}.txt -type f 2> /dev/null | xargs rm 2> /dev/null"
@@ -59,9 +63,10 @@ function molden ()
 ########
 psi4_run()
 {
-    label=${$(pwd):t}
+    label="psi4_${$(pwd):t}"
+    nprocs=${1-1}
 
-    tsp zsh -c "conda run -n cc psi4 -n ${1-'1'}" -N ${1-'1'} -L $label | add_job $label
+    tsp -N $nprocs -L $label zsh -c "conda run -n cc psi4 -n $nprocs" | add_job $label
 }
 
 #######
@@ -69,34 +74,46 @@ psi4_run()
 #######
 xtb_opt()
 {
-    label=${$(pwd):t}
+    label="xtb_${$(pwd):t}"
 
-    tsp zsh -c "conda run -n cc xtb ${1-'geom.xyz'} --opt -c ${2-0} > output.dat" -L $label | add_job $label
+    tsp -L $label zsh -c "conda run -n cc xtb ${1-'geom.xyz'} --opt -c ${2-0} > output.dat" | add_job $label
 }
 
 xtb_md()
 {
-    label=${$(pwd):t}
+    label="xtbmd_${$(pwd):t}"
 
-    tsp zsh -c "conda run -n cc xtb ${1-'geom.xyz'} --omd -c ${2-0} > output.dat" -L $label | add_job $label
+    tsp -L $label zsh -c "conda run -n cc xtb ${1-'geom.xyz'} --omd -c ${2-0} > output.dat" | add_job $label
 }
 stda()
 {
-    label=${$(pwd):t}
+    label="stda_${$(pwd):t}"
 
     cords=${1-'geom.xyz'}
     charge=${2-0}
 
-    tsp zsh -c "xtb4stda $coords -chrg $charge > xtb.out" -L $label | add_job $label
-    tsp -d zsh -c "~/progs/bin/stda_v1_6_2 coords -xtb -e 10" -L $label | add_job $label
+
+    tsp -L $label zsh -c "xtb4stda $coords -chrg $charge > xtb.out" | add_job $label
+    tsp -d -L $label zsh -c "~/progs/bin/stda_v1_6_2 coords -xtb -e 10"| add_job $label
 }
 crest_run()
 {
-    label=${$(pwd):t}
+    label="conformers_${$(pwd):t}"
 
     inp=${1-'geom.xyz'}
     out=${2-'output.dat'}
     charge=${3-0}
 
-    tsp zsh -c "crest $inp -c $charge -niceprint > $out" -L $label | add_job $label
+    tsp -L $label zsh -c "crest $inp -c $charge -niceprint > $out" | add_job $label
+}
+crest_cluster()
+{
+    label="cluster_${$(pwd):t}"
+
+    nclusters=${1-5}
+    inp=${2-'crest_rotamers.xyz'}
+    out=${3-'output.dat'}
+    charge=${4-0}
+
+    tsp -L $label zsh -c "crest -cregen $inp -cluster $nclusters -c $charge -niceprint > $out" | add_job $label
 }
