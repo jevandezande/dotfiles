@@ -30,7 +30,7 @@ orca_run()
         fi
     fi
 
-    tsp -N $procs -L $label zsh -c "$orca $@" | add_job $label
+    tsp -N $nprocs -L $label zsh -c "$orca $@" | add_job $label
 }
 alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
 alias clean_orca="find input.{cis,engrad,ges,hostnames,opt,prop,qro,uno,unso,xyz} input{,_atom{45,77}}{,_property}.txt -type f 2> /dev/null | xargs rm 2> /dev/null"
@@ -98,13 +98,13 @@ stda()
 }
 crest_run()
 {
-    label="conformers_${$(pwd):t}"
+    label="CREST_${$(pwd):t}"
 
     inp=${1-'geom.xyz'}
     out=${2-'output.dat'}
     charge=${3-0}
 
-    tsp -L $label zsh -c "crest $inp -c $charge -niceprint > $out" | add_job $label
+    tsp -L $label zsh -c "crest $inp -c $charge -niceprint -cluster > $out" | add_job $label
 }
 crest_cluster()
 {
