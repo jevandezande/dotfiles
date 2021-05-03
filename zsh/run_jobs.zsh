@@ -63,7 +63,7 @@ function molden ()
 ########
 psi4_run()
 {
-    label="psi4_${$(pwd):t}"
+    label="PSI4_${$(pwd):t}"
     nprocs=${1-1}
 
     tsp -N $nprocs -L $label zsh -c "conda run -n cc psi4 -n $nprocs" | add_job $label
@@ -74,46 +74,59 @@ psi4_run()
 #######
 xtb_opt()
 {
-    label="xtb_${$(pwd):t}"
+    label="xTB_${$(pwd):t}"
+    coords=${1-'geom.xyz'}
+    charge=${2-0}
 
     tsp -L $label zsh -c "conda run -n cc xtb ${1-'geom.xyz'} --opt -c ${2-0} > output.dat" | add_job $label
 }
 
 xtb_md()
 {
-    label="xtbmd_${$(pwd):t}"
+    label="xTBMD_${$(pwd):t}"
+    coords=${1-'geom.xyz'}
+    charge=${2-0}
 
-    tsp -L $label zsh -c "conda run -n cc xtb ${1-'geom.xyz'} --omd -c ${2-0} > output.dat" | add_job $label
+    tsp -L $label zsh -c "conda run -n cc xtb $coords --omd -c $charge > output.dat" | add_job $label
 }
 stda()
 {
-    label="stda_${$(pwd):t}"
+    label="sTDA_${$(pwd):t}"
 
-    cords=${1-'geom.xyz'}
-    charge=${2-0}
+    threads=${1-1}
+    coords=${2-'geom.xyz'}
+    charge=${3-0}
 
-
-    tsp -L $label zsh -c "xtb4stda $coords -chrg $charge > xtb.out" | add_job $label
-    tsp -d -L $label zsh -c "~/progs/bin/stda_v1_6_2 coords -xtb -e 10"| add_job $label
+    tsp -L $label -N $threads zsh -c "xtb4stda $coords -T $threads -chrg $charge > xtb.out" | add_job $label
+    tsp -d -L $label -N $threads zsh -c "~/progs/bin/stda_v1_6_2 coords -T $threads -xtb -e 10"| add_job $label
 }
 crest_run()
 {
     label="CREST_${$(pwd):t}"
 
-    inp=${1-'geom.xyz'}
-    out=${2-'output.dat'}
+    threads=${1-1}
+    coords=${2-'geom.xyz'}
     charge=${3-0}
 
-    tsp -L $label zsh -c "crest $inp -c $charge -niceprint -cluster > $out" | add_job $label
+    tsp -L $label -N $threads zsh -c "crest $coords -T $threads -c $charge -niceprint -cluster > output.dat" | add_job $label
 }
-crest_cluster()
+crest_gff()
 {
-    label="cluster_${$(pwd):t}"
+    label="CREST_GFF_${$(pwd):t}"
 
-    nclusters=${1-5}
-    inp=${2-'crest_rotamers.xyz'}
-    out=${3-'output.dat'}
-    charge=${4-0}
+    threads=${1-1}
+    coords=${2-'geom.xyz'}
+    charge=${3-0}
 
-    tsp -L $label zsh -c "crest -cregen $inp -cluster $nclusters -c $charge -niceprint > $out" | add_job $label
+    tsp -L $label zsh -c "crest $coords -c $charge -T $threads -niceprint -cluster -gff > output.dat" | add_job $label
+}
+crest_gfn2gff()
+{
+    label="CREST_GFN2//GFNFF_${$(pwd):t}"
+
+    threads=${1-1}
+    coords=${2-'geom.xyz'}
+    charge=${3-0}
+
+    tsp -L $label zsh -c "crest $coords -c $charge -T $threads -niceprint -cluster -gfn2//gfnff > output.dat" | add_job $label
 }
