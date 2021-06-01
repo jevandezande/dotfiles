@@ -64,9 +64,9 @@ function molden ()
 psi4_run()
 {
     label="PSI4_${$(pwd):t}"
-    nprocs=${1-1}
+    threads=${1-1}
 
-    tsp -N $nprocs -L $label zsh -c "conda run -n cc psi4 -n $nprocs" | add_job $label
+    tsp -N $threads -L $label zsh -c "conda run -n cc psi4 -n $threads" | add_job $label
 }
 
 #######
@@ -118,7 +118,7 @@ crest_gff()
     coords=${2-'geom.xyz'}
     charge=${3-0}
 
-    tsp -L $label zsh -c "crest $coords -c $charge -T $threads -niceprint -cluster -gff > output.dat" | add_job $label
+    tsp -L $label -N $threads zsh -c "crest $coords -c $charge -T $threads -niceprint -cluster -gff > output.dat" | add_job $label
 }
 crest_gfn2gff()
 {
@@ -128,5 +128,5 @@ crest_gfn2gff()
     coords=${2-'geom.xyz'}
     charge=${3-0}
 
-    tsp -L $label zsh -c "crest $coords -c $charge -T $threads -niceprint -cluster -gfn2//gfnff > output.dat" | add_job $label
+    tsp -L $label -N $threads zsh -c "crest $coords -c $charge -T $threads -niceprint -cluster -gfn2//gfnff > output.dat" | add_job $label
 }
