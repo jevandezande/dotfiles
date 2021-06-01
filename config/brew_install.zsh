@@ -11,8 +11,6 @@ brew_progs=(
     openjpeg
     openssl
     rcm
-    #spotify-tui
-    #spotifyd
     sqlite
     wget
     zplug

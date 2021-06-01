@@ -6,6 +6,15 @@
 #
 ###########################################################
 
+if [ ! -f ~/.ssh/id_rsa.pub ]
+then
+    ssh-keygen
+else
+    ssh -T git@github.com
+    ls -al ~/.ssh
+    cat ~/.ssh/id_rsa.pub
+fi
+
 username=${1-'jevandezande'}
 
 mkdir -p ~/progs ~/tmp
@@ -34,7 +43,6 @@ apt_progs=(
     golang          # Go language
     gparted         # Disk partitioning tool
     gummi           # Simple LaTeX editor
-    # inkscape        # Vector graphic editor, superseded by snap
     i3              # Tiling window manager
     # jmol# Molecule visualizer
     keepassx        # Password storage
@@ -59,7 +67,7 @@ apt_progs=(
     libtiff-dev     # cheMVP
     libxml2-dev     # Avogadro2
     make            # compilation
-    nautilus-dropbox # Dropbox that works on Ubuntu
+    python3-dropbox # Dropbox
     neovim          # Neovim
     openconnect     # VPN (alternative to Cisco AnyConnect)
     openjdk-8-jre   # Java
@@ -116,8 +124,8 @@ snap_progs=(
     inkscape            # Vector graphics editor
     keepassxc           # Password storage
     pycharm-community   # Python IDE
-    skype               # Video chat client
     spotify             # Music player
+    valgrind            # Code checker
 )
 
 for prog in "${snap_progs[@]}"
@@ -167,6 +175,23 @@ else
     popd
 fi
 
+echo "Git programs!"
+git_progs=(
+    dotfiles
+    qgrep
+    spectra
+)
+for prog in $git_progs
+do
+    if [ ! -d ~/progs/$prog ]
+    then
+        git clone git@github.com:jevandezande/$prog ~/$prog
+    fi
+done
+
+mv progs/dotfiles ~/.dotfiles
+rcup
+
 
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -183,4 +208,4 @@ zsh conda_install.zsh
 
 echo "Finished Installing"
 echo "Change launcher and workspaces with the gnome-tweak-tool"
-echo "Change Alt+Tab with compizconfig-settings-manager. Change settings in 'Ubuntu Unity Plugin' and 'Static Application Switcher.'"
+echo "Run non-root commands"
