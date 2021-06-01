@@ -74,6 +74,9 @@ Plug 'nvie/vim-flake8'
 " Submode: new submodes for making things easier
 Plug 'kana/vim-submode'
 
+" Ale: Asynchronous Linting
+"Plug 'dense-analysis/ale'
+
 " Initialize plugin system
 call plug#end()
 
