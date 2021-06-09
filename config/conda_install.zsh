@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 echo "Conda!"
-conda_dir=~/progs/miniconda
+conda_dir=~/progs/anaconda3
 conda=$conda_dir/bin/conda
 mamba=$conda_dir/bin/mamba
 if [ ! -d $conda_dir ]

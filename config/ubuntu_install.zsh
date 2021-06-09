@@ -18,26 +18,23 @@ apt-get update
 
 apt_progs=(
     autoconf        # PSI4
-    aptitude        # Better than apt-get
     avogadro        # Visualizing molecules and MM
+    build-essential # compiler needs
+    clang           # compiler
     cmake           # PSI4
     curl            # Downloading stuff from the web
     compizconfig-settings-manager # For changing computer defaults
     compiz-plugins  # Extension to ccsm
     eigen           # Matrix library
-    # firefox         # Browser, superseded by snap
     g++             # C++ compiler
-    gabedit         # QM program input generator
     gfortran        # PSI4
     git             # VCS
     gkrellm         # System monitor
     google-chrome   # Browser
-    golang          # Browser
+    golang          # Go language
     gparted         # Disk partitioning tool
-    gsl-bin         # GNU Scientific library: CheMPS2
     gummi           # Simple LaTeX editor
     # inkscape        # Vector graphic editor, superseded by snap
-    icedtea-plugin  # Java on the internet
     i3              # Tiling window manager
     # jmol# Molecule visualizer
     keepassx        # Password storage
@@ -52,23 +49,18 @@ apt_progs=(
     liblapack-dev   # PSI4, OpenChemistry
     libeigen3-dev   # Eigen
     libfreetype6-dev # Matplotlib
-    libgail-common  # For Inkscape
+    libgail-common  # Inkscape
     libjpeg-dev     # cheMVP
-    libopenmpi2         # OpenMPI
+    libopenmpi2     # OpenMPI
     libpng-dev      # cheMVP, Matplotlib
     libqt5designer5 # OpenChemistry
     libqt5svg5-dev  # cheMVP
     libssl-dev      # Compiling Python3
     libtiff-dev     # cheMVP
     libxml2-dev     # Avogadro2
-    libscalapack-openmpi1   # BAGEL
-    libscalapack-mpi-dev    # BAGEL
-    # mendeleydesktop
     make            # compilation
-    nautilus-dropbox# Dropbox that works on Ubuntu
+    nautilus-dropbox # Dropbox that works on Ubuntu
     neovim          # Neovim
-    network-manager-openconnect       # VPN (alternative to Cisco AnyConnect)
-    network-manager-openconnect-gnome # VPN (alternative to Cisco AnyConnect)
     openconnect     # VPN (alternative to Cisco AnyConnect)
     openjdk-8-jre   # Java
     openssh-server  # SSH
@@ -83,9 +75,8 @@ apt_progs=(
     rclone          # Rscync for cloud storage
     rcm             # Dotfile manager
     ruby-dev        # Programming language (used for Travis)
-    # skype           # Video chat client
     snapd           # Snap installer
-    # spotify-client  # Spotify
+    swi-prolog      # Prolog implementation
     texlive-full    # Full tex distribution (very large)
     vim             # Editor
     zplug           # Zsh plugin installer
@@ -94,12 +85,29 @@ apt_progs=(
 
 for prog in "${apt_progs[@]}"
 do
-    apt-get install $prog -y
     echo $prog
+    apt-get install $prog -y
 done
 
 apt-get update
 apt-get upgrade -y
+
+
+echo "PIP!"
+pip_progs=(
+    natsort
+    more_itertools
+    mypy
+    black
+    flake8
+)
+
+for prog in "${pip_progs[@]}"
+do
+    echo $prog
+    pip install $prog
+done
+
 
 echo "Snaps!"
 snap_progs=(
@@ -107,26 +115,15 @@ snap_progs=(
     gimp                # Raster graphic editor
     inkscape            # Vector graphics editor
     keepassxc           # Password storage
-    # neovim-kalikiana    # Upgraded version of vim
     pycharm-community   # Python IDE
     skype               # Video chat client
     spotify             # Music player
-    valgrind            # Code checker
-    wine-platform       # Emulator
 )
+
 for prog in "${snap_progs[@]}"
 do
+    echo $prog
     snap install $prog
-done
-
-
-echo "Gems!"
-gem_progs=(
-    travis              # Travis CI CLI
-)
-for prog in "${gem_progs[@]}"
-do
-    gem install $prog
 done
 
 
@@ -140,9 +137,9 @@ if [ ! -d ~/.dotfiles ]
 then
     git clone https://github.com/jevandezande/dotfiles ~/.dotfiles
 else
-    cd ~/.dotfiles
+    pushd ~/.dotfiles
     git update
-    cd ~
+    popd
 fi
 rcup
 
@@ -154,21 +151,25 @@ then
 fi
 
 # Zplug
-if [ ! -d ~/.zplug ]
-then
-    curl -sL --proto-redir -all,https \
-        https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-fi
+#if [ ! -d ~/.zplug ]
+#then
+#    curl -sL --proto-redir -all,https \
+#        https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+#fi
 
 
 if [ ! -d ~/progs/qgrep ]
 then
     git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
 else
-    cd ~/progs/qgrep
+    pushd ~/progs/qgrep
     git update
-    cd ~
+    popd
 fi
+
+
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 zsh conda_install.zsh
 
@@ -183,7 +184,3 @@ zsh conda_install.zsh
 echo "Finished Installing"
 echo "Change launcher and workspaces with the gnome-tweak-tool"
 echo "Change Alt+Tab with compizconfig-settings-manager. Change settings in 'Ubuntu Unity Plugin' and 'Static Application Switcher.'"
-echo "Install Spotify notify (for media controls)"
-echo "Setup VPN alternative to Cisco anyconnect"
-#http://www.humans-enabled.com/2011/06/how-to-connect-ubuntu-linux-to-cisco.html
-echo "Run non-root commands"
