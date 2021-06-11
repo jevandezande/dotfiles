@@ -8,26 +8,13 @@ endif
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
 
-" CSV
-"Plug 'chrisbra/csv.vim', { 'for': 'csv' }
-
 " VimTex: compiling LaTeX (more modern than LaTeX-Box)
 Plug 'lervag/vimtex', { 'for' : 'tex' }
-
-" Rykka.vim: Improved highlighting for RestructuredText
-Plug 'Rykka/riv.vim', { 'for' : 'rst' }
-
-" NERDTree: makes nicer directory viewing
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 " Syntastic: syntax checking
 Plug 'scrooloose/syntastic'
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': ['.dat'] }
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-
-" Hardmode: Why, oh why did I do this?
-"Plug 'wikitopian/hardmode'
 
 " Vim-Airline: fancy status line
 Plug 'vim-airline/vim-airline'
@@ -50,17 +37,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Sort python imports
 Plug 'tweekmonster/impsort.vim'
 
-" Vim Polyglot: syntax and proper indents
-"Plug 'sheerun/vim-polyglot'
-
-" Ultisnips: snippets plugin
-"Plug 'SirVer/ultisnips'
-
 " Rust coding features
-Plug 'rust-lang/rust.vim'
-
-" SnipRun: runs code blocks
-"Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
 " Black: code formatter
 Plug 'psf/black', { 'branch': 'stable' }
@@ -75,16 +53,10 @@ Plug 'nvie/vim-flake8'
 Plug 'kana/vim-submode'
 
 " Ale: Asynchronous Linting
-"Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 
 " Initialize plugin system
 call plug#end()
-
-
-"""""""""""""
-" Rykka-VIM "
-"""""""""""""
-let g:riv_disable_folding=1 "RST folding
 
 
 """"""""""""
@@ -114,12 +86,6 @@ let g:syntastic_tex_checkers=['lacheck']
 let g:syntastic_loc_list_height=5 " Smaller error window
 
 
-"""""""""""""
-" Hard Mode "
-"""""""""""""
-nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-
-
 """""""""""""""
 " Vim Airline "
 """""""""""""""
@@ -129,11 +95,6 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-
-
-""""""""""""""""
-" Vim Fugitive "
-""""""""""""""""
 
 
 """""""""
