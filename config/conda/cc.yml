@@ -13,10 +13,12 @@ dependencies:
     - xtb-python
     - py3dmol
     - jupyterlab
+    - datamol
     - ipyparallel
     - pip:
       - pyscf
       - pyberny
+      - geomeTRIC
       - scipy
       - pandas
       - matplotlib
@@ -27,6 +29,7 @@ dependencies:
       - ipython
       - more-itertools
       - natsort
+      - black
       - flake8
       - mypy
       - isort

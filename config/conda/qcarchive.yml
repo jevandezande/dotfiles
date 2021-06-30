@@ -1,22 +1,15 @@
 name: qcarchive
 channels:
-    - psi4/label/dev
-    - adcc
-    - entos
     - conda-forge
+    - psi4/label/dev
 dependencies:
-    - python=3.9
-    - pip
-    - qcfractal
     - psi4
     - dftd3    
     - gcp
     - geomeTRIC
-    - adcc
-    - entos
     - xtb
-    - xtb-python
     - rdkit
+    - pip
     - pip:
       - pyscf
       - pyberny
@@ -29,6 +22,7 @@ dependencies:
       - ipython
       - more-itertools
       - natsort
+      - black
       - flake8
       - mypy
       - isort
