@@ -13,7 +13,7 @@ add_job()
 orca_run()
 {
     label="orca_${$(pwd):t}"
-    orca=~/progs/orca/orca_4_2_1/run_orca.zsh
+    orca=~jevandezande/progs/orca/orca_4_2_1/run_orca.zsh
     inp=${1:-input.dat}
 
     nprocs=1
@@ -78,7 +78,7 @@ xtb_opt()
     coords=${1-'geom.xyz'}
     charge=${2-0}
 
-    tsp -L $label zsh -c "conda run -n cc xtb ${1-'geom.xyz'} --opt -c ${2-0} > output.dat" | add_job $label
+    tsp -L $label zsh -c "conda run -n cc2 xtb ${1-'geom.xyz'} --opt -c ${2-0} > output.dat" | add_job $label
 }
 
 xtb_md()
