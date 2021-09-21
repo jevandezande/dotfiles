@@ -70,7 +70,12 @@ then
     source ~/.zsh/profiles/rhea.zsh
     source ~/.zsh/profiles/mac.zsh
     source ~/.zsh/profiles/local.zsh
-    source ~/.zsh/profiles/ZL-12213.zsh
+
+elif [ $HOST = 'ZL-12640' ]
+then
+    source ~/.zsh/profiles/zym.zsh
+    source ~/.zsh/profiles/tethys.zsh
+    source ~/.zsh/profiles/local.zsh
 
 elif [ -n "$HOST" ]
 then

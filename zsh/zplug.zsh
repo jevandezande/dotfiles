@@ -9,6 +9,3 @@ eval "$(starship init zsh)"
         echo; zplug install
     fi
 fi
-
-# Then, source plugins and add commands to $PATH
-zplug load  #--verbose

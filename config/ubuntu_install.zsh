@@ -6,16 +6,17 @@
 #
 ###########################################################
 
-if [ ! -f ~/.ssh/id_rsa.pub ]
-then
-    ssh-keygen
-else
-    ssh -T git@github.com
-    ls -al ~/.ssh
-    cat ~/.ssh/id_rsa.pub
-fi
+#if [ ! -f ~/.ssh/id_rsa.pub ]
+#then
+#    ssh-keygen
+#else
+#    ssh -T git@github.com
+#    ls -al ~/.ssh
+#    cat ~/.ssh/id_rsa.pub
+#fi
 
-username=${1-'jevandezande'}
+username=${1-'jvandezande'}
+
 
 mkdir -p ~/progs ~/tmp
 
@@ -67,6 +68,7 @@ apt_progs=(
     libtiff-dev     # cheMVP
     libxml2-dev     # Avogadro2
     make            # compilation
+    neofetch        # System properties display
     python3-dropbox # Dropbox
     neovim          # Neovim
     openconnect     # VPN (alternative to Cisco AnyConnect)
@@ -103,6 +105,7 @@ apt-get upgrade -y
 
 echo "PIP!"
 pip_progs=(
+    ipython[all]
     natsort
     more_itertools
     mypy
@@ -143,7 +146,7 @@ su $username
 # Dotfiles
 if [ ! -d ~/.dotfiles ]
 then
-    git clone https://github.com/jevandezande/dotfiles ~/.dotfiles
+    git clone git@github.com:jevandezande/dotfiles ~/.dotfiles
 else
     pushd ~/.dotfiles
     git update
@@ -159,11 +162,11 @@ then
 fi
 
 # Zplug
-#if [ ! -d ~/.zplug ]
-#then
-#    curl -sL --proto-redir -all,https \
-#        https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-#fi
+if [ ! -d ~/.zplug ]
+then
+    curl -sL --proto-redir -all,https \
+        https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+fi
 
 
 if [ ! -d ~/progs/qgrep ]
@@ -185,7 +188,7 @@ for prog in $git_progs
 do
     if [ ! -d ~/progs/$prog ]
     then
-        git clone git@github.com:jevandezande/$prog ~/$prog
+        git clone git@github.com:jevandezande/$prog ~/progs/$prog
     fi
 done
 
@@ -199,6 +202,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 zsh conda_install.zsh
 
 
+chsh zsh
 # Change ownership from root to user
 #chown $username -R ~/.dotfiles
 #chown $username -R ~/.zplug
