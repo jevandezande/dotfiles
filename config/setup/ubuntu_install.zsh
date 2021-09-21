@@ -5,17 +5,17 @@
 # Setup your ssh key with github
 #
 ###########################################################
-
-#if [ ! -f ~/.ssh/id_rsa.pub ]
-#then
-#    ssh-keygen
-#else
-#    ssh -T git@github.com
-#    ls -al ~/.ssh
-#    cat ~/.ssh/id_rsa.pub
-#fi
-
 username=${1-'jvandezande'}
+
+
+if [ ! -f ~/.ssh/id_rsa.pub ]
+then
+    ssh-keygen
+else
+    ssh -T git@github.com
+    ls -al ~/.ssh
+    cat ~/.ssh/id_rsa.pub
+fi
 
 
 mkdir -p ~/progs ~/tmp
@@ -209,6 +209,10 @@ chsh zsh
 #chown $username -R ~/progs
 #chsh $username -s /bin/zsh
 
+# Facial recognition login
+# sudo add-apt-repository ppa:boltgolt/howdy
+# sudo apt update
+# sudo apt install howdy
 
 echo "Finished Installing"
 echo "Change launcher and workspaces with the gnome-tweak-tool"

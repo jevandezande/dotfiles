@@ -1,12 +1,12 @@
 create_default_packages:
-    - pip
-    - ipython
-    - numpy
-    - matplotlib
-    - pip:
-        - natsort
-        - more-itertools
-        - black
-        - isort
-        - mypy
-        - flake8
+  - pip
+  - ipython
+  - numpy
+  - matplotlib
+  - pip:
+    - natsort
+    - more-itertools
+    - black
+    - isort
+    - mypy
+    - flake8
