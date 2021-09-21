@@ -13,6 +13,9 @@ then
     elif [ $(uname) = "Darwin" ]
     then
         OS="MacOSX"
+    else
+        echo "Failed to determine OS: $OS"
+        exit 0
     fi
     curl -o anaconda_install.sh "https://repo.anaconda.com/archive/Anaconda3-2021.05-$OS-x86_64.sh"
     bash anaconda_install.sh -b -p $conda_dir

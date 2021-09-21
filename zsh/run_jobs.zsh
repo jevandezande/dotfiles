@@ -66,7 +66,7 @@ psi4_run()
     label="PSI4_${$(pwd):t}"
     threads=${1-1}
 
-    tsp -N $threads -L $label zsh -c "conda run -n cc psi4 -n $threads" | add_job $label
+    tsp -N $threads -L $label zsh -c "conda run -n psi4 psi4 -n $threads" | add_job $label
 }
 
 #######
@@ -129,4 +129,27 @@ crest_gfn2gff()
     charge=${3-0}
 
     tsp -L $label -N $threads zsh -c "crest $coords -c $charge -T $threads -niceprint -cluster -gfn2//gfnff > output.dat" | add_job $label
+}
+
+################
+# Torsiondrive #
+################
+torsion()
+{
+    #run_torsion()
+    #{
+    #    echo "conda run -n torsion-drive torsiondrive-launch input.dat dihedrals.txt"
+    #}
+    #plot_torsion()
+    #{
+    #    echo "conda run -n torsion-drive torsiondrive-plot1D scan.xyz &> /dev/null && convert scan.pdf td_1D.png || torsiondrive-plot2D scan.xyz && convert torsiondrive_2D.pdf td_2D.png"
+    #}
+    #tsp -L $label zsh -c run_torsion | add_job $label
+    #tsp -L $label zsh -c plot_torsion
+
+    label="TD_${$(pwd):t}"
+    conv_label="${label}_plotting"
+
+    tsp -L $label zsh -c "conda run -n torsion-drive torsiondrive-launch input.dat dihedrals.txt" | add_job $label
+    tsp -L $conv_label -d zsh -c "conda run -n torsion-drive torsiondrive-plot1D scan.xyz &> /dev/null && convert scan.pdf td_1D.png || torsiondrive-plot2D scan.xyz && convert torsiondrive_2D.pdf td_2D.png"
 }

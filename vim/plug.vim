@@ -44,7 +44,7 @@ Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'psf/black', { 'branch': 'stable' }
 
 " MyPy: type checking
-Plug 'spirosbax/vim-mypy'
+Plug 'integralist/vim-mypy', {'for': 'python'}
 
 " Flake8: linting
 Plug 'nvie/vim-flake8'
@@ -63,8 +63,8 @@ call plug#end()
 " NerdTree "
 """"""""""""
 " Open NerdTree with plain 'vi' command
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Open NerdTree with <C-n>
 " map <C-n> :NERDTreeToggle<CR>
 

@@ -11,16 +11,24 @@ username=${1-'jvandezande'}
 if [ ! -f ~/.ssh/id_rsa.pub ]
 then
     ssh-keygen
+    echo "Setup your ssh key with GitHub"
+    exit 0
 else
     ssh -T git@github.com
     ls -al ~/.ssh
     cat ~/.ssh/id_rsa.pub
 fi
 
+LOCAL_USER=$USER
+
+# Run script as root if not already.
+if [[ $EUID -ne 0 ]]; then
+    exec sudo REAL_USER=${LOCAL_USER} /usr/bin/env bash "$0" "$@"
+fi
 
 mkdir -p ~/progs ~/tmp
 
-echo "Adding repos"
+echo "Adding repos!"
 
 
 echo "Apt!"
@@ -36,6 +44,7 @@ apt_progs=(
     compizconfig-settings-manager # For changing computer defaults
     compiz-plugins  # Extension to ccsm
     eigen           # Matrix library
+    fd-find         # Much faster than `find`
     g++             # C++ compiler
     gfortran        # PSI4
     git             # VCS
@@ -101,13 +110,18 @@ done
 
 apt-get update
 apt-get upgrade -y
+apt-get autoremove
 
 
 echo "PIP!"
 pip_progs=(
+# Python libraries
     ipython[all]
-    natsort
+    matplotlib
     more_itertools
+    natsort
+    numpy
+# Coding tools
     mypy
     black
     flake8
@@ -116,7 +130,7 @@ pip_progs=(
 for prog in "${pip_progs[@]}"
 do
     echo $prog
-    pip install $prog
+    pip3 install $prog
 done
 
 
@@ -141,20 +155,9 @@ done
 #############
 # Userspace #
 #############
-su $username
-
-# Dotfiles
-if [ ! -d ~/.dotfiles ]
-then
-    git clone git@github.com:jevandezande/dotfiles ~/.dotfiles
-else
-    pushd ~/.dotfiles
-    git update
-    popd
-fi
-rcup
 
 # Vim-plug
+echo "Vim-Plug!"
 if [ ! -f ~/.dotfiles/.vim/autoload/plug.vim ]
 then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -162,20 +165,11 @@ then
 fi
 
 # Zplug
+echo "Zplug!"
 if [ ! -d ~/.zplug ]
 then
     curl -sL --proto-redir -all,https \
         https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-fi
-
-
-if [ ! -d ~/progs/qgrep ]
-then
-    git clone https://github.com/jevandezande/qgrep ~/progs/qgrep
-else
-    pushd ~/progs/qgrep
-    git update
-    popd
 fi
 
 echo "Git programs!"
@@ -189,6 +183,11 @@ do
     if [ ! -d ~/progs/$prog ]
     then
         git clone git@github.com:jevandezande/$prog ~/progs/$prog
+        pushd ~/progs/$prog
+            git update
+            git submodule init
+            git submodule update
+        popd
     fi
 done
 
@@ -197,9 +196,11 @@ rcup
 
 
 # Rust
+echo "Rust!"
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-zsh conda_install.zsh
+echo "Conda!"
+zsh ~/.dotfiles/config/conda_install.zsh
 
 
 chsh zsh
@@ -216,4 +217,3 @@ chsh zsh
 
 echo "Finished Installing"
 echo "Change launcher and workspaces with the gnome-tweak-tool"
-echo "Run non-root commands"

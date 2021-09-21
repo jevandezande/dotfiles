@@ -1,25 +1,21 @@
-name: qcarchive
+name: p39
 channels:
     - conda-forge
-    - psi4/label/dev
+    - psi4
 dependencies:
     - python=3.9
+    - pip
     - psi4
     - dftd3    
     - gcp
-    - geomeTRIC
     - xtb
-    - rdkit
-    - pip
     - pip:
       - cclib
-      - geometric
+      - geomeTRIC
       - matplotlib
       - more-itertools
       - natsort
-      - networkx
       - pandas
-      - pyberny
       - pyscf
       - scipy
 # Tools
