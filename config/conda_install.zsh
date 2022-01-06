@@ -6,10 +6,19 @@ conda=$conda_dir/bin/conda
 mamba=$conda_dir/bin/mamba
 if [ ! -d $conda_dir ]
 then
-    # curl -o Miniconda-latest.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-    curl -o anaconda_install.sh "https://repo.anaconda.com/archive/Anaconda3-2021.05-MacOSX-x86_64.sh"
-    bash anaconda_install.sh -b -p $conda_dir
-    rm anaconda_install.sh
+    if [ `uname` = "Linux" ]
+    then
+        OS = "Linux"
+    elif [ `uname` = "Darwin" ]
+    then
+        OS = "MacOSX"
+    else
+        echo "Failed to determine OS: $(OS)"
+        exit 0
+    fi
+    curl -o conda_install.sh "https://repo.anaconda.com/miniconda/Miniconda3-latest-$(OS)-x86_64.sh"
+    bash conda_install.sh -b -p $conda_dir
+    rm conda_install.sh
 fi
 
 $conda update -n base -c defaults conda --yes
