@@ -4,13 +4,14 @@ channels:
     - psi4/label/dev
 dependencies:
     - python=3.9
+    - pip
+    - pipx
     - psi4
     - dftd3    
     - gcp
     - geomeTRIC
     - xtb
     - rdkit
-    - pip
     - pip:
       - cclib
       - geometric

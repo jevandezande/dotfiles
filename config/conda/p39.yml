@@ -5,6 +5,7 @@ channels:
 dependencies:
     - python=3.9
     - pip
+    - pipx
     - psi4
     - dftd3    
     - gcp
@@ -16,6 +17,7 @@ dependencies:
       - more-itertools
       - natsort
       - pandas
+      - pipx
       - pyscf
       - scipy
 # Tools
