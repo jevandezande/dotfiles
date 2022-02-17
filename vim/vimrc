@@ -126,3 +126,9 @@ au FileType rust map <leader>t :!cargo test<CR>
 " Vim-Plug "
 """"""""""""
 source ~/.vim/plug.vim
+
+
+""""""""""
+" Prolog "
+""""""""""
+autocmd BufNewFile,BufRead *.pl setfiletype prolog syntax=prolog
