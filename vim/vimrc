@@ -116,7 +116,7 @@ endif
 " Running Code "
 """"""""""""""""
 au FileType python map <leader>r :!python3 %<CR>
-au FileType python map <leader>t :!pytest %<CR>
+au FileType python map <leader>t :!pytest --doctest-modules %<CR>
 au FileType zsh map <leader>r :!zsh %<CR>
 au FileType r map <leader>r :!Rscript %<CR>
 au FileType rust map <leader>r :!cargo run<CR>
