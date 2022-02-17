@@ -13,7 +13,7 @@ add_job()
 orca_run()
 {
     label="orca_${$(pwd):t}"
-    orca=~jevandezande/progs/orca/orca_4_2_1/run_orca.zsh
+    orca=~jevandezande/progs/orca/run_orca.zsh
     inp=${1:-input.dat}
 
     nprocs=1
@@ -24,7 +24,7 @@ orca_run()
         if [[ $pal == "%pal" ]]
         then
             nprocs=`head -1 $inp | cut -d " " -f 3`
-        elif [[ $pal == "pal" ]]
+        elif [[ $pal2 == "pal" ]]
         then
             nprocs=`head -1 $inp | cut -d " " -f 4`
         fi
