@@ -94,6 +94,8 @@ map <F3> :/\(<<<<<<<\\|=======\\|>>>>>>>\)<CR>
 """"""""""
 augroup python_functions
     autocmd!
+    " Sort imports with isort
+    autocmd FileType python nnoremap <buffer> <F5> :execute ':!isort %'<CR>
     " Reformat with black
     autocmd FileType python nnoremap <buffer> <F6> :Black<CR>
     " Check types with MyPy
