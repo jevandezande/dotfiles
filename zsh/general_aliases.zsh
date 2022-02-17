@@ -32,6 +32,8 @@ alias vio='vi output.dat -R'
 alias vig='vi geom.xyz'
 alias viz='vi ZMAT'
 
+if [ `uname` = "Linux" ]; then alias bat='batcat'; fi
+
 # Watch the output file
 tout() { less +F ${1-'output.dat'} }
 
