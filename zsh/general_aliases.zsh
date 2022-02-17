@@ -71,14 +71,6 @@ mkdircd () {
 }
 
 
-
-#########
-# ENTOS #
-#########
-#alias qcore="docker run --rm -v \$(pwd):\$(pwd) -w \$(pwd) -u $(id -u):$(id -g) entos.jfrog.io/docker-entos-commercial/qcore:0.8.17"
-#alias sierra="docker run --rm -v \$(pwd):\$(pwd) -w \$(pwd) -u $(id -u):$(id -g) --env DGLBACKEND=pytorch entos.jfrog.io/docker-entos-commercial/sierra-orbnet:1.1.0"
-
-
 ##########
 # Images #
 ##########
