@@ -1,9 +1,0 @@
-default_context:
-    full_name: "Jonathon Vandezande"
-    email: "jevandezande@gmail.com"
-    github_username: "jevandezande"
-abbreviations:
-    bp: https://github.com/sourcery-ai/python-best-practices-cookiecutter.git
-    #pp: https://github.com/audreyr/cookiecutter-pypackage.git
-    gh: https://github.com/{0}.git
-    bb: https://bitbucket.org/{0}

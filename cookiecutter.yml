@@ -1,0 +1,7 @@
+default_context:
+    author_name: "Jonathon Vandezande"
+    email: "jevandezande@gmail.com"
+    github_username: "jevandezande"
+abbreviations:
+    gh: https://github.com/{0}.git
+    bb: https://bitbucket.org/{0}
