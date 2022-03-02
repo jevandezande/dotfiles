@@ -51,6 +51,11 @@ then
         https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh &
 fi
 
+
+# Starship
+sh -c "$(curl -fsSL https://starship.rs/install.sh)" &
+
+
 echo "Conda!"
 zsh ~/.dotfiles/config/conda_install.zsh
 

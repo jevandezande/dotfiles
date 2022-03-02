@@ -1,6 +1,7 @@
 source ~/.zplug/init.zsh
 
-eval "$(starship init zsh)"
+# Make sure to use double quotes to prevent shell expansion
+zplug "zsh-users/zsh-syntax-highlighting"
 
 # Install plugins if there are plugins that have not been installed
  if ! zplug check --verbose; then
@@ -9,3 +10,5 @@ eval "$(starship init zsh)"
         echo; zplug install
     fi
 fi
+
+zplug load
