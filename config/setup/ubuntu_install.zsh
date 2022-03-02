@@ -1,23 +1,18 @@
 #!/usr/bin/env zsh
-###########################################################
-# Before running:
-#
-# Setup your ssh key with github
-#
-###########################################################
-username=${1-'jvandezande'}
 
+username=${1-'jvandezande'}
 
 if [ ! -f ~/.ssh/id_rsa.pub ]
 then
     ssh-keygen
-    echo "Setup your ssh key with GitHub"
-    exit 0
-else
-    ssh -T git@github.com
     ls -al ~/.ssh
+    echo "Setup your ssh key with GitHub"
     cat ~/.ssh/id_rsa.pub
+    echo "Press any key when ready"
+    read
 fi
+
+ssh -T git@github.com
 
 LOCAL_USER=$USER
 
