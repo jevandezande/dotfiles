@@ -1,4 +1,7 @@
 #!/usr/bin/env zsh
+##################################
+# Install Conda and environments #
+##################################
 
 conda_dir=~/progs/anaconda3
 conda=$conda_dir/bin/conda
@@ -14,7 +17,7 @@ then
     then
         OS="MacOSX"
     else
-        echo "Failed to determine OS: $OS"
+        echo "Failed to determine OS: $(uname)"
         exit 0
     fi
     # Miniconda: "https://repo.anaconda.com/miniconda/Miniconda3-latest-$OS-x86_64.sh"
