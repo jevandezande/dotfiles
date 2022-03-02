@@ -1,0 +1,28 @@
+name: p310
+channels:
+    - conda-forge
+    - psi4
+dependencies:
+    - python=3.10
+    - pip
+#    - psi4
+    - dftd3    
+    - gcp
+    - xtb
+    - pip:
+      - cclib
+      - geomeTRIC
+      - matplotlib
+      - more-itertools
+      - natsort
+      - pandas
+      - pipx
+      - pyscf
+      - scipy
+# Tools
+      - black
+      - flake8
+      - ipython
+      - isort
+      - mypy
+      - pytest
