@@ -1,22 +1,31 @@
 #!/usr/bin/env zsh
 
 brew_progs=(
-    anaconda
-    cmake
     htop
-    inkscape
     imagemagick
     node
-    openfortivpn
     openjpeg
     openssl
     rcm
-    sqlite
     wget
     zplug
+)
+
+casks=(
+    gimp
+    inkscape
 )
 
 for prog in ${brew_progs[@]}
 do
     brew install $prog
 done
+
+# Casks only work on MacOS
+if [ $(uname) = "Darwin" ]
+then
+    for prog in ${casks[@]}
+    do
+        brew install --cask $prog
+    done
+fi
