@@ -1,4 +1,13 @@
-conda install gh
+#!/usr/bin/env zsh
+
+if ! type gh > /dev/null
+then
+    echo "gh is not installed"
+    return
+elif ! gh auth status 2> /dev/null
+then
+    gh auth login
+fi
 
 github_progs=(
     pipenv-cookiecutter
@@ -8,7 +17,7 @@ github_progs=(
 )
 
 pushd ~/progs/
-    for prog in $git_progs
+    for prog in $github_progs
     do
         if [ ! -d $prog ]
         then

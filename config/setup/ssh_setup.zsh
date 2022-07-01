@@ -4,7 +4,12 @@
 # Setup ssh and Github keys #
 #############################
 
-if [ ! -f ~/.ssh/id_rsa.pub ]
+# Use GitHub CLI if available
+if type gh > /dev/null;
+then
+    # generates eliptic curve key automagically
+    gh auth login
+elif [ ! -d ~/.ssh ]
 then
     ssh-keygen
     ls -al ~/.ssh
