@@ -77,6 +77,12 @@ then
     source ~/.zsh/profiles/tethys.zsh
     source ~/.zsh/profiles/local.zsh
 
+elif [ $HOST = 'nyc-laptop-w105' ]
+then
+    source ~/.zsh/profiles/schrodinger.zsh
+    source ~/.zsh/profiles/themis.zsh
+    source ~/.zsh/profiles/local.zsh
+
 elif [ -n "$HOST" ]
 then
     echo "Cannot find the proper host and associated system profile. Host: $HOST"
