@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 git clone https://github.com/jevandezande/dotfiles ~/.dotfiles
 
 if [ $(uname) = "Linux" ]

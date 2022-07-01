@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+
 ##################################
 # Install Conda and environments #
 ##################################

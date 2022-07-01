@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 apt-get update
 
 apt_progs=(
