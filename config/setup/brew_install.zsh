@@ -11,9 +11,12 @@ brew_progs=(
     zplug
 )
 
+brew tap homebrew/cask-fonts
+
 casks=(
     gimp
     inkscape
+    font-UbuntuMono-nerd-font
 )
 
 for prog in ${brew_progs[@]}
