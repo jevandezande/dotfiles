@@ -7,8 +7,9 @@ export PATH=$HOME/.bin:$PATH
 # Rust
 export PATH=$PATH:~/.cargo/bin
 
+# Linuxbrew
 if [ $(uname) = "Linux" ]
-    # Linuxbrew
+then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" eval export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
     export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar"
     export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
