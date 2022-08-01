@@ -1,2 +1,1 @@
-export PROMPT='%F{blue}@themis%f% %~$ '
-
+hash -d docs=/mnt/c/Users/vandezan/Documents/
