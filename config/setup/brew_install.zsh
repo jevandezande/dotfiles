@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 brew_progs=(
+    act
     htop
     imagemagick
     node

@@ -64,6 +64,7 @@ apt_progs=(
     ruby-dev        # Programming language (used for Travis)
     snapd           # Snap installer
     swi-prolog      # Prolog implementation
+    task-spooler    # Task queue
     texlive-full    # Full tex distribution (very large)
     vim             # Editor
     zplug           # Zsh plugin installer
