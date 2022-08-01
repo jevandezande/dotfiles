@@ -81,6 +81,7 @@ elif [ $HOST = 'nyc-laptop-w105' ]
 then
     source ~/.zsh/profiles/schrodinger.zsh
     source ~/.zsh/profiles/themis.zsh
+    source ~/.zsh/profiles/wsl.zsh
     source ~/.zsh/profiles/local.zsh
 
 elif [ -n "$HOST" ]
