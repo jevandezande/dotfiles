@@ -217,3 +217,18 @@ torsion()
     tsp -L $label zsh -c "conda run -n torsion-drive torsiondrive-launch input.dat dihedrals.txt" | add_job $label
     tsp -L $conv_label -d zsh -c "conda run -n torsion-drive torsiondrive-plot1D scan.xyz &> /dev/null && convert scan.pdf td_1D.png || torsiondrive-plot2D scan.xyz && convert torsiondrive_2D.pdf td_2D.png"
 }
+
+
+#################
+# Miscellaneous #
+#################
+tsp_make()
+{
+    local label="MAKE_$(pwd)"
+
+    local threads=${1-$NUMCPUS}
+
+    local cmd="time make -j $threads --load-average=$threads > make.out 2> make.error"
+
+    task_spool $cmd $label $threads
+}
