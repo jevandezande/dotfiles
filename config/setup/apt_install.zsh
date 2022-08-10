@@ -5,6 +5,7 @@ apt-get update
 apt_progs=(
     autoconf        # PSI4
     avogadro        # Visualizing molecules and MM
+    bat             # Replacement for cat
     build-essential # compiler needs
     clang           # compiler
     cmake           # PSI4
