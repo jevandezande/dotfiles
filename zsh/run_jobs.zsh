@@ -1,10 +1,33 @@
+###########
+# Helpers #
+###########
 add_job()
 {
     read
-    number=${REPLY}
-    label=${1-${$(pwd):t}}
+    local number=${REPLY}
+    local label=${1-${$(pwd):t}}
     echo "$number - $label - $(pwd)" >> ~/.jobs
 }
+
+task_spool()
+{
+    local cmd=${1}
+    local label=${2:-"tsp"}
+    local threads=${3:-1}
+
+    echo "tsp -L $label -N $threads zsh -c $cmd | add_job $label"
+
+    tsp -L $label -N $threads zsh -c "$cmd" | add_job $label
+}
+
+
+############
+# Programs #
+############
+crest="conda run -n cc crest"
+orca="~jevandezande/progs/orca/run_orca.zsh"
+psi4="conda run -n cc psi4"
+xtb="conda run -n cc xtb"
 
 
 ########
@@ -12,11 +35,10 @@ add_job()
 ########
 orca_run()
 {
-    label="orca_${$(pwd):t}"
-    orca=~jevandezande/progs/orca/run_orca.zsh
-    inp=${1:-input.dat}
+    local label="orca_${$(pwd):t}"
+    local inp=${1:-input.dat}
 
-    nprocs=1
+    local nprocs=1
     if [[ -f $inp ]]
     then
         pal=`head -1 $inp | cut -d " " -f 1`
@@ -30,7 +52,9 @@ orca_run()
         fi
     fi
 
-    tsp -N $nprocs -L $label zsh -c "$orca $@" | add_job $label
+    local cmd="$orca $@"
+
+    task_spool $cmd $label $nprocs
 }
 alias killorca='killall orca{,_scf,_scfgrad,_casscf,_cipsi}{,_mpi}'
 alias clean_orca="find input.{cis,engrad,ges,hostnames,opt,prop,qro,uno,unso,xyz} input{,_atom{45,77}}{,_property}.txt -type f 2> /dev/null | xargs rm 2> /dev/null"
@@ -40,7 +64,7 @@ alias clean_orca="find input.{cis,engrad,ges,hostnames,opt,prop,qro,uno,unso,xyz
 function molden ()
 {
     # Strip the file extenstion
-    file=${1:r}
+    local file=${1:r}
     # If no argument
     if [[ ! -n $file ]]
     then
@@ -63,73 +87,113 @@ function molden ()
 ########
 psi4_run()
 {
-    label="PSI4_${$(pwd):t}"
-    threads=${1-1}
+    local label="PSI4_${$(pwd):t}"
+    local threads=${1-1}
 
-    tsp -N $threads -L $label zsh -c "conda run -n psi4 psi4 -n $threads" | add_job $label
+    local cmd="conda run -n psi4 psi4 -n $threads"
+
+    task_spool $cmd $label $threads
 }
+
 
 #######
 # XTB #
 #######
 xtb_opt()
 {
-    label="xTB_${$(pwd):t}"
-    coords=${1-'geom.xyz'}
-    charge=${2-0}
+    local label="xTB_${$(pwd):t}"
 
-    tsp -L $label zsh -c "conda run -n cc2 xtb ${1-'geom.xyz'} --opt -c ${2-0} > output.dat" | add_job $label
+    local coords=${1-'geom.xyz'}
+    local charge=${2-0}
+    local threads=${3-8}
+
+    local cmd="$xtb $coords --opt -c $charge -P $threads > output.dat"
+
+    task_spool $cmd $label $threads
 }
 
 xtb_md()
 {
-    label="xTBMD_${$(pwd):t}"
-    coords=${1-'geom.xyz'}
-    charge=${2-0}
+    local label="xTBMD_${$(pwd):t}"
 
-    tsp -L $label zsh -c "conda run -n cc xtb $coords --omd -c $charge > output.dat" | add_job $label
+    local coords=${1-'geom.xyz'}
+    local charge=${2-0}
+    local threads=${3-8}
+
+    local cmd="$xtb $coords --omd -c $charge -P $threads > output.dat"
+
+    task_spool $cmd $label $threads
 }
+
+xtb_path()
+{
+    local label="xTB_path_${$(pwd):t}"
+
+    local start=${1-"start.xyz"}
+    local path_end=${2-"end.xyz"}
+    local input=${3-"path.in"}
+    local charge=${4-0}
+    local threads=${5-8}
+
+    local cmd="$xtb $start --path $path_end --input $input -c $charge -P $threads > output.dat"
+
+    task_spool $cmd $label $threads
+
+}
+
 stda()
 {
-    label="sTDA_${$(pwd):t}"
+    local label="sTDA_${$(pwd):t}"
 
-    threads=${1-1}
-    coords=${2-'geom.xyz'}
-    charge=${3-0}
+    local coords=${1-'geom.xyz'}
+    local charge=${2-0}
+    local threads=${3-8}
 
     tsp -L $label -N $threads zsh -c "xtb4stda $coords -T $threads -chrg $charge > xtb.out" | add_job $label
     tsp -d -L $label -N $threads zsh -c "~/progs/bin/stda_v1_6_2 coords -T $threads -xtb -e 10"| add_job $label
 }
+
 crest_run()
 {
-    label="CREST_${$(pwd):t}"
+    local label="CREST_${$(pwd):t}"
 
-    threads=${1-1}
-    coords=${2-'geom.xyz'}
-    charge=${3-0}
+    local coords=${1-'geom.xyz'}
+    local charge=${2-0}
+    local threads=${3-8}
 
-    tsp -L $label -N $threads zsh -c "crest $coords -T $threads -c $charge -niceprint -cluster > output.dat" | add_job $label
+    local cmd="$crest $coords -T $threads -c $charge -niceprint > output.dat"
+
+    task_spool $cmd $label $threads
 }
+
 crest_gff()
 {
-    label="CREST_GFF_${$(pwd):t}"
+    local label="CREST_GFF_${$(pwd):t}"
 
-    threads=${1-1}
-    coords=${2-'geom.xyz'}
-    charge=${3-0}
+    local coords=${1-'geom.xyz'}
+    local charge=${2-0}
+    local threads=${3-8}
 
-    tsp -L $label -N $threads zsh -c "crest $coords -c $charge -T $threads -niceprint -cluster -gff > output.dat" | add_job $label
+    local cmd="$crest $coords -c $charge -T $threads -niceprint -gff > output.dat"
+
+    task_spool $cmd $label $threads
 }
+
 crest_gfn2gff()
 {
-    label="CREST_GFN2//GFNFF_${$(pwd):t}"
+    local label="CREST_GFN2//GFNFF_${$(pwd):t}"
 
-    threads=${1-1}
-    coords=${2-'geom.xyz'}
-    charge=${3-0}
+    local coords=${1-'geom.xyz'}
+    local charge=${2-0}
+    local threads=${3-8}
 
-    tsp -L $label -N $threads zsh -c "crest $coords -c $charge -T $threads -niceprint -cluster -gfn2//gfnff > output.dat" | add_job $label
+    local cmd="$crest $coords -c $charge -T $threads -niceprint -gfn2//gfnff > output.dat"
+
+    task_spool $cmd $label $threads
 }
+
+alias clean_xtb="find xtb{opt.log,opt.xyz,restart,topo.mol} wbo charges -type f 2> /dev/null | xargs rm 2> /dev/null"
+
 
 ################
 # Torsiondrive #
@@ -147,8 +211,8 @@ torsion()
     #tsp -L $label zsh -c run_torsion | add_job $label
     #tsp -L $label zsh -c plot_torsion
 
-    label="TD_${$(pwd):t}"
-    conv_label="${label}_plotting"
+    local label="TD_${$(pwd):t}"
+    local conv_label="${label}_plotting"
 
     tsp -L $label zsh -c "conda run -n torsion-drive torsiondrive-launch input.dat dihedrals.txt" | add_job $label
     tsp -L $conv_label -d zsh -c "conda run -n torsion-drive torsiondrive-plot1D scan.xyz &> /dev/null && convert scan.pdf td_1D.png || torsiondrive-plot2D scan.xyz && convert torsiondrive_2D.pdf td_2D.png"
