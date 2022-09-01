@@ -59,7 +59,8 @@ apt_progs=(
     python3-pip     # Python3 package installer
     python3-setuptools # setting up python packages
     python3-pyqt5   # Python3 qt5 bindings
-    qt5-default     # cheMVP
+    qtbase5-dev     # cheMVP
+    qtbase5-qmake   # cheMVP
     rclone          # Rscync for cloud storage
     rcm             # Dotfile manager
     ruby-dev        # Programming language (used for Travis)
