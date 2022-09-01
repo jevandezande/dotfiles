@@ -24,7 +24,7 @@ task_spool()
 ############
 # Programs #
 ############
-crest="conda run -n cc crest"
+crest="conda run -n crest crest"
 orca="~jevandezande/progs/orca/run_orca.zsh"
 psi4="conda run -n cc psi4"
 xtb="conda run -n cc xtb"
@@ -229,6 +229,16 @@ tsp_make()
     local threads=${1-$NUMCPUS}
 
     local cmd="time make -j $threads --load-average=$threads > make.out 2> make.error"
+
+    task_spool $cmd $label $threads
+}
+
+tsp_cmake(){
+    local label="CMAKE_$(pwd)"
+
+    local threads=${1-$NUMCPUS}
+
+    local cmd="cmake --build . --config Release -j $threads > make.out 2> make.error"
 
     task_spool $cmd $label $threads
 }
