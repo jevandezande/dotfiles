@@ -66,5 +66,8 @@ echo "Github programs!"
 zsh github_install.zsh &
 
 
+echo "Miscellaneous"
+zsh miscellaneous.zsh &
+
 
 echo "Finished Installing Programs for Ubuntu!"
