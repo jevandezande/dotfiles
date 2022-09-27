@@ -1,7 +1,14 @@
 #!/usr/bin/env zsh
 
+if ! type brew > /dev/null
+then
+    echo "Installing Homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
 brew_progs=(
     act
+    gh
     htop
     imagemagick
     node

@@ -27,6 +27,8 @@ echo "Apt!"
 zsh apt_install.zsh &
 echo "Snaps!"
 zsh snap_install.zsh &
+echo "Brew!"
+zsh brew_install.zsh
 
 echo "Changing to ZSH!"
 chsh zsh
@@ -57,11 +59,11 @@ fi
 sh -c "$(curl -fsSL https://starship.rs/install.sh)" &
 
 
-echo "Conda!"
-zsh ~/.dotfiles/config/conda_install.zsh
+echo "Mamba!"
+zsh ~/.dotfiles/config/mamba_install.zsh
 
 
-# Relies on conda to install gh
+# Relies on brew to install gh
 echo "Github programs!"
 zsh github_install.zsh &
 
