@@ -10,13 +10,9 @@ brew_progs=(
     act
     gh
     htop
-    imagemagick
     node
     openjpeg
     openssl
-    rcm
-    wget
-    zplug
 )
 
 brew tap homebrew/cask-fonts
@@ -27,14 +23,26 @@ casks=(
     font-UbuntuMono-nerd-font
 )
 
+mac_only=(
+    imagemagick
+    rcm
+    wget
+    zplug
+)
+
 for prog in ${brew_progs[@]}
 do
     brew install $prog
 done
 
-# Casks only work on MacOS
 if [ $(uname) = "Darwin" ]
 then
+    for prog in ${mac_only[@]}
+    do
+        brew install $prog
+    done
+
+    # Casks only work on MacOS
     for prog in ${casks[@]}
     do
         brew install --cask $prog
