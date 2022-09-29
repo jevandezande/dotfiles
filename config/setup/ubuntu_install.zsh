@@ -20,7 +20,7 @@ zsh helpers/setup_dirs.zsh
 
 
 # Pre-install these programs to allow parallel installs
-apt install snapd, zsh
+apt install snapd zsh
 
 
 echo "Apt!"
@@ -56,7 +56,7 @@ fi
 
 
 # Starship
-sh -c "$(curl -fsSL https://starship.rs/install.sh)" &
+sh -c "$(curl -fsSL https://starship.rs/install.sh)" --yes &
 
 
 echo "Mamba!"
