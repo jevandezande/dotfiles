@@ -20,7 +20,7 @@ zsh helpers/setup_dirs.zsh
 
 
 # Pre-install these programs to allow parallel installs
-apt install snapd zsh
+apt install curl ssnapd
 
 
 echo "Apt!"
@@ -60,7 +60,7 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)" --yes &
 
 
 echo "Mamba!"
-zsh ~/.dotfiles/config/mamba_install.zsh
+zsh ~/.dotfiles/config/mamba_install.zsh &
 
 
 # Relies on brew to install gh
