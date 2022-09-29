@@ -69,8 +69,6 @@ apt_progs=(
     task-spooler    # Task queue
     texlive-full    # Full tex distribution (very large)
     vim             # Editor
-    zplug           # Zsh plugin installer
-    zsh             # Shell
 )
 
 for prog in "${apt_progs[@]}"
