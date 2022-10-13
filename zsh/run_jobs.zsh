@@ -15,7 +15,7 @@ task_spool()
     local label=${2:-"tsp"}
     local threads=${3:-1}
 
-    echo "tsp -L $label -N $threads zsh -c $cmd | add_job $label"
+    echo "tsp -L $label -N $threads zsh -c \"$cmd\" | add_job $label"
 
     tsp -L $label -N $threads zsh -c "$cmd" | add_job $label
 }
@@ -107,7 +107,32 @@ xtb_opt()
     local charge=${2-0}
     local threads=${3-8}
 
-    local cmd="$xtb $coords --opt -c $charge -P $threads > output.dat"
+    if [ -f input.dat ]
+    then
+        input="--input input.dat"
+        echo $input
+    fi
+
+    local cmd="$xtb $coords --opt -c $charge -P $threads $input > output.dat"
+
+    task_spool $cmd $label $threads
+}
+
+xtb_hess()
+{
+    local label="xTB_hess_${$(pwd):t}"
+
+    local coords=${1-'geom.xyz'}
+    local charge=${2-0}
+    local threads=${3-8}
+
+    if [ -f input.dat ]
+    then
+        input="--input input.dat"
+        echo $input
+    fi
+
+    local cmd="$xtb $coords --hess -c $charge -P $threads $input > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -120,7 +145,13 @@ xtb_md()
     local charge=${2-0}
     local threads=${3-8}
 
-    local cmd="$xtb $coords --omd -c $charge -P $threads > output.dat"
+    if [ -f input.dat ]
+    then
+        input="--input input.dat"
+        echo $input
+    fi
+
+    local cmd="$xtb $coords --omd --input $input -c $charge -P $threads > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -134,6 +165,12 @@ xtb_path()
     local input=${3-"path.in"}
     local charge=${4-0}
     local threads=${5-8}
+
+    if [ -f input.dat ]
+    then
+        input="--input input.dat"
+        echo $input
+    fi
 
     local cmd="$xtb $start --path $path_end --input $input -c $charge -P $threads > output.dat"
 
@@ -161,7 +198,13 @@ crest_run()
     local charge=${2-0}
     local threads=${3-8}
 
-    local cmd="$crest $coords -T $threads -c $charge -niceprint > output.dat"
+    if [ -f input.dat ]
+    then
+        input="--input input.dat"
+        echo $input
+    fi
+
+    local cmd="$crest $coords -T $threads --input $input -c $charge -niceprint > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -174,7 +217,13 @@ crest_gff()
     local charge=${2-0}
     local threads=${3-8}
 
-    local cmd="$crest $coords -c $charge -T $threads -niceprint -gff > output.dat"
+    if [ -f input.dat ]
+    then
+        input="--input input.dat"
+        echo $input
+    fi
+
+    local cmd="$crest $coords -T $threads --input $input -c $charge -niceprint -gff > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -187,7 +236,13 @@ crest_gfn2gff()
     local charge=${2-0}
     local threads=${3-8}
 
-    local cmd="$crest $coords -c $charge -T $threads -niceprint -gfn2//gfnff > output.dat"
+    if [ -f input.dat ]
+    then
+        input="--input input.dat"
+        echo $input
+    fi
+
+    local cmd="$crest $coords -T $threads --input $input -c $charge -niceprint -gfn2//gfnff > output.dat"
 
     task_spool $cmd $label $threads
 }
