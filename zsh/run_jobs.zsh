@@ -151,7 +151,7 @@ xtb_md()
         echo $input
     fi
 
-    local cmd="$xtb $coords --omd --input $input -c $charge -P $threads > output.dat"
+    local cmd="$xtb $coords --omd $input -c $charge -P $threads > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -172,7 +172,7 @@ xtb_path()
         echo $input
     fi
 
-    local cmd="$xtb $start --path $path_end --input $input -c $charge -P $threads > output.dat"
+    local cmd="$xtb $start --path $path_end $input -c $charge -P $threads > output.dat"
 
     task_spool $cmd $label $threads
 
@@ -204,7 +204,7 @@ crest_run()
         echo $input
     fi
 
-    local cmd="$crest $coords -T $threads --input $input -c $charge -niceprint > output.dat"
+    local cmd="$crest $coords -T $threads $input -c $charge -niceprint > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -223,7 +223,7 @@ crest_gff()
         echo $input
     fi
 
-    local cmd="$crest $coords -T $threads --input $input -c $charge -niceprint -gff > output.dat"
+    local cmd="$crest $coords -T $threads $input -c $charge -niceprint -gff > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -242,7 +242,7 @@ crest_gfn2gff()
         echo $input
     fi
 
-    local cmd="$crest $coords -T $threads --input $input -c $charge -niceprint -gfn2//gfnff > output.dat"
+    local cmd="$crest $coords -T $threads $input -c $charge -niceprint -gfn2//gfnff > output.dat"
 
     task_spool $cmd $label $threads
 }
