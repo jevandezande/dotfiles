@@ -107,6 +107,7 @@ xtb_opt()
     local charge=${2-0}
     local threads=${3-8}
 
+    local input=""
     if [ -f input.dat ]
     then
         input="--input input.dat"
@@ -126,6 +127,7 @@ xtb_hess()
     local charge=${2-0}
     local threads=${3-8}
 
+    local input=""
     if [ -f input.dat ]
     then
         input="--input input.dat"
@@ -145,6 +147,7 @@ xtb_md()
     local charge=${2-0}
     local threads=${3-8}
 
+    local input=""
     if [ -f input.dat ]
     then
         input="--input input.dat"
@@ -166,6 +169,7 @@ xtb_path()
     local charge=${4-0}
     local threads=${5-8}
 
+    local input=""
     if [ -f input.dat ]
     then
         input="--input input.dat"
@@ -198,6 +202,7 @@ crest_run()
     local charge=${2-0}
     local threads=${3-8}
 
+    local input=""
     if [ -f input.dat ]
     then
         input="--input input.dat"
@@ -217,6 +222,7 @@ crest_gff()
     local charge=${2-0}
     local threads=${3-8}
 
+    local input=""
     if [ -f input.dat ]
     then
         input="--input input.dat"
@@ -236,6 +242,7 @@ crest_gfn2gff()
     local charge=${2-0}
     local threads=${3-8}
 
+    local input=""
     if [ -f input.dat ]
     then
         input="--input input.dat"
