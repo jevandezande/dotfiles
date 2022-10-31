@@ -254,6 +254,44 @@ crest_gfn2gff()
     task_spool $cmd $label $threads
 }
 
+nanoreactor_setup()
+{
+    local coords=${1-'geom.xyz'}
+    local charge=${2-0}
+    local genpot=${3-10}
+    local genmtd=${4-10}
+
+    echo "Optimizing initial coordinates"
+    eval "$xtb $coords --opt -c $charge > output.dat"
+
+    mv xtbopt.xyz nanoreactor_start.xyz
+
+    echo "Setting up input file"
+    eval "$crest nanoreactor_start.xyz --reactor --genpot $genpot --genmtd $genmtd >> output.dat"
+
+    echo "\$chrg $charge" > input.dat
+    cat rcontrol >> input.dat
+    rm rcontrol
+
+    # then use nanoreactor_run
+}
+
+nanoreactor_run()
+{
+    local label="NanoReactor_${$(pwd):t}"
+
+    local coords=${1-'nanoreactor_start.xyz'}
+    local threads=${2-8}
+    local cmd="$xtb $coords --omd --input input.dat -P $threads > output.dat"
+
+    task_spool $cmd $label $threads
+
+    label="${label}_opt"
+    cmd="$crest coord --input input.dat --reactor --fragopt >> output.dat"
+
+    tsp -d -L $label -N $threads zsh -c "$cmd" | add_job $label
+}
+
 alias clean_xtb="find xtb{opt.log,opt.xyz,restart,topo.mol} wbo charges -type f 2> /dev/null | xargs rm 2> /dev/null"
 
 
