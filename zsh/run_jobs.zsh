@@ -5,7 +5,7 @@ add_job()
 {
     read
     local number=${REPLY}
-    local label=${1-${$(pwd):t}}
+    local label=${1:-${$(pwd):t}}
     echo "$number - $label - $(pwd)" >> ~/.jobs
 }
 
@@ -88,7 +88,7 @@ function molden ()
 psi4_run()
 {
     local label="PSI4_${$(pwd):t}"
-    local threads=${1-1}
+    local threads=${1:-1}
 
     local cmd="conda run -n psi4 psi4 -n $threads"
 
@@ -103,9 +103,9 @@ xtb_opt()
 {
     local label="xTB_${$(pwd):t}"
 
-    local coords=${1-'geom.xyz'}
-    local charge=${2-0}
-    local threads=${3-8}
+    local coords=${1:-'geom.xyz'}
+    local charge=${2:-0}
+    local threads=${3:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -122,9 +122,9 @@ xtb_hess()
 {
     local label="xTB_hess_${$(pwd):t}"
 
-    local coords=${1-'geom.xyz'}
-    local charge=${2-0}
-    local threads=${3-8}
+    local coords=${1:-'geom.xyz'}
+    local charge=${2:-0}
+    local threads=${3:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -141,9 +141,9 @@ xtb_md()
 {
     local label="xTBMD_${$(pwd):t}"
 
-    local coords=${1-'geom.xyz'}
-    local charge=${2-0}
-    local threads=${3-8}
+    local coords=${1:-'geom.xyz'}
+    local charge=${2:-0}
+    local threads=${3:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -160,11 +160,11 @@ xtb_path()
 {
     local label="xTB_path_${$(pwd):t}"
 
-    local start=${1-"start.xyz"}
-    local path_end=${2-"end.xyz"}
-    local input=${3-"path.in"}
-    local charge=${4-0}
-    local threads=${5-8}
+    local start=${1:-"start.xyz"}
+    local path_end=${2:-"end.xyz"}
+    local input=${3:-"path.in"}
+    local charge=${4:-0}
+    local threads=${5:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -182,9 +182,9 @@ stda()
 {
     local label="sTDA_${$(pwd):t}"
 
-    local coords=${1-'geom.xyz'}
-    local charge=${2-0}
-    local threads=${3-8}
+    local coords=${1:-'geom.xyz'}
+    local charge=${2:-0}
+    local threads=${3:-8}
 
     tsp -L $label -N $threads zsh -c "xtb4stda $coords -T $threads -chrg $charge > xtb.out" | add_job $label
     tsp -d -L $label -N $threads zsh -c "~/progs/bin/stda_v1_6_2 coords -T $threads -xtb -e 10"| add_job $label
@@ -194,9 +194,9 @@ crest_run()
 {
     local label="CREST_${$(pwd):t}"
 
-    local coords=${1-'geom.xyz'}
-    local charge=${2-0}
-    local threads=${3-8}
+    local coords=${1:-'geom.xyz'}
+    local charge=${2:-0}
+    local threads=${3:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -213,9 +213,9 @@ crest_gff()
 {
     local label="CREST_GFF_${$(pwd):t}"
 
-    local coords=${1-'geom.xyz'}
-    local charge=${2-0}
-    local threads=${3-8}
+    local coords=${1:-'geom.xyz'}
+    local charge=${2:-0}
+    local threads=${3:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -232,9 +232,9 @@ crest_gfn2gff()
 {
     local label="CREST_GFN2//GFNFF_${$(pwd):t}"
 
-    local coords=${1-'geom.xyz'}
-    local charge=${2-0}
-    local threads=${3-8}
+    local coords=${1:-'geom.xyz'}
+    local charge=${2:-0}
+    local threads=${3:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -249,10 +249,10 @@ crest_gfn2gff()
 
 nanoreactor_setup()
 {
-    local coords=${1-'geom.xyz'}
-    local charge=${2-0}
-    local genpot=${3-10}
-    local genmtd=${4-10}
+    local coords=${1:-'geom.xyz'}
+    local charge=${2:-0}
+    local genpot=${3:-10}
+    local genmtd=${4:-10}
 
     echo "Optimizing initial coordinates"
     eval "$xtb $coords --opt -c $charge > output.dat"
@@ -273,8 +273,8 @@ nanoreactor_run()
 {
     local label="NanoReactor_${$(pwd):t}"
 
-    local coords=${1-'nanoreactor_start.xyz'}
-    local threads=${2-8}
+    local coords=${1:-'nanoreactor_start.xyz'}
+    local threads=${2:-8}
     local cmd="$xtb $coords --omd --input input.dat -P $threads > output.dat"
 
     task_spool $cmd $label $threads
@@ -319,7 +319,7 @@ tsp_make()
 {
     local label="MAKE_$(pwd)"
 
-    local threads=${1-$NUMCPUS}
+    local threads=${1:-$NUMCPUS}
 
     local cmd="time make -j $threads --load-average=$threads > make.out 2> make.error"
 
@@ -329,7 +329,7 @@ tsp_make()
 tsp_cmake(){
     local label="CMAKE_$(pwd)"
 
-    local threads=${1-$NUMCPUS}
+    local threads=${1:-$NUMCPUS}
 
     local cmd="cmake --build . --config Release -j $threads > make.out 2> make.error"
 
