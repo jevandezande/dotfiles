@@ -111,7 +111,6 @@ xtb_opt()
     if [ -f input.dat ]
     then
         input="--input input.dat"
-        echo $input
     fi
 
     local cmd="$xtb $coords --opt -c $charge -P $threads $input > output.dat"
@@ -131,7 +130,6 @@ xtb_hess()
     if [ -f input.dat ]
     then
         input="--input input.dat"
-        echo $input
     fi
 
     local cmd="$xtb $coords --hess -c $charge -P $threads $input > output.dat"
@@ -151,7 +149,6 @@ xtb_md()
     if [ -f input.dat ]
     then
         input="--input input.dat"
-        echo $input
     fi
 
     local cmd="$xtb $coords --omd $input -c $charge -P $threads > output.dat"
@@ -173,7 +170,6 @@ xtb_path()
     if [ -f input.dat ]
     then
         input="--input input.dat"
-        echo $input
     fi
 
     local cmd="$xtb $start --path $path_end $input -c $charge -P $threads > output.dat"
@@ -206,7 +202,6 @@ crest_run()
     if [ -f input.dat ]
     then
         input="--input input.dat"
-        echo $input
     fi
 
     local cmd="$crest $coords -T $threads $input -c $charge -niceprint > output.dat"
@@ -226,7 +221,6 @@ crest_gff()
     if [ -f input.dat ]
     then
         input="--input input.dat"
-        echo $input
     fi
 
     local cmd="$crest $coords -T $threads $input -c $charge -niceprint -gff > output.dat"
@@ -246,7 +240,6 @@ crest_gfn2gff()
     if [ -f input.dat ]
     then
         input="--input input.dat"
-        echo $input
     fi
 
     local cmd="$crest $coords -T $threads $input -c $charge -niceprint -gfn2//gfnff > output.dat"
