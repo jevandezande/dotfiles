@@ -1,23 +1,16 @@
 name: p311
 channels:
     - conda-forge
-    - py311_bs
 dependencies:
     - python=3.11
     - pip
-    - psi4
-    - dftd3    
-    - gcp
-    - xtb
     - pip:
       - cclib
-      - geomeTRIC
       - matplotlib
       - more-itertools
       - natsort
       - pandas
       - pipx
-      - pyscf
       - scipy
 # Tools
       - black

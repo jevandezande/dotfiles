@@ -10,7 +10,7 @@ then
 fi
 
 github_progs=(
-    pipenv-cookiecutter
+    poetry-cookiecutter
     qgrep
     reaction_web
     spectra

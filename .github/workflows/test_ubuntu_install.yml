@@ -1,0 +1,22 @@
+name: Test Ubuntu Install
+
+on:
+    pull_request: {}
+    push:
+        branches: master
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    name: Test Bootstrap ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Bootstrap
+        run: |
+          cd config/setup/
+          sh ./bootstrap.sh
