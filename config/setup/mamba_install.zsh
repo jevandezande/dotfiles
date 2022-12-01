@@ -19,6 +19,6 @@ $mamba update --all --yes
 
 for env in ../mamba/*.yml
 do
-    echo $env
+    echo "Installing ${${env:t}:r}"
     $mamba env create -f $env
 done

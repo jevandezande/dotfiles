@@ -3,27 +3,23 @@ channels:
     - conda-forge
     - psi4/label/dev
 dependencies:
-    - python=3.9
+    - python=3.10
     - pip
-    - pipx
     - psi4
     - dftd3    
     - gcp
     - xtb
     - pip:
-      - cclib
-      - geometric
       - matplotlib
       - more-itertools
       - natsort
       - pandas
-      - pyberny
-      - pyscf
+      - pipx
       - scipy
 # Tools
       - black
+      - flake8
       - ipython
       - isort
-      - flake8
       - mypy
       - pytest
