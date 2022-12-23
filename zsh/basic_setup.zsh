@@ -18,8 +18,8 @@ SAVEHIST=1000000
 HISTFILE=~/.zsh/history
 
 # Use modern completion system
-autoload -Uz compinit
-compinit
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
 
 ####################
 # Completion stuff #
