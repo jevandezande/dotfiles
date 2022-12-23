@@ -1,0 +1,21 @@
+name: dftb
+channels:
+    - conda-forge
+dependencies:
+    - python=3.11
+    - dftbplus=*=nompi_*
+    - pip
+    - pip:
+      - matplotlib
+      - more-itertools
+      - natsort
+      - pandas
+      - pipx
+      - scipy
+# Tools
+      - black
+      - flake8
+      - ipython
+      - isort
+      - mypy
+      - pytest
