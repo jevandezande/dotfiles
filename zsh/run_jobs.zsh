@@ -312,7 +312,8 @@ nanoreactor_run()
     tsp -d -L $label -N $threads zsh -c "$cmd" | add_job $label
 }
 
-alias clean_xtb="find xtb{opt.log,opt.xyz,restart,topo.mol} wbo charges -type f 2> /dev/null | xargs rm 2> /dev/null"
+alias clean_xtb="find xtb{opt.{coord,log,xyz},restart,topo.mol} wbo charges -type f 2> /dev/null | xargs rm 2> /dev/null"
+alias clean_crest="clean_xtb; find bondlengths coord cre_members cregen_{1..9}.tmp crest.energies gfnff_{adjacency,charges} struc.xyz tmpcoord xtb.out -type f 2> /dev/null | xargs rm 2> /dev/null"
 
 
 ################
