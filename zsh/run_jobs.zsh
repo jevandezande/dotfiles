@@ -231,7 +231,13 @@ crest_run()
         input="--input input.dat"
     fi
 
-    local cmd="$crest $coords -T $threads $input -c $charge -niceprint > output.dat"
+    local constrain=""
+    if [ -f constrain.inp ]
+    then
+        constrain="--cinp constrain.inp --subrmsd"
+    fi
+
+    local cmd="$crest $coords -T $threads $input $constrain -c $charge -niceprint > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -250,7 +256,13 @@ crest_gff()
         input="--input input.dat"
     fi
 
-    local cmd="$crest $coords -T $threads $input -c $charge -niceprint -gff > output.dat"
+    local constrain=""
+    if [ -f constrain.inp ]
+    then
+        constrain="--cinp constrain.inp --subrmsd"
+    fi
+
+    local cmd="$crest $coords -T $threads $input $constrain -c $charge -niceprint --gff > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -269,7 +281,13 @@ crest_gfn2gff()
         input="--input input.dat"
     fi
 
-    local cmd="$crest $coords -T $threads $input -c $charge -niceprint -gfn2//gfnff > output.dat"
+    local constrain=""
+    if [ -f constrain.inp ]
+    then
+        constrain="--cinp constrain.inp --subrmsd"
+    fi
+
+    local cmd="$crest $coords -T $threads $input $constrain -c $charge -niceprint -gfn2//gfnff > output.dat"
 
     task_spool $cmd $label $threads
 }
