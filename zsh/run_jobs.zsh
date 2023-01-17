@@ -118,6 +118,33 @@ xtb_opt()
     task_spool $cmd $label $threads
 }
 
+xtb_spin()
+{
+    local name="${$(pwd):t}"
+    local coords="geom.xyz"
+
+    local mult1=${1:-1}
+    local mult2=${2:-7}
+    local threads=${3:-8}
+
+    for mult in {$mult1..$mult2..2}
+    do
+        let "spin = $mult - 1"
+        mkdir $mult
+        cp $coords $mult
+        echo "\$spin $spin" > $mult/input.dat
+        if [ -f input.dat ]
+        then
+            cat input.dat >> $mult/input.dat
+        fi
+        pushd $mult
+            local cmd="$xtb $coords --opt --input input.dat -P $threads $input > output.dat"
+            local label="xTB_spin_$spin_$name"
+            task_spool $cmd $label_$mult $threads
+        popd
+    done
+}
+
 xtb_hess()
 {
     local label="xTB_hess_${$(pwd):t}"
