@@ -27,7 +27,15 @@ task_spool()
 crest="conda run -n crest crest"
 orca="~jevandezande/progs/orca/run_orca.zsh"
 psi4="conda run -n cc psi4"
-xtb="conda run -n cc xtb"
+xtb="conda run -n crest xtb"
+
+
+############
+# Settings #
+############
+# xtb
+export OMP_STACKSIZE=18G
+ulimit -s unlimited
 
 
 ########
@@ -330,8 +338,8 @@ nanoreactor_run()
     tsp -d -L $label -N $threads zsh -c "$cmd" | add_job $label
 }
 
-alias clean_xtb="find xtb{opt.{coord,log,xyz},restart,topo.mol} wbo charges -type f 2> /dev/null | xargs rm 2> /dev/null"
-alias clean_crest="clean_xtb; find bondlengths coord cre_members cregen_{1..9}.tmp crest.energies gfnff_{adjacency,charges} struc.xyz tmpcoord xtb.out -type f 2> /dev/null | xargs rm 2> /dev/null"
+alias clean_xtb="find xtb{opt.{coord,log},restart,topo.mol} wbo charges -type f 2> /dev/null | xargs rm 2> /dev/null"
+alias clean_crest="clean_xtb; find bondlengths coord{,.original} cre_members cregen_{0..9}.tmp crest.energies gfnff_{adjacency,charges,topo} struc.xyz tmpcoord xtb.out -type f 2> /dev/null | xargs rm 2> /dev/null"
 
 
 ################
