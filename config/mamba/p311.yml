@@ -11,10 +11,10 @@ dependencies:
       - pandas
       - pipx
       - scipy
+      - sklearn
 # Tools
       - black
-      - flake8
       - ipython
-      - isort
       - mypy
       - pytest
+      - ruff

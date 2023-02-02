@@ -16,7 +16,6 @@ dependencies:
 # Tools
       - black
       - ipython
-      - isort
-      - flake8
       - mypy
       - pytest
+      - ruff
