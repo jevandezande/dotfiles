@@ -1,1 +1,1 @@
-export SCHRODINGER="/home/jevandezande/progs/schrodinger2022-4"
+export SCHRODINGER="/home/jevandezande/progs/schrodinger/22-4"
