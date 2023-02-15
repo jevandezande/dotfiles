@@ -126,6 +126,61 @@ xtb_opt()
     task_spool $cmd $label $threads
 }
 
+xtb_copt()
+{
+    local label="XTB_copt_${$(pwd):t}"
+
+    local atoms=${1}
+    if [[ -z $atoms ]]
+    then
+        echo "Missing atoms to constrain"
+        return
+    fi
+    local force_constant=${2:-5}
+
+    local coords=${3:-'geom.xyz'}
+    local charge=${4:-0}
+    local threads=${5:-8}
+
+    echo "\$constrain
+    atoms: $atoms
+    force constant=$force_constant
+\$end" > input.dat
+    input="--input input.dat"
+
+    local cmd="$xtb $coords --opt -c $charge -P $threads $input > output.dat"
+
+    task_spool $cmd $label $threads
+}
+
+xtb_scan()
+{
+    local label="XTB_scan_${$(pwd):t}"
+
+    local scan=${1}
+    if [[ -z $scan ]]
+    then
+        echo "Missing scan parameters"
+        return
+    fi
+    local force_constant=${2:-5}
+
+    local coords=${3:-'geom.xyz'}
+    local charge=${4:-0}
+    local threads=${5:-8}
+
+    echo "\$constrain
+    force constant=$force_constant
+\$scan
+    $scan
+\$end" > input.dat
+    input="--input input.dat"
+
+    local cmd="$xtb $coords --opt -c $charge -P $threads $input > output.dat"
+
+    task_spool $cmd $label $threads
+}
+
 xtb_spin()
 {
     local name="${$(pwd):t}"
@@ -210,7 +265,6 @@ xtb_path()
     local cmd="$xtb $start --path $path_end $input -c $charge -P $threads > output.dat"
 
     task_spool $cmd $label $threads
-
 }
 
 stda()
