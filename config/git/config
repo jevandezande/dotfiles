@@ -36,7 +36,7 @@
     d = diff
     l = log
     s = status
-#https://gist.github.com/pksunkara/988716
+    cram = commit --amend --no-edit
 [credential]
     helper = cache --timeout=86400
 [pull]
