@@ -19,7 +19,6 @@ apt_progs=(
     git             # VCS
     gkrellm         # System monitor
     google-chrome   # Browser
-    golang          # Go language
     gparted         # Disk partitioning tool
     gummi           # Simple LaTeX editor
     i3              # Tiling window manager
@@ -34,7 +33,6 @@ apt_progs=(
     libbz2-ocaml-dev # OpenChemistry
     libffi-dev      # Cairocffi dependency (used in Matplotlib)
     liblapack-dev   # PSI4, OpenChemistry
-    libeigen3-dev   # Eigen
     libfreetype6-dev # Matplotlib
     libgail-common  # Inkscape
     libjpeg-dev     # cheMVP
@@ -52,18 +50,14 @@ apt_progs=(
     openconnect     # VPN (alternative to Cisco AnyConnect)
     openjdk-8-jre   # Java
     openssh-server  # SSH
-    openssl         # Compiling Python3
     pinta           # Lightwieght raster graphic editor
-    povray          # Ray tracer
     python3-dev     # Python3
     python3-pip     # Python3 package installer
-    python3-setuptools # setting up python packages
     python3-pyqt5   # Python3 qt5 bindings
     qtbase5-dev     # cheMVP
     qtbase5-qmake   # cheMVP
     rclone          # Rscync for cloud storage
     rcm             # Dotfile manager
-    ruby-dev        # Programming language (used for Travis)
     snapd           # Snap installer
     swi-prolog      # Prolog implementation
     task-spooler    # Task queue
