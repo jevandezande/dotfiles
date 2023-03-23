@@ -44,6 +44,8 @@ alias table='column -s, -t'
 #################
 # Miscellaneous #
 #################
+alias weather="curl wttr.in/boston"
+
 # parallel make
 export NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
 alias pmake='time nice make -j$NUMCPUS --load-average=$NUMCPUS'
