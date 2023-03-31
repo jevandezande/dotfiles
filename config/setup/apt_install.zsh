@@ -1,5 +1,33 @@
 #!/usr/bin/env zsh
 
+# Intel compilers
+intel_version="-2022.2.1"
+intel_sources="/etc/apt/sources.list.d/oneAPI.list"
+intel_apt_repo="https://apt.repos.intel.com/oneapi"
+
+if [[ ! -a $intel_sources ]] || ! grep -q $intel_apt_repo $intel_sources
+then
+    echo "Adding Intel Apt repo"
+    wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
+    sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
+    rm GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
+    echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+fi
+
+# Github
+github_apt_repo="https://cli.github.com/packages"
+github_sources="/etc/apt/sources.list.d/github-cli.list"
+github_gpg="https://cli.github.com/packages/githubcli-archive-keyring.gpg"
+github_gpg_loc="/usr/share/keyrings/githubcli-archive-keyring.gpg"
+
+if [[ ! -a $github_sources ]] || ! grep -q $github_apt_repo $github_sources
+then
+    echo "Adding Github apt repo"
+    curl -fsSL $github_gpg | dd of=$github_gpg_loc \
+    && chmod go+r $github_gpg_loc \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=$github_gpg_loc] $github_apt_repo stable main" | sudo tee $github_sources > /dev/null
+fi
+
 apt-get update
 
 apt_progs=(
@@ -16,12 +44,18 @@ apt_progs=(
     fd-find         # Much faster than `find`
     g++             # C++ compiler
     gfortran        # PSI4
+    gh              # Github
     git             # VCS
     gkrellm         # System monitor
     google-chrome   # Browser
     gparted         # Disk partitioning tool
     gummi           # Simple LaTeX editor
     i3              # Tiling window manager
+    # Intel compilers
+    intel-oneapi-compiler-fortran$intel_version
+    intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic$intel_version
+    intel-oneapi-mkl$intel_version
+    intel-oneapi-mkl-devel$intel_version
     # jmol# Molecule visualizer
     keepassx        # Password storage
     libatk-adaptor  # For inkscape

@@ -8,7 +8,6 @@ fi
 
 brew_progs=(
     act
-    gh
     htop
     node
     openjpeg
@@ -24,6 +23,7 @@ casks=(
 )
 
 mac_only=(
+    gh
     imagemagick
     rcm
     wget
