@@ -43,8 +43,10 @@ apt_progs=(
     libssl-dev      # Compiling Python3
     libtiff-dev     # cheMVP
     libxml2-dev     # Avogadro2
-    make            # compilation
+    make            # Compilation
+    meson           # Compilation
     neofetch        # System properties display
+    ninja-build     # Compilitation
     python3-dropbox # Dropbox
     neovim          # Neovim
     openconnect     # VPN (alternative to Cisco AnyConnect)
