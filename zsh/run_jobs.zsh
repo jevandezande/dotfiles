@@ -112,8 +112,7 @@ xtb_opt()
     local label="xTB_${$(pwd):t}"
 
     local coords=${1:-'geom.xyz'}
-    local charge=${2:-0}
-    local threads=${3:-8}
+    local threads=${2:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -121,7 +120,7 @@ xtb_opt()
         input="--input input.dat"
     fi
 
-    local cmd="$xtb $coords --opt -c $charge -P $threads $input > output.dat"
+    local cmd="$xtb $coords --opt -P $threads $input > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -139,8 +138,7 @@ xtb_copt()
     local force_constant=${2:-5}
 
     local coords=${3:-'geom.xyz'}
-    local charge=${4:-0}
-    local threads=${5:-8}
+    local threads=${4:-8}
 
     echo "\$constrain
     atoms: $atoms
@@ -148,7 +146,7 @@ xtb_copt()
 \$end" > input.dat
     input="--input input.dat"
 
-    local cmd="$xtb $coords --opt -c $charge -P $threads $input > output.dat"
+    local cmd="$xtb $coords --opt -P $threads $input > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -166,8 +164,7 @@ xtb_scan()
     local force_constant=${2:-5}
 
     local coords=${3:-'geom.xyz'}
-    local charge=${4:-0}
-    local threads=${5:-8}
+    local threads=${4:-8}
 
     echo "\$constrain
     force constant=$force_constant
@@ -176,7 +173,7 @@ xtb_scan()
 \$end" > input.dat
     input="--input input.dat"
 
-    local cmd="$xtb $coords --opt -c $charge -P $threads $input > output.dat"
+    local cmd="$xtb $coords --opt -P $threads $input > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -213,8 +210,7 @@ xtb_hess()
     local label="xTB_hess_${$(pwd):t}"
 
     local coords=${1:-'geom.xyz'}
-    local charge=${2:-0}
-    local threads=${3:-8}
+    local threads=${2:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -222,7 +218,7 @@ xtb_hess()
         input="--input input.dat"
     fi
 
-    local cmd="$xtb $coords --hess -c $charge -P $threads $input > output.dat"
+    local cmd="$xtb $coords --hess -P $threads $input > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -232,8 +228,7 @@ xtb_md()
     local label="xTBMD_${$(pwd):t}"
 
     local coords=${1:-'geom.xyz'}
-    local charge=${2:-0}
-    local threads=${3:-8}
+    local threads=${2:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -241,7 +236,7 @@ xtb_md()
         input="--input input.dat"
     fi
 
-    local cmd="$xtb $coords --omd $input -c $charge -P $threads > output.dat"
+    local cmd="$xtb $coords --omd $input -P $threads > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -253,8 +248,7 @@ xtb_path()
     local start=${1:-"start.xyz"}
     local path_end=${2:-"end.xyz"}
     local input=${3:-"path.in"}
-    local charge=${4:-0}
-    local threads=${5:-8}
+    local threads=${4:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -262,7 +256,7 @@ xtb_path()
         input="--input input.dat"
     fi
 
-    local cmd="$xtb $start --path $path_end $input -c $charge -P $threads > output.dat"
+    local cmd="$xtb $start --path $path_end $input -P $threads > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -272,10 +266,9 @@ stda()
     local label="sTDA_${$(pwd):t}"
 
     local coords=${1:-'geom.xyz'}
-    local charge=${2:-0}
-    local threads=${3:-8}
+    local threads=${2:-8}
 
-    tsp -L $label -N $threads zsh -c "xtb4stda $coords -T $threads -chrg $charge > xtb.out" | add_job $label
+    tsp -L $label -N $threads zsh -c "xtb4stda $coords -T $threads > xtb.out" | add_job $label
     tsp -d -L $label -N $threads zsh -c "~/progs/bin/stda_v1_6_2 coords -T $threads -xtb -e 10"| add_job $label
 }
 
@@ -284,8 +277,7 @@ crest_run()
     local label="CREST_${$(pwd):t}"
 
     local coords=${1:-'geom.xyz'}
-    local charge=${2:-0}
-    local threads=${3:-8}
+    local threads=${2:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -299,7 +291,7 @@ crest_run()
         constrain="--cinp constrain.inp --subrmsd"
     fi
 
-    local cmd="$crest $coords -T $threads $input $constrain -c $charge -niceprint > output.dat"
+    local cmd="$crest $coords -T $threads $input $constrain -niceprint > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -309,8 +301,7 @@ crest_gff()
     local label="CREST_GFF_${$(pwd):t}"
 
     local coords=${1:-'geom.xyz'}
-    local charge=${2:-0}
-    local threads=${3:-8}
+    local threads=${2:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -324,7 +315,7 @@ crest_gff()
         constrain="--cinp constrain.inp --subrmsd"
     fi
 
-    local cmd="$crest $coords -T $threads $input $constrain -c $charge -niceprint --gff > output.dat"
+    local cmd="$crest $coords -T $threads $input $constrain -niceprint --gff > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -334,8 +325,7 @@ crest_gfn2gff()
     local label="CREST_GFN2//GFNFF_${$(pwd):t}"
 
     local coords=${1:-'geom.xyz'}
-    local charge=${2:-0}
-    local threads=${3:-8}
+    local threads=${2:-8}
 
     local input=""
     if [ -f input.dat ]
@@ -349,7 +339,7 @@ crest_gfn2gff()
         constrain="--cinp constrain.inp --subrmsd"
     fi
 
-    local cmd="$crest $coords -T $threads $input $constrain -c $charge -niceprint -gfn2//gfnff > output.dat"
+    local cmd="$crest $coords -T $threads $input $constrain -niceprint -gfn2//gfnff > output.dat"
 
     task_spool $cmd $label $threads
 }
@@ -385,20 +375,24 @@ crest_constrain()
 nanoreactor_setup()
 {
     local coords=${1:-'geom.xyz'}
-    local charge=${2:-0}
-    local genpot=${3:-10}
-    local genmtd=${4:-10}
+    local genpot=${2:-10}
+    local genmtd=${3:-10}
+
+    local input=""
+    if [ -f input.dat ]
+    then
+        input="--input input.dat"
+    fi
 
     echo "Optimizing initial coordinates"
-    eval "$xtb $coords --opt -c $charge > output.dat"
+    eval "$xtb $coords --opt $input > output.dat"
 
     mv xtbopt.xyz nanoreactor_start.xyz
 
     echo "Setting up input file"
     eval "$crest nanoreactor_start.xyz --reactor --genpot $genpot --genmtd $genmtd >> output.dat"
 
-    echo "\$chrg $charge" > input.dat
-    cat rcontrol >> input.dat
+    cat rcontrol > input.dat
     rm rcontrol
 
     # then use nanoreactor_run
