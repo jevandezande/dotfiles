@@ -2,16 +2,16 @@
 
 # Intel compilers
 intel_version="-2022.2.1"
-intel_sources="/etc/apt/sources.list.d/oneAPI.list"
-intel_apt_repo="https://apt.repos.intel.com/oneapi"
+intel_pub="https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB"
+oneapi_gpg="/usr/share/keyrings/oneapi-archive-keyring.gpg"
+oneapi_apt_repo="https://apt.repos.intel.com/oneapi"
+oneapi_sources="/etc/apt/sources.list.d/oneAPI.list"
 
-if [[ ! -a $intel_sources ]] || ! grep -q $intel_apt_repo $intel_sources
+if [[ ! -a $oneapi_sources ]] || ! grep -q $oneapi_apt_repo $oneapi_sources
 then
     echo "Adding Intel Apt repo"
-    wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
-    sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
-    rm GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB
-    echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+    wget -O- $intel_pub | gpg --dearmor | sudo tee $oneapi_gpg > /dev/null
+    echo "deb [signed-by=$oneapi_gpg] $oneapi_apt_repo all main" | sudo tee $oneapi_sources
 fi
 
 # Github
