@@ -354,6 +354,34 @@ crest_gfn2gff()
     task_spool $cmd $label $threads
 }
 
+crest_constrain()
+{
+    local label_xtb="xTB_${$(pwd):t}"
+    local label_CREST="CREST_${$(pwd):t}"
+
+    local coords=${1:-'geom.xyz'}
+    local threads=${2:-8}
+
+    if [ ! -f input.dat ]
+    then
+        echo "Missing input file"
+        return 1
+    fi
+    if [ ! -f constrain.inp ]
+    then
+        cp input.dat constrain.inp
+    fi
+
+    # Optimize
+    local cmd="$xtb $coords --opt -P $threads --input input.dat > output.dat && cp xtbopt.xyz geom.xyz"
+    task_spool $cmd $label_xtb $threads
+
+    # Run CREST afterwards
+    echo "tsp -L $label_CREST -N $threads -d zsh -c \"$cmd\" | add_job $label_CREST"
+    local cmd="$crest $coords -T $threads --cinp constrain.inp --subrmsd -niceprint >> output.dat"
+    tsp -L $label_CREST -N $threads -d zsh -c "$cmd" | add_job $label_CREST
+}
+
 nanoreactor_setup()
 {
     local coords=${1:-'geom.xyz'}
