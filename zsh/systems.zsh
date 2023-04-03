@@ -84,6 +84,11 @@ then
     source ~/.zsh/profiles/wsl.zsh
     source ~/.zsh/profiles/local.zsh
 
+elif [ $HOST = 'desk-lu251' ]
+then
+    source ~/.zsh/profiles/schrodinger.zsh
+    source ~/.zsh/profiles/themis.zsh
+
 elif [ -n "$HOST" ]
 then
     echo "Cannot find the proper host and associated system profile. Host: $HOST"
