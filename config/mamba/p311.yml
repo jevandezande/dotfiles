@@ -12,6 +12,7 @@ dependencies:
       - pipx
       - scipy
       - sklearn
+      - sympy
 # Tools
       - black
       - ipython

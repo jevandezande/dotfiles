@@ -18,6 +18,7 @@ dependencies:
       - pandas
       - pyberny
       - scipy
+      - sympy
 # Tools
       - black
       - ipython

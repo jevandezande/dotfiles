@@ -16,6 +16,7 @@ dependencies:
       - pandas
       - pipx
       - scipy
+      - sympy
 # Tools
       - black
       - ipython
