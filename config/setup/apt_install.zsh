@@ -37,6 +37,7 @@ apt_progs=(
     build-essential # compiler needs
     clang           # compiler
     cmake           # PSI4
+    nvidia-cuda-toolkit # Task-spooler compilation
     curl            # Downloading stuff from the web
     compizconfig-settings-manager # For changing computer defaults
     compiz-plugins  # Extension to ccsm
