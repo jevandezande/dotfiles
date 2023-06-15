@@ -1,0 +1,8 @@
+[crest]
+executable = "conda env -c crest crest"
+
+[xtb]
+executable = "conda env -c crest xtb"
+
+[task_spooler]
+cmd = "ts"
