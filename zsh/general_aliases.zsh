@@ -1,4 +1,5 @@
 # General aliases for all systems
+alias vi=nvim
 
 # Color directories
 if [ -x /usr/bin/dircolors ]; then

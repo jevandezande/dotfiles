@@ -28,6 +28,9 @@ then
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=$github_gpg_loc] $github_apt_repo stable main" | sudo tee $github_sources > /dev/null
 fi
 
+# Neovim
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+
 apt-get update
 
 apt_progs=(
