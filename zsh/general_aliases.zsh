@@ -161,6 +161,3 @@ ljobs()
         fi
     done
 }
-
-
-source ~/.zsh/run_jobs.zsh

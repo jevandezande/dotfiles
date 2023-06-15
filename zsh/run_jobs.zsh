@@ -9,11 +9,27 @@ add_job()
     echo "$number - $label - $(pwd)" >> ~/.jobs
 }
 
+threaded()
+{
+    # Set environment variables for running commands in parallel
+    local threads=${1}
+    local cmd=${@:2}
+
+    eval """\
+export OMP_NUM_THREADS=$threads;
+export MKL_NUM_THREADS=$threads;
+$cmd
+"""
+}
+
+
 task_spool()
 {
     local cmd=${1}
     local label=${2:-"tsp"}
     local threads=${3:-1}
+
+    # cmd="threaded $threads $cmd"
 
     echo "tsp -L $label -N $threads zsh -c \"$cmd\" | add_job $label"
 
