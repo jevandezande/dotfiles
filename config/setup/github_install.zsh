@@ -3,17 +3,24 @@
 if ! type gh > /dev/null
 then
     echo "gh is not installed"
-    return
-elif ! gh auth status 2> /dev/null
+    echo "Trying to install via brew"
+    brew install gh
+fi
+
+if ! gh auth status 2> /dev/null
 then
     gh auth login
 fi
 
 github_progs=(
-    poetry-cookiecutter
+    basis
+    chem_runner
     qgrep
+    poetry-cookiecutter
     reaction_web
+    schro_snip
     spectra
+    snippets
 )
 
 pushd ~/progs/
