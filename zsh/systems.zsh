@@ -84,7 +84,7 @@ then
     source ~/.zsh/profiles/wsl.zsh
     source ~/.zsh/profiles/local.zsh
 
-elif [ $HOST = 'desk-lu251' ]
+elif [ $HOST = 'desk-lu251.schrodinger.com' ]
 then
     source ~/.zsh/profiles/schrodinger.zsh
     source ~/.zsh/profiles/themis.zsh
