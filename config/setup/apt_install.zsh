@@ -91,9 +91,6 @@ apt_progs=(
     openjdk-8-jre   # Java
     openssh-server  # SSH
     pinta           # Lightwieght raster graphic editor
-    python3-dev     # Python3
-    python3-pip     # Python3 package installer
-    python3-pyqt5   # Python3 qt5 bindings
     qtbase5-dev     # cheMVP
     qtbase5-qmake   # cheMVP
     rclone          # Rscync for cloud storage
@@ -113,4 +110,4 @@ done
 
 apt-get update
 apt-get upgrade -y
-apt-get autoremove
+apt-get autoremove -y
