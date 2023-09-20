@@ -6,6 +6,8 @@ source $HOME/.zsh/paths.zsh
 
 source $HOME/.zsh/zplug.zsh
 
+source $HOME/.zsh/rust.zsh
+
 source $HOME/.zsh/systems.zsh
 
 eval "$(starship init zsh)"
