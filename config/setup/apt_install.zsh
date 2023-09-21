@@ -55,6 +55,7 @@ apt_progs=(
     gparted         # Disk partitioning tool
     gummi           # Simple LaTeX editor
     i3              # Tiling window manager
+    i3blocks        # Better blocks on i3status bar
     # Intel compilers
     intel-oneapi-compiler-fortran$intel_version
     intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic$intel_version
@@ -95,6 +96,7 @@ apt_progs=(
     qtbase5-qmake   # cheMVP
     rclone          # Rscync for cloud storage
     rcm             # Dotfile manager
+    rofi            # DMenu replacement (used with i3)
     snapd           # Snap installer
     swi-prolog      # Prolog implementation
     task-spooler    # Task queue
