@@ -43,3 +43,8 @@ bindsym $mod+O exec "xdg-open /home/vandezande/Dropbox/work/Papers/manuals/ORCA4
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+bindsym $mod+Shift+x exec "\
+    maim --hidecursor -s ~/.screenshots/$(date +%Y-%b-%d--%H-%M-%S_maim | tr A-Z a-z).png; \
+    i3-nagbar --message 'Screenshot created' --type warning & \
+    sleep 2; pkill i3-nagbar"
