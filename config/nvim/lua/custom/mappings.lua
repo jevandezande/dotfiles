@@ -14,6 +14,12 @@ M.dap = {
   plugin = true,
   n = {
     ["<leader>db"] = {"<cmd> DapToggleBreakpoint <CR>"},
+
+    ["<leader>dj"] = {"<cmd> DapStepInto <CR>"},
+    ["<leader>dk"] = {"<cmd> DapStepOut <CR>"},
+    ["<leader>dl"] = {"<cmd> DapStepOver <CR>"},
+    ["<leader>dc"] = {"<cmd> DapContinue <CR>"},
+
     ["<leader>dus"] = {
       function ()
         local widgets = require('dap.ui.widgets');
@@ -47,6 +53,5 @@ M.crates = {
     }
   }
 }
-
 
 return M
