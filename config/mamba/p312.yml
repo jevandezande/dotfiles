@@ -12,7 +12,6 @@ dependencies:
       - pandas
       - pipx
       - scipy
-      - scikit-learn
       - sympy
 # Tools
       - black

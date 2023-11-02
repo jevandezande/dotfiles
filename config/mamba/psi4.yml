@@ -3,7 +3,7 @@ channels:
     - conda-forge
     - psi4/label/dev
 dependencies:
-    - python=3.10
+    - python
     - pip
     - pipx
     - psi4
