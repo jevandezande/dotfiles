@@ -1,14 +1,15 @@
 name: psi4
 channels:
-    - conda-forge
     - psi4/label/dev
+    - conda-forge/label/libint_dev
+    - conda-forge
 dependencies:
-    - python
+    - python=3.11
     - pip
     - pipx
+    - dftd3
+    - gcp-correction
     - psi4
-    - dftd3    
-    - gcp
     - pip:
       - cclib
       - geomeTRIC
