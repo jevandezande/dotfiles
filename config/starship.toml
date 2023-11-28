@@ -8,3 +8,10 @@ right_format = """$all"""
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
+
+[custom.Schrodinger]
+symbol = "Ψ"
+format = "[$symbol$output]($style) "
+style = "fg:bright-blue"
+command = "echo ${SCHRODINGER: -9}"
+detect_extensions = ['mae']
