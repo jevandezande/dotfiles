@@ -1,4 +1,4 @@
-require "settings"
+require "custom.settings"
 
 ---@type ChadrcConfig 
 local M = {}
