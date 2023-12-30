@@ -138,6 +138,25 @@ local plugins = {
       table.insert(M.sources, {name = "crates"})
       return M
     end,
-  }
+  },
+  {
+    "epwalsh/obsidian.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("obsidian").setup({
+        workspaces = {
+          {
+            name = "work",
+            path = "~/work/Obsidian/",
+          },
+        },
+      })
+    end,
+  },
+  {
+    "lervag/vimtex",
+  },
 }
 return plugins
