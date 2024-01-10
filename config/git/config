@@ -37,6 +37,7 @@
     l = log
     s = status
     cram = commit --amend --no-edit
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit
 [credential]
     helper = cache --timeout=86400
 [pull]
