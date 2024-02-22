@@ -2,7 +2,7 @@
 # Cluster Sync #
 ################
 cluster_sync () {
-    cluster=${$1:cronos}
+    cluster=${1-cronos}
     echo "Syncing $1"
     # note: rsync works on first matching pattern (thus include must be first)
     rsync $1: \
@@ -10,7 +10,7 @@ cluster_sync () {
         -azP \
         --delete \
         --include=input.dat \
-        --exclude={"input.*","*.tar.gz","*.tgz","*.tbz",tmp/,progs/,old/,".*"}
+        --exclude={"input.*","*.tar.gz","*.tgz","*.tbz",tmp/,progs/,old/,".*","*.zip"}
 }
 
 alias mrv='MarvinSketch $1 2> /dev/null'
