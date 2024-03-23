@@ -57,6 +57,7 @@ apt_progs=(
     i3              # Tiling window manager
     i3blocks        # Better blocks on i3status bar
     # Intel compilers
+    intel-hpckit    # ifx, iMPI
     intel-oneapi-compiler-fortran$intel_version
     intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic$intel_version
     intel-oneapi-mkl$intel_version
