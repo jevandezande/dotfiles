@@ -97,6 +97,7 @@ apt_progs=(
     qtbase5-qmake   # cheMVP
     rclone          # Rscync for cloud storage
     rcm             # Dotfile manager
+    ripgrep         # Used by telescope.nvim
     rofi            # DMenu replacement (used with i3)
     snapd           # Snap installer
     swi-prolog      # Prolog implementation
