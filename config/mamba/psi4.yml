@@ -8,6 +8,7 @@ dependencies:
     - pip
     - pipx
     - dftd3
+    - dftd4
     - gcp-correction
     - psi4
     - pip:
