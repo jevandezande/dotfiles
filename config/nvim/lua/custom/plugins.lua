@@ -3,6 +3,16 @@ local overrides = require("custom.overrides")
 
 local plugins = {
   {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("refactoring").setup()
+    end,
+  },
+  {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
@@ -19,20 +29,20 @@ local plugins = {
       },
     },
   },
-  -- {
-  --   "jackMort/ChatGPT.nvim",
-  --   event = "VeryLazy",
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --   },
-  --   config = function()
-  --     require("chatgpt").setup({
-  --       api_key_cmd = "pass show api/tokens/openai",
-  --     })
-  --   end,
-  -- },
+  {
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("chatgpt").setup({
+        api_key_cmd = "pass show api/tokens/openai",
+      })
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
     config = function()

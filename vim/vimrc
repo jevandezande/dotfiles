@@ -34,7 +34,7 @@ set smartcase                   " Smart case insensitive searching
                                 "/copyright\C    " Case sensitive
                                 "/Copyright\c    " Case insensitive
 
-set tw=79                       "Tetxidth = 2 (use gq to wrap)
+set tw=88                       "Tetxidth = 2 (use gq to wrap)
 
 " Prevent tabs from expanding to spaces in Makefiles
 autocmd FileType make setlocal noexpandtab

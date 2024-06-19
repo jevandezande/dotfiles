@@ -10,7 +10,7 @@ cluster_sync () {
         -azP \
         --delete \
         --include=input.dat \
-        --exclude={"input.*","*.tar.gz","*.tgz","*.tbz",tmp/,progs/,old/,".*","*.zip"}
+        --exclude={"input.*","*.tar.gz","*.tgz","*.tbz",.cache/,.dotfiles/,OB/,old/,progs/,tmp,".*","*.zip"}
 }
 
 alias mrv='MarvinSketch $1 2> /dev/null'

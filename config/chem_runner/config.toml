@@ -5,4 +5,10 @@ executable = "conda env -c crest crest"
 executable = "conda env -c crest xtb"
 
 [task_spooler]
-cmd = "ts"
+cmd = "tsp"
+
+[schrodinger]
+queue = "bolt_cpu"
+cores = "4"
+dft_keywords = { "dftname"= "wB97X-3c", "iacc"= "2", "nops"= "1", "maxit"= "250" }
+
