@@ -15,7 +15,6 @@ dependencies:
       - scipy
       - sympy
 # Tools
-      - black
       - ipython
       - mypy
       - pytest
