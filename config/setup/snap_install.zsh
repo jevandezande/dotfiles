@@ -5,6 +5,7 @@
 #########################
 
 snap_progs=(
+    brave               # Brave browser
     gimp                # Raster graphic editor
     inkscape            # Vector graphics editor
     keepassxc           # Password storage
