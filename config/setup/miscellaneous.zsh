@@ -18,3 +18,10 @@ if [ ! -d ~/.config/nvim/lua ]
 then
     git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 fi
+
+
+if [ ! -d ~/.hidden ]
+then
+	# For default folder paths. See ~/.config/user-dirs.dirs
+	mkdir ~/.hidden
+fi
