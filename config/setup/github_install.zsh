@@ -18,10 +18,14 @@ github_progs=(
     qgrep
     poetry-cookiecutter
     reaction_web
-    schro_snip
     spectra
     snippets
 )
+
+if [ ! -d progs ]
+then
+    mkdir ~/progs
+fi
 
 pushd ~/progs/
     for prog in $github_progs
