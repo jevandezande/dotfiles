@@ -89,6 +89,10 @@ then
     source ~/.zsh/profiles/schrodinger.zsh
     source ~/.zsh/profiles/themis.zsh
 
+elif [ $HOST = 'crius' ]
+then
+    source ~/.zsh/profiles/crius.zsh
+
 elif [ -n "$HOST" ]
 then
     echo "Cannot find the proper host and associated system profile. Host: $HOST"
