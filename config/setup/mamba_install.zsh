@@ -9,9 +9,13 @@ mamba=$mamba_dir/bin/mamba
 
 if [ ! -d $mamba_dir ]
 then
-    curl -L -o mamba_install.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-    bash mamba_install.sh -b -f -p $mamba_dir
-    rm mamba_install.sh
+    mkdir -p $mamba_dir
+    pushd $mamba_dir
+        pwd
+        curl -L -o mamba_install.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+        bash mamba_install.sh -b -f -p $mamba_dir
+        rm mamba_install.sh
+    popd
 fi
 
 
