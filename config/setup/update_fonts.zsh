@@ -2,12 +2,18 @@
 
 if [ $(uname) = "Linux" ]
 then
-  dir="~/.dotfiles/local/share/fonts"
+  dir=~/.dotfiles/local/share/fonts
 elif [ $(uname) = "Darwin" ]
+then
   dir="~/Library/Fonts"
 else
   echo "Unable to setup fonts for $(uname)"
   exit
+fi
+
+if [ ! -d $dir ]
+then
+  mkdir -p $dir
 fi
 
 pushd $dir
