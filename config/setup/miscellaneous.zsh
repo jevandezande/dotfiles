@@ -25,3 +25,10 @@ then
 	# For default folder paths. See ~/.config/user-dirs.dirs
 	mkdir ~/.hidden
 fi
+
+
+# Set alacritty as the default terminal
+if ! type alacritty > /dev/null
+then
+  sudo update-alternatives --set x-terminal-emulator /usr/bin/alacritty
+fi

@@ -1,0 +1,7 @@
+[shell]
+program = "/usr/bin/zsh"
+
+[font]
+size = 10.0
+
+
