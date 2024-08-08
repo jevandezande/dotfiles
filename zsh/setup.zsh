@@ -12,4 +12,4 @@ source $HOME/.zsh/rust.zsh
 
 source $HOME/.zsh/systems.zsh
 
-eval "$(starship init zsh)"
+source $HOME/.zsh/completions.zsh
