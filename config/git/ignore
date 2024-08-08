@@ -64,6 +64,9 @@ desktop.ini
 # PyCharm
 .idea
 
+# VSCode
+.vscode
+
 ##########
 # Random #
 ##########
