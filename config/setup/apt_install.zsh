@@ -48,7 +48,6 @@ apt_progs=(
     fd-find         # Much faster than `find`
     g++             # C++ compiler
     gfortran        # PSI4
-    gh              # Github
     git             # VCS
     gkrellm         # System monitor
     google-chrome   # Browser
